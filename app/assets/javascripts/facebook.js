@@ -7,16 +7,12 @@ function facebook_setup(appid) {
             xfbml      : true,
             oauth      : true,
           });
-          FB.Event.subscribe('auth.login', function(r)
+          FB.Event.subscribe('auth.login', function(r) {
+              if ( r.status === 'connected' )
               {
-                  console.log(r.status);
-
-                  if ( r.status === 'connected' )
-                  {
-                      // a user has logged in
-                  }
+                  console.log(r)
               }
-          );
+          });
         };
 
         (function(d){
