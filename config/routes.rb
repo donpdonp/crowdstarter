@@ -1,7 +1,7 @@
 Crowdstarter::Application.routes.draw do
   get "dashboard/explain"
 
-  match "auth/:provider/callback" => "sessions#create" 
+  match "auth/:provider/callback" => "session#create" 
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
