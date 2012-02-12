@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
       return User.create(:facebook_uid => hash.uid,
                          :email => hash.info.email,
                          :name => hash.info.name)
+                         :image_url => hash.info.image)
     end
   end
 end
