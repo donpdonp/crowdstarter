@@ -1,3 +1,8 @@
 <div class="project-box">
- <%= project.name %>
+ <div class="project-box-inner">
+  <div class="project-title"><%= project.name %> </div>
+  <div class="project-due">Due by: <%= project.funding_due %> </div>
+  <div class="project-amount">$<%= project.amount %> USD </div>
+
+ </div>
 </div>
