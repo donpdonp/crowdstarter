@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
 */
+
+.fb-login-button {
+  margin-top: 7px;
+  margin-left: 15em;
+}
