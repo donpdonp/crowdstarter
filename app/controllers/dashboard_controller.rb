@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def explain
-    @example_item = Project.first
+    @example_project = Project.first
   end
 end
