@@ -5,6 +5,11 @@ class SessionController < ApplicationController
     redirect_to params[:redirect_to] || :root
   end
 
+  def destroy
+    session[:logged_in_user_id] = nil
+    redirect_to params[:redirect_to] || :root
+  end
+
   def auth_hash
     request.env['omniauth.auth']
   end

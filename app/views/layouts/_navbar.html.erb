@@ -13,7 +13,10 @@
         </ul> 
 
         <% if logged_in? %>
-          <%= current_user.email %> <% link_to "logout", "/session", :method => :delete %>
+          <span class="user-detail">
+            <%= current_user.email %> 
+            <%= link_to "logout", session_path, :method => :delete %>
+          </span>
         <% else %>
           <a class="login" href="/auth/facebook"><%= image_tag "signin_facebook.png" %></a>
         <% end %>
