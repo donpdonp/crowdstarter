@@ -12,7 +12,11 @@
         <li><a href="#">List a project</a></li>
         </ul> 
 
-        <a class="login" href="/auth/facebook"><%= image_tag "signin_facebook.png" %></a>
+        <% if logged_in? %>
+          <%= current_user.email %> <% link_to "logout", "/session", :method => :delete %>
+        <% else %>
+          <a class="login" href="/auth/facebook"><%= image_tag "signin_facebook.png" %></a>
+        <% end %>
     </div>
   </div>
 </div>
