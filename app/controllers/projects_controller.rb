@@ -9,7 +9,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.create(params[:project])
+    if logged_in?
+      project = current_user.projects.create(params[:project])
+    end
     redirect_to project || :root
   end
   
