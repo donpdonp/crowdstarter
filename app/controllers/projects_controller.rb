@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   def new
     if logged_in?
-      @project = Project.new
+      @project = current_user.projects.build
     else
       flash[:error] = "Login first"
       redirect_to :root
@@ -18,4 +18,16 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
   end
+
+  def edit
+    @project = current_user.projects.find(params[:id])
+  end
+
+  def update
+    project = current_user.projects.find(params[:id])
+    project.update_attributes params[:project]
+    redirect_to project
+  end
+
+
 end
