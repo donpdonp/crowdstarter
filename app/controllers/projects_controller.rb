@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
   def new
-    @project = Project.new
+    if logged_in?
+      @project = Project.new
+    else
+      flash[:error] = "Login first"
+      redirect_to :root
+    end
   end
 
   def create
