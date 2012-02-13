@@ -1,0 +1,12 @@
+<%= form_for(project) do %>
+  <%= label_tag(:n, "Name") %>
+  <%= text_field_tag(:n) %>
+  <%= label_tag(:p, "Picture Url") %>
+  <%= text_field_tag(:p) %>
+  <%= label_tag(:d, "Due date") %>
+  <%= text_field_tag(:d) %>
+  <%= label_tag(:a, "Amount") %>
+  <%= text_field_tag(:a) %>
+
+  <%= submit_tag("Create") %>
+<% end %>
