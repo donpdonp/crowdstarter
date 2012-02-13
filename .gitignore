@@ -7,6 +7,7 @@
 # Ignore bundler config
 /.bundle
 Gemfile.lock
+db/schema.rb
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
