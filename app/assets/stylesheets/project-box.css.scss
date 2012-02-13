@@ -4,10 +4,17 @@ $boxcolor_light: #999999;
 .project-box {
   background: $boxcolor_dark;
   padding: 1em;
+  font-size: 120%
 }
 .project-box-inner {
   background: $boxcolor_light;
   padding: 1em;
+
+  img { 
+    float: left;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+   }
 }
 .project-title {
   color: white;

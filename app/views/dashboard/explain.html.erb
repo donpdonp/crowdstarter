@@ -1,7 +1,15 @@
+<div class="explain">
 <h1>Crowd-Sourced Funding</h1>
 
 <p>
 Get funding for a group project or activity!
 </p>
 
+<div class="project-box-container-left">
 <%= render :partial => "projects/item", :locals => {:project => @example_project}%>
+</div>
+
+<div class="project-box-container-right">
+<%= render :partial => "projects/item", :locals => {:project => @example_project}%>
+</div>
+</div>
