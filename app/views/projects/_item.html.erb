@@ -1,5 +1,6 @@
 <div class="project-box">
  <div class="project-box-border">
+
    <div class="project-box-inner-owner">
      <div class="photo"> <%= image_tag project.user.image_url %></div>
      <div class="name"> <%= project.user.name %></div>
@@ -10,10 +11,20 @@
     <div class="project-title"><%= link_to project.name, project %> </div>
     <div class="project-due">Due by: <%= project.funding_due.strftime("%Y-%m-%d") %> </div>
     <div class="project-due">Time left: <%= distance_of_time_in_words_to_now(project.funding_due) %> </div>
-    <div class="project-goal">Goal: $<%= project.amount %> USD </div>
-    <div class="project-collected">Collected: $<%= project.contributions.sum(&:amount) %> USD </div>
 
-   </div>
+    <div class="progress-box">
+      <div class="project-goal">
+        Goal: $<%= project.amount %> USD 
+      </div>
+      <div class="project-collected">
+       Collected: $<%= project.collected %> USD 
+      </div>
+
+      <div class="progress">
+        <div class="bar" style="width: <%= project.percent_complete %>%;"></div>
+      </div>
+     </div>
+   </div>   
 
   </div>
 </div>
