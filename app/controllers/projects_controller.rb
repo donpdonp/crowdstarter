@@ -36,5 +36,8 @@ class ProjectsController < ApplicationController
     redirect_to project
   end
 
-
+  def destroy
+    current_user.projects.find(params[:id]).destroy
+    redirect_to :root
+  end
 end

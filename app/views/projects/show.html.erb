@@ -1,2 +1,6 @@
 <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
+<% if logged_in? && current_user == @project.user %>
+  <%= link_to 'edit', edit_project_path(@project) %>
+  <%= link_to 'delete', project_path(@project), :method => :delete %>  
+<% end %>
