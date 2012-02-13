@@ -11,8 +11,15 @@ class ProjectsController < ApplicationController
   def create
     if logged_in?
       project = current_user.projects.create(params[:project])
+      if project.valid?
+        redirect_to project
+      else
+        flash[:error] = "invalid project"
+        redirect_to new_project_path
+      end
+    else
+      redirect_to :root
     end
-    redirect_to project || :root
   end
   
   def show
