@@ -1,6 +1,7 @@
 $boxcolor_dark: #666666;
 $boxcolor_lighter: #999999;
 $boxcolor_light: #eeeeee;
+$boxcolor_lightest: #ffffff;
 
 .project-box {
   background: $boxcolor_dark;
@@ -23,6 +24,12 @@ $boxcolor_light: #eeeeee;
     padding-right: 0.5em;
    }
 }
+
+.project-box-inner-owner {
+  float: right;
+  background: $boxcolor_lightest;
+}
+
 .project-title {
   color: white;
 }

@@ -17,7 +17,6 @@ module MiniAuth
 
   def auth
     id = session[:logged_in_user_id]
-    id=1
     if id
       login(id)
       logger.info("logging in from session: #{current_user}")

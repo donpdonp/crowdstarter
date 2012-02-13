@@ -1,5 +1,10 @@
 <div class="project-box">
  <div class="project-box-border">
+   <div class="project-box-inner-owner">
+     <div class="photo"> <%= image_tag project.user.image_url %></div>
+     <div class="name"> <%= project.user.name %></div>
+   </div>
+
    <div class="project-box-inner">
     <img src="<%= project.image_url %>">
     <div class="project-title"><%= link_to project.name, project %> </div>
@@ -9,5 +14,6 @@
     <div class="project-collected">Collected: $<%= project.contributions.sum(&:amount) %> USD </div>
 
    </div>
+
   </div>
 </div>
