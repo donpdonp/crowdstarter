@@ -1,5 +1,6 @@
 Crowdstarter::Application.routes.draw do
   resources :projects
+  resources :users
   
   get "dashboard/explain"
   match "session" => "session#destroy", :via => :delete

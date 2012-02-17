@@ -14,7 +14,7 @@
 
         <% if logged_in? %>
           <span class="user-detail">
-            <%= current_user.email %> 
+            <%= user_link(current_user) %> 
             <%= link_to "logout", session_path, :method => :delete %>
           </span>
         <% else %>

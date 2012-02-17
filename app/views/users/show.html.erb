@@ -1,0 +1,13 @@
+<div class="action users-show">
+  <%= @user.email %> profile
+
+  <div>
+    Connect Amazon.com Payment Service
+      <%= raw FPS.cbui_form( :recipient,
+                   return_url:         root_url,
+                   caller_reference:   "csus:#{@user.email}",
+                   max_variable_fee:   "1%",
+                   recipient_pays_fee: "True",
+                   submit_tag: submit_tag("Connect with Amazon.com") ) %>
+  </div>
+</div>
