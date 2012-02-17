@@ -3,6 +3,8 @@ Crowdstarter::Application.routes.draw do
   resources :users
   
   get "dashboard/explain"
+  get "payment/tokenize"
+  get "payment/clear"
   match "session" => "session#destroy", :via => :delete
   match "auth/:provider/callback" => "session#create" 
 

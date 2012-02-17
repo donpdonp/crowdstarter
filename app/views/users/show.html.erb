@@ -2,11 +2,16 @@
   <%= @user.email %> profile
 
   <div>
+    <% if @user == current_user && current_user.aws_token.blank? %>
     Connect Amazon.com Payment Service
       <%= raw FPS.cbui_form( :recipient,
-                   return_url:         root_url,
+                   return_url:         payment_tokenize_url,
                    caller_reference:   "fbid-#{@user.facebook_uid}",
                    max_fixed_fee:   5,
                    recipient_pays_fee: "True" ) %>
+    <% else %>
+      Amazon Payments token exists.
+      <%= link_to "Remove token", payment_clear_path %>
+    <% end %>
   </div>
 </div>
