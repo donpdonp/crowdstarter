@@ -1,3 +1,22 @@
+<div class="project-box" style="float:right; width:20%">
+  <div class="project-box-border">
+    <div class="project-box-inner">
+      <% if logged_in? %>
+         <%= form_tag(contribute_project_path) do %>
+           Contribute to this project
+           <div class="contribute-amount">
+           <%= label_tag(:amount, "Amount") %>
+           $<%= text_field_tag(:amount, nil, :required => true) %>
+           </div>
+           <button type="submit" class="btn">Give</button>
+         <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div style="float:right; width:75%; margin-right: 1em">
+
 <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
 
@@ -17,16 +36,14 @@
   Be the first to contribute to this project.
 <% end %>
 
+
 <% if logged_in? && current_user == @project.user %>
+
   <div class="btn-group">
   <%= link_to 'edit', edit_project_path(@project), :class => "btn" %>
   <%= link_to 'delete', project_path(@project), :method => :delete, :class => "btn" %>
   </div>
 
-   <%= form_tag(contribute_project_path) do %>
-     Contribute in the amount of
-     <%= label_tag(:amount, "Amount") %>
-     $<%= text_field_tag(:amount) %>
-   <% end %>
 <% end %>
 
+</div>
