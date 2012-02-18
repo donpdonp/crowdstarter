@@ -10,3 +10,18 @@
 .contribute-amount input {
   width: 5em;
 }
+
+.project-contribute {
+  text-align: center;
+  font-size: 140%;
+
+  .amount {
+    font-weight: bold    ;
+  }
+
+  .payments-logo {
+    margin: 1em;
+  }
+}
+
+

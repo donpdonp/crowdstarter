@@ -1,4 +1,16 @@
-Contribute <%= number_to_currency(@contribution.amount) %>
+<div class="project-contribute">
+
+<div>
+  Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>.
+</div>
+
+<div>
+Crowdstarter uses Amazon Payments to process contributions. 
+</div>
+
+<div class="payments-logo">
+<%= image_tag "amazon-payments.gif" %>
+</div>
 
   <%= raw FPS.cbui_form( :multi_use,
               return_url:         payment_receive_url,
@@ -7,5 +19,7 @@ Contribute <%= number_to_currency(@contribution.amount) %>
               recipient_token_list: [SETTINGS['aws']['recipient_token'],
                                       @contribution.project.user.aws_token],
               payment_method: "CC",
-              payment_reason: "Contribution to Project ##{@contribution.project.id}" ) %>
+              payment_reason: "Contribution to Project ##{@contribution.project.id}",
+              submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
 
+</div>
