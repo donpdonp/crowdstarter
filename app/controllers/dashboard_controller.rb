@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def explain
-    @example_project = Project.first
+    @example_projects = Tag.find_by_name("frontpage").projects
   end
 end
