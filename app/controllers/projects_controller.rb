@@ -40,4 +40,12 @@ class ProjectsController < ApplicationController
     current_user.projects.find(params[:id]).destroy
     redirect_to :root
   end
+
+  def contribute
+    project = Project.find(params[:id])
+    @contribution = project.contributions.create(
+                           :user_id => current_user.id,
+                           :amount => params[:amount],
+                           :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
+  end
 end

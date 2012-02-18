@@ -10,4 +10,13 @@ class PaymentController < ApplicationController
     current_user.update_attribute :aws_token_refund, nil
     redirect_to current_user
   end
+
+  def receive
+    contribution = Contribution.find_by_reference(params[:callerReference])
+    if contribution
+      contribution.update_attribute :token, params[:tokenID]
+      contribution.update_attribute :status, params[:status]
+      redirect_to contribution.project
+    end
+  end
 end

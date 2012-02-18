@@ -4,4 +4,9 @@
   <%= link_to 'edit', edit_project_path(@project) %>
   <%= link_to 'delete', project_path(@project), :method => :delete %>
 
+   <%= form_tag(contribute_project_path) do %>
+     <%= label_tag(:amount, "Amount") %>
+     <%= text_field_tag(:amount) %>
+   <% end %>
 <% end %>
+

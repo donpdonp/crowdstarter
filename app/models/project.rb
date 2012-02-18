@@ -5,7 +5,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :name, :funding_due, :amount, :user_id
 
   def collected
-    contributions.sum(&:amount)
+    contributions.select{|c| c.status == "SC"}.sum(&:amount)
   end
 
   def percent_complete
