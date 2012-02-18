@@ -1,12 +1,30 @@
 <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
+
+<% contribs =  @project.contributions.select(&:successful?) %>
+<% if contribs.size > 0 %>
+  <div class="contributors">
+    <div class="contributors-inner">
+      Contributors
+      <% contribs.each do |c| %>
+        <div>
+        <%= render :partial => "projects/contribution", :locals => {:contribution => c} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  Be the first to contribute to this project.
+<% end %>
+
 <% if logged_in? && current_user == @project.user %>
   <%= link_to 'edit', edit_project_path(@project) %>
   <%= link_to 'delete', project_path(@project), :method => :delete %>
 
    <%= form_tag(contribute_project_path) do %>
+     Contribute in the amount of
      <%= label_tag(:amount, "Amount") %>
-     <%= text_field_tag(:amount) %>
+     $<%= text_field_tag(:amount) %>
    <% end %>
 <% end %>
 
