@@ -18,8 +18,10 @@
 <% end %>
 
 <% if logged_in? && current_user == @project.user %>
-  <%= link_to 'edit', edit_project_path(@project) %>
-  <%= link_to 'delete', project_path(@project), :method => :delete %>
+  <div class="btn-group">
+  <%= link_to 'edit', edit_project_path(@project), :class => "btn" %>
+  <%= link_to 'delete', project_path(@project), :method => :delete, :class => "btn" %>
+  </div>
 
    <%= form_tag(contribute_project_path) do %>
      Contribute in the amount of
