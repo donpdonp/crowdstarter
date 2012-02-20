@@ -5,7 +5,8 @@ gem 'rails', '3.2.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'sqlite3', :group => :development
+gem 'pg', :group => :production
 gem 'omniauth-facebook'
 gem 'boomerang', :git => "git://github.com/donpdonp/boomerang.git"
 
@@ -16,7 +17,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
+  gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -38,3 +39,15 @@ gem 'rspec-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :development do
+  # output tools
+  gem 'awesome_print'
+
+  # diagramming
+  gem "rails-erd"
+
+  # other
+  gem "letter_opener" # show email in the browser in dev mode
+end
+
