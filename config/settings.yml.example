@@ -1,0 +1,7 @@
+aws:
+  access_key: abcd
+  access_secret: abcd
+  sandbox: true
+facebook:
+  key: abcd
+  secret: abcd
