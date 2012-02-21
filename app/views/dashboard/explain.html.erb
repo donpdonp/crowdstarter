@@ -1,15 +1,13 @@
 <div class="explain">
-<h1>Crowd-Sourced Funding</h1>
+  <h1>Crowd-Sourced Funding</h1>
 
-<p>
-Get funding for a group project or activity!
-</p>
+  <p>
+  Get funding for a group project or activity!
+  </p>
 
-<div class="project-box-container-left">
-<%= render :partial => "projects/item", :locals => {:project => @example_projects[1]}%>
-</div>
-
-<div class="project-box-container-left">
-<%= render :partial => "projects/item", :locals => {:project => @example_projects[0]}%>
-</div>
+  <% @example_projects.each do |project| %>
+    <div class="project-box-container-left">
+    <%= render :partial => "projects/item", :locals => {:project => project}%>
+    </div>
+  <% end %>
 </div>
