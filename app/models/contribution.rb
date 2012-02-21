@@ -9,6 +9,6 @@ class Contribution < ActiveRecord::Base
   end
 
   def thank_the_user
-    Notification.thanks(self)
+    Notifications.thanks(self)
   end
 end
