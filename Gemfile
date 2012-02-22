@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
+local_gemfile = File.dirname(__FILE__) + "/Gemfile.local"
+if File.file?(local_gemfile)
+  self.instance_eval(Bundler.read_file(local_gemfile))
+end
+
 gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3', :group => :development
-gem 'pg'
 gem 'omniauth-facebook'
 gem 'boomerang', :git => "git://github.com/donpdonp/boomerang.git"
 
