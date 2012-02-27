@@ -10,6 +10,10 @@ class Project < ActiveRecord::Base
     contributions.select{|c| c.status == "SC"}.sum(&:amount)
   end
 
+  def remaining
+    amount - collected
+  end
+
   def percent_complete
     collected / amount
   end

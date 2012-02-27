@@ -5,13 +5,13 @@
     </div>
     <div class="project-box-inner">
       <% if logged_in? %>
-         <%= form_tag(contribute_project_path) do %>
+          <%= form_tag(contribute_project_path) do %>
            <div class="contribute-amount">
            <%= label_tag(:amount, "Amount") %>
            $<%= text_field_tag(:amount, nil, :required => true) %>
            </div>
            <button type="submit" class="btn">Give</button>
-         <% end %>
+          <% end %>
       <% end %>
     </div>
   </div>
