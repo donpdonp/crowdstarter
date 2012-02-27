@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .project-box-container-left {
-  float:right; 
+  float:right;
   width: 50%;
 }
 
@@ -14,6 +14,14 @@
   text-align: center;
 }
 
-.explain p {
+.tagline {
   text-align: center;
+  font-size: 140%;
+}
+
+.startnow button {
+	float: right;
+	margin-right: 2em;
+	font-size: 300%;
+	line-height: 40px;
 }
