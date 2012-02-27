@@ -18,36 +18,29 @@ $boxcolor_lightest: #ffffff;
   border-radius: 6px 6px 0 0 ;
   a {
     color: #eeeeee;
-    font-size: 150%
+    font-size: 140%
   }
 }
 
 .project-box-inner {
-  background: $boxcolor_light;
-  padding: 1em;
+  background: $boxcolor_lightest;
+}
 
-  img {
-    float: left;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-   }
+.project-box-inner-photo {
+  border-radius: 0 0 0 6px;
+  margin-left: 0.2em;
+  padding-top: 0.2em;
 }
 
 .project-box-inner-owner {
   float: right;
-  background: $boxcolor_dark;
+  padding-top: 0.2em;
   border-radius: 0 0 0 6px;
 }
 
-.project-title {
-  color: white;
+.project-box-inner-detail {
+  text-align: center;
+  float: right;
+  border-radius: 0 0 0 6px;
 }
 
-.progress-box {
-  padding: 0.5em;
-  margin-right: 0.5em;
-}
-
-.project-goal {
-  float: right
-}
