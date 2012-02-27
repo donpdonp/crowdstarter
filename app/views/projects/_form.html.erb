@@ -1,14 +1,21 @@
+<h1>
+  List a project
+</h1>
+<p>
+  Tell potential contributors about your project.
+</p>
+
 <%= form_for(project) do |f| %>
   <%= f.label("name") %>
-  <%= f.text_field("name") %>
+  <%= f.text_field("name", :required => true) %>
   <%= f.label("image_url") %>
   <%= f.text_field("image_url") %>
   <%= f.label("funding_due") %>
-  <%= f.text_field("funding_due") %>
+  <%= f.text_field("funding_due", :required => true) %>
   <%= f.label("amount") %>
-  <%= f.text_field("amount") %>
+  <%= f.text_field("amount", :required => true) %>
   <%= f.label("descripton") %>
-  <%= f.text_field("description") %>
+  <%= f.text_area("description", :rows => 2) %>
 
   <br/>
   <%= submit_tag %>

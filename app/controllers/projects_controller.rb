@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   def new
     if logged_in?
       @project = current_user.projects.build
+      @project.funding_due = 1.week.from_now
     else
       flash[:error] = "Login first"
       redirect_to :root
@@ -21,7 +22,7 @@ class ProjectsController < ApplicationController
       redirect_to :root
     end
   end
-  
+
   def show
     @project = Project.find(params[:id])
   end
