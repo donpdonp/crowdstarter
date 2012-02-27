@@ -20,7 +20,7 @@
         Goal: <%= number_to_currency(project.amount) %> USD
       </div>
       <div class="project-collected">
-       Collected: <%= number_to_currency(project.collected) %> USD
+       Collected: <%= number_to_currency(project.collected) %> USD / <%= project.percent_complete %>%
       </div>
 
       <div class="progress">

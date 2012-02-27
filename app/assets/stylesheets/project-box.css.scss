@@ -15,7 +15,7 @@ $boxcolor_lightest: #ffffff;
   text-align: center;
   background: $boxcolor_dark;
   line-height: 22px;
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0 ;
   a {
     color: #eeeeee;
     font-size: 150%
@@ -35,7 +35,8 @@ $boxcolor_lightest: #ffffff;
 
 .project-box-inner-owner {
   float: right;
-  background: $boxcolor_lightest;
+  background: $boxcolor_dark;
+  border-radius: 0 0 0 6px;
 }
 
 .project-title {
