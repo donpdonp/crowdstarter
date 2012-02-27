@@ -1,11 +1,12 @@
 <div class="project-contribute">
 
 <div>
-  Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>.
+  Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>
+  to <span class="project-name"><%= link_to(@contribution.project.name, @contribution.project)%></span> (Project #<%=@contribution.project.id%>).
 </div>
 
 <div>
-Crowdstarter uses Amazon Payments to process contributions. 
+Crowdstarter uses Amazon Payments to process contributions.
 </div>
 
 <div class="payments-logo">

@@ -1,9 +1,11 @@
-<div class="project-box" style="float:right; width:20%">
+<div class="contribute-box" style="float:right; width:20%">
   <div class="project-box-border">
+    <div class="project-box-rolodex">
+      Contribute to this project
+    </div>
     <div class="project-box-inner">
       <% if logged_in? %>
          <%= form_tag(contribute_project_path) do %>
-           Contribute to this project
            <div class="contribute-amount">
            <%= label_tag(:amount, "Amount") %>
            $<%= text_field_tag(:amount, nil, :required => true) %>

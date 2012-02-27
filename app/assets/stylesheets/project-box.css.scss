@@ -16,6 +16,7 @@ $boxcolor_lightest: #ffffff;
   background: $boxcolor_dark;
   line-height: 22px;
   border-radius: 6px 6px 0 0 ;
+  color: #eeeeee;
   a {
     color: #eeeeee;
     font-size: 140%
@@ -64,3 +65,17 @@ $boxcolor_lightest: #ffffff;
   }
 }
 
+.project-box-actions {
+  background: $boxcolor_light;
+  text-align: center;
+}
+
+.contribute-box {
+  padding: 0.7em;
+  .project-box-inner {
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    padding-left: 0.5em;
+  }
+}

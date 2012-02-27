@@ -30,5 +30,13 @@
       </div>
     </div>
 
+    <% if defined?(inline_support) %>
+    <div class="project-box-actions">
+      <% if logged_in? %>
+       <a href="<%=project_path(project)%>"><button type="submit" class="btn">Support</button></a>
+    <% end %>
+    </div>
+    <% end %>
+
   </div>
 </div>
