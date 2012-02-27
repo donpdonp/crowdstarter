@@ -2,15 +2,17 @@
   Profile for <%= @user.name %>.
 
   <div>
-    <% if @user == current_user && current_user.aws_token.blank? %>
-    Connect Amazon.com Payment Service
-      <%= raw FPS.cbui_form( :recipient,
-                   return_url:         payment_tokenize_url,
-                   caller_reference:   "fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
-                   recipient_pays_fee: "True" ) %>
-    <% else %>
-      Amazon Payments token exists.
-      <%= link_to "Remove token", payment_clear_path %>
+    <% if @user == current_user %>
+      <% if current_user.aws_token.blank? %>
+      Connect Amazon.com Payment Service
+        <%= raw FPS.cbui_form( :recipient,
+                     return_url:         payment_tokenize_url,
+                     caller_reference:   "fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
+                     recipient_pays_fee: "True" ) %>
+      <% else %>
+        Amazon Payments token exists.
+        <%= link_to "Remove token", payment_clear_path %>
+      <% end %>
     <% end %>
   </div>
 </div>
