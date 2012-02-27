@@ -13,17 +13,16 @@
 
       <div class="project-box-inner-detail">
         <div class="hangboard project-due">
-          Due by: <br/>
-          <%= project.funding_due.strftime("%h-%d") %> <br/>
-          <%= project.funding_due.strftime("%H:%M") %>
+          <div class="title">Due by: </div>
+          <%= project.funding_due.strftime("%h-%d") %>
         </div>
         <div class="hangboard project-goal">
-          Goal: <br/>
-          <%= number_to_currency(project.amount) %>
+          <div class="title">Goal: </div>
+          <div class="money"><%= number_to_currency(project.amount) %> </div>
         </div>
         <div class="hangboard project-contributors">
-          Collected: <br/>
-          <%= number_to_currency(project.collected) %> <br/>
+          <div class="title">Collected: </div>
+          <div class="money"><%= number_to_currency(project.collected) %> </div>
         </div>
       </div>
       <div class="project-box-inner-photo">
