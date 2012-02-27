@@ -1,5 +1,5 @@
 <div class="action users-show">
-  <%= @user.email %> profile
+  Profile for <%= @user.name %>.
 
   <div>
     <% if @user == current_user && current_user.aws_token.blank? %>
