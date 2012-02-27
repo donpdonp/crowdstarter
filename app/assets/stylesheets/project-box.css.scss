@@ -54,13 +54,13 @@ $boxcolor_lightest: #ffffff;
   margin-right: 1em;
   margin-top: 0.2em;
   border-radius: 8px;
-  padding-top: 0.1em;
+  padding-top: 0.2em;
   padding-left: 1em;
   padding-right: 1em;
 
   .title {
     padding-top: 0.2em;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.5em;
   }
 
   .money {
@@ -71,6 +71,7 @@ $boxcolor_lightest: #ffffff;
 .project-box-actions {
   background: $boxcolor_light;
   text-align: center;
+  padding: 0.2em;
 }
 
 .project-box-description {

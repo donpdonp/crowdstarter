@@ -14,7 +14,7 @@
       <div class="project-box-inner-detail">
         <div class="hangboard project-due">
           <div class="title">Due by: </div>
-          <%= project.funding_due.strftime("%h-%d") %>
+          <%= project.funding_due.strftime("%h ")+project.funding_due.day.to_s %>
         </div>
         <div class="hangboard project-goal">
           <div class="title">Goal: </div>
@@ -38,9 +38,9 @@
 
     <% if defined?(inline_support) %>
     <div class="project-box-actions">
-      <% if logged_in? %>
-       <a href="<%=project_path(project)%>"><button type="submit" class="btn">Support</button></a>
-    <% end %>
+      <a href="<%=project_path(project)%>">
+        <button type="submit" class="btn">Details</button>
+      </a>
     </div>
     <% end %>
 
