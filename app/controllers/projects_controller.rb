@@ -49,4 +49,8 @@ class ProjectsController < ApplicationController
                            :amount => params[:amount],
                            :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
   end
+
+  def count
+    render :json => Project.where("created_at > ?", params[:hours].to_i.hours.ago).count
+  end
 end
