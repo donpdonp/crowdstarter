@@ -2,7 +2,7 @@
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/">
-        CrowdStarter.us
+        EverythingFunded.com
       </a>
 
       <ul class="nav">
@@ -10,11 +10,11 @@
           <a href="/">Home</a>
         </li>
         <li> <%= link_to 'List a project', new_project_path%> </li>
-        </ul> 
+        </ul>
 
         <% if logged_in? %>
           <span class="user-detail">
-            <%= user_link(current_user) %> 
+            <%= user_link(current_user) %>
             <%= link_to "logout", session_path, :method => :delete %>
           </span>
         <% else %>
