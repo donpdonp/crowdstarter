@@ -11,6 +11,9 @@
 <%= render :partial => "layouts/navbar" %>
 <%= render :partial => "layouts/flashbar" %>
 
+<script>
+  $(function(){$(".controller-"+<%=raw controller_name.to_json%>).addClass('active')})
+</script>
 <%= yield %>
 
 <%= render :partial => "layouts/google" %>
