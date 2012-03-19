@@ -22,9 +22,26 @@
   float: right;
 }
 
+.user-nav {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.user-nav a {
+  color: white;
+}
+
+.user-nav a:hover {
+  color: white;
+}
+
+.nav {
+  font-size: 16px;
+}
+
 .user-detail {
   padding-top: 7px;
-  float: right;
+  padding-right: 1em;
   color: white;
 }
 

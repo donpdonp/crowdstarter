@@ -13,7 +13,7 @@ div class="navbar"
       div class="user-nav pull-right"
         - if logged_in?
           span class="user-detail"
-          = user_link(current_user)
+            = user_link(current_user)
           = link_to "logout", session_path, :method => :delete
         - else
           a class="login" href="/auth/facebook"
