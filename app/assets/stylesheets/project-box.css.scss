@@ -3,19 +3,24 @@ $boxcolor_lighter: #999999;
 $boxcolor_light: #eeeeee;
 $boxcolor_lightest: #ffffff;
 
-.project-box {
+.project-box-border {
   background: $boxcolor_lighter;
   padding: 0.7em;
   font-size: 120%;
   border-radius: 6px;
   margin: 0.5em;
+  height: 230px;
+}
+
+.project-box {
+  height: 220px;
+  background: $boxcolor_lightest;
 }
 
 .project-box-rolodex {
   text-align: center;
   background: $boxcolor_dark;
-  line-height: 22px;
-  border-radius: 6px 6px 0 0 ;
+  height: 15%;
   color: #eeeeee;
   a {
     color: #eeeeee;
@@ -23,8 +28,12 @@ $boxcolor_lightest: #ffffff;
   }
 }
 
+.project-box-rolodex-text {
+  padding-top: 0.5em;
+}
+
 .project-box-inner {
-  background: $boxcolor_lightest;
+  height: 70%
 }
 
 .project-box-inner-photo {
