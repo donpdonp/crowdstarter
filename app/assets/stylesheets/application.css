@@ -17,14 +17,13 @@
   margin-left: 15em;
 }
 
-.login {
-  padding-top: 7px;
-  float: right;
-}
-
 .user-nav {
   margin-top: 10px;
   font-size: 16px;
+  .login {
+    padding-top: 7px;
+    float: right;
+  }
 }
 
 .user-nav a {
