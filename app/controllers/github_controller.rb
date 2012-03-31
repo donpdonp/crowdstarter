@@ -6,4 +6,10 @@ class GithubController < ApplicationController
     logger.info("github pull output: #{out}")
     render :nothing => true
   end
+
+  private
+  # easy to mock
+  def shell(cmd)
+    `/bin/sh #{cmd}`
+  end
 end
