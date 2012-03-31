@@ -13,6 +13,7 @@ Crowdstarter::Application.routes.draw do
   get "payment/tokenize"
   get "payment/clear"
   get "payment/receive"
+  post "github/commit"
   match "session" => "session#destroy", :via => :delete
   match "auth/:provider/callback" => "session#create"
 
