@@ -1,8 +1,8 @@
 div class="footer"
-  span id="revision"
-    = GithubHelper.source_code_version_raw
   ul
     li
       = link_to "About"
     li
       = link_to "Stuff"
+    li title="#{GithubHelper.source_code_version_raw}"
+      | Version
