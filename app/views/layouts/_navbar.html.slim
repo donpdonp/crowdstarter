@@ -14,7 +14,8 @@ div class="navbar"
         - if logged_in?
           span class="user-detail"
             = user_link(current_user)
-          = link_to "logout", session_path, :method => :delete
+          span class="user-detail"
+            = link_to "logout", session_path, :method => :delete
         - else
           a class="login" href="/auth/facebook"
             = image_tag "signin_facebook.png"

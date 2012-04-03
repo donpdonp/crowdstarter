@@ -12,19 +12,6 @@
  *= require_tree .
 */
 
-.fb-login-button {
-  margin-top: 7px;
-  margin-left: 15em;
-}
-
-.user-nav {
-  font-size: 16px;
-  .login {
-    padding-top: 7px;
-    float: right;
-  }
-}
-
 html a {
   color: white;
 }
@@ -37,11 +24,20 @@ html a:hover {
   font-size: 16px;
 }
 
-.user-detail {
-  padding-top: 7px;
-  padding-right: 1em;
-  color: white;
+.user-nav {
+  font-size: 16px;
+  padding-top: 8px;
+
+  .user-detail {
+    padding-right: 1em;
+    color: white;
+  }
+
+  .login {
+    float: right;
+  }
 }
+
 
 .alert { text-align: center;}
 
