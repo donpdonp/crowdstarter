@@ -13,11 +13,11 @@
 */
 
 html a {
-  color: white;
+  color: black;
 }
 
 html a:hover {
-  color: white;
+  color: black;
 }
 
 .nav {
@@ -47,6 +47,9 @@ html a:hover {
   color: white;
   text-align: center;
 
+  a, a:hover {
+    color: white
+  }
   ul {
     li {
       display: inline;
