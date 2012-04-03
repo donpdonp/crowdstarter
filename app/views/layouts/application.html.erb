@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="container-fluid">
 
 <%= render :partial => "layouts/navbar" %>
 <%= render :partial => "layouts/flashbar" %>
@@ -15,7 +16,10 @@
   $(function(){$(".controller-"+<%=raw controller_name.to_json%>).addClass('active')})
 </script>
 
-<%= yield %>
+  <%= yield %>
+
+<%= render :partial => "layouts/footer" %>
+</div>
 
 <%= render :partial => "layouts/google" %>
 </body>

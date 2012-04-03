@@ -26,11 +26,11 @@
   }
 }
 
-.user-nav a {
+html a {
   color: white;
 }
 
-.user-nav a:hover {
+html a:hover {
   color: white;
 }
 
@@ -45,3 +45,27 @@
 }
 
 .alert { text-align: center;}
+
+.footer {
+  clear: both;
+  background: #000;
+  color: white;
+  text-align: center;
+
+  #revision {
+    font-size: 70%;
+    float: left;
+  }
+
+  ul {
+    li {
+      display: inline;
+      border-right: thin solid #aaa;
+      padding-right: 0.5em;
+    }
+    li:last-child {
+      border-right: none;
+    }
+  }
+
+}
