@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
 
   has_many :projects
 
+  validates :email, :uniqueness => true
+  validates :username, :uniqueness => true
+  validates :facebook_uid, :uniqueness => true
+
   def self.find_or_create_from_auth_hash(hash)
     user = find_by_facebook_uid(hash.uid)
     if user
