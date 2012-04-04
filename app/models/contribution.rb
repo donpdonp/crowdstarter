@@ -2,6 +2,8 @@ class Contribution < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
+  scope :successful, where(:status => "SC")
+
   #after_create :thank_the_user
 
   def successful?
