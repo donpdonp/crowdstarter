@@ -18,8 +18,14 @@ module MiniAuth
   def auth
     id = session[:logged_in_user_id]
     if id
-      login(id)
-      logger.info("logging in from session: #{current_user}")
+      begin
+        login(id)
+        logger.info("logging in from session: #{current_user}")
+      rescue ActiveRecord::RecordNotFound
+        logger.info("session user id of #{id} is bogus. removing")
+        session[:logged_in_user_id] = nil
+        return false
+      end
     end
   end
 end
