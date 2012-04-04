@@ -15,4 +15,10 @@
       <% end %>
     <% end %>
   </div>
+
+  <div>
+    <% @user.projects.each do |project| %>
+      <%= render :partial => "projects/item", :locals => {:project=>project} %>
+    <% end %>
+  </div>
 </div>

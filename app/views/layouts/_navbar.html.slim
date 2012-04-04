@@ -6,9 +6,9 @@ div class="navbar"
 
       ul class="nav"
         li class="controller-dashboard"
-          a href="/" Features
+          = link_to "Projects", projects_path
         li class="controller-projects"
-          = link_to 'List a project', new_project_path
+          = link_to "People", users_path
 
       div class="user-nav pull-right"
         - if logged_in?
