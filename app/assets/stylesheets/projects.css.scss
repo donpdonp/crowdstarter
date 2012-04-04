@@ -10,6 +10,10 @@
 .project-edit {
   padding-left: 10%;
   padding-right: 10%;
+
+  input,textarea {
+    width: 410px
+  }
 }
 
 .contribute-amount input {

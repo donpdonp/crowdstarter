@@ -15,8 +15,8 @@
   <%= f.label("amount") %>
   <%= f.text_field("amount", :required => true) %>
   <%= f.label("descripton") %>
-  <%= f.text_area("description", :rows => 2) %>
+  <%= f.text_area("description", :rows => 4) %>
 
   <br/>
-  <%= submit_tag %>
+  <%= submit_tag nil, :class => "btn" %>
 <% end %>
