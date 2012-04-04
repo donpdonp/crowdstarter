@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :username
+
   has_many :projects
 
   def self.find_or_create_from_auth_hash(hash)
