@@ -10,7 +10,9 @@
       <div class="project-box-inner-top-row">
 
         <div class="project-box-inner-photo">
+          <% unless project.image_url.blank? %>
           <%= link_to(image_tag(project.image_url), project) %>
+          <% end %>
         </div>
 
         <div class="project-box-inner-owner">
