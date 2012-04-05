@@ -8,7 +8,6 @@
 
     <div class="project-box-inner">
       <div class="project-box-inner-top-row">
-      <div class="project-box-inner-top-row-inside">
 
         <div class="project-box-inner-photo">
           <%= link_to(image_tag(project.image_url), project) %>
@@ -39,7 +38,6 @@
             <div class="money"><%= number_to_currency(project.collected) %> </div>
           </div>
         </div>
-      </div>
       </div>
 
       <% unless project.description.blank? %>
