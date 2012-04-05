@@ -36,6 +36,10 @@ $boxcolor_lightest: #ffffff;
   height: 70%
 }
 
+.project-box-inner-top-row {
+  height: 75px;
+}
+
 .project-box-inner-photo {
   border-radius: 0 0 0 6px;
   margin-left: 0.2em;
@@ -69,6 +73,7 @@ $boxcolor_lightest: #ffffff;
   padding-top: 0.2em;
   padding-left: 1em;
   padding-right: 1em;
+  text-align: center;
 
   .title {
     padding-top: 0.2em;
@@ -78,6 +83,14 @@ $boxcolor_lightest: #ffffff;
   .money {
     font-size: 120%;
   }
+
+  .count {
+    font-size: 120%
+  }
+}
+
+.hangboards {
+
 }
 
 .project-box-actions {
