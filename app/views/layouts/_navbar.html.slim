@@ -6,9 +6,8 @@ div class="navbar"
 
       ul class="nav"
         li class="controller-dashboard"
-          = link_to "Projects", projects_path
-        li class="controller-projects"
-          = link_to "People", users_path
+          = link_to "Projects", root_path
+        li class="controller-users"
 
       div class="user-nav pull-right"
         - if logged_in?
