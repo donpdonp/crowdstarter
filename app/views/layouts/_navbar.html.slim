@@ -6,10 +6,12 @@ div class="navbar"
 
       ul class="nav"
         li class="controller-dashboard"
-          = link_to "Projects", root_path
-        li class="controller-users"
 
       div class="user-nav pull-right"
+        span style="margin-right: 1em"
+          | #{@projects_count} Projects
+        span style="margin-right: 1em"
+          | #{number_to_currency(@contributions_amount)} in contributions
         - if logged_in?
           span class="user-detail"
             = user_link(current_user)
