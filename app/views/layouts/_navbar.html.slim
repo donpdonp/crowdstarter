@@ -9,9 +9,9 @@ div class="navbar"
 
       div class="user-nav pull-right"
         span style="margin-right: 1em"
-          | #{@projects_count} Projects
+          | #{Project.count} projects
         span style="margin-right: 1em"
-          | #{number_to_currency(@contributions_amount)} in contributions
+          | #{number_to_currency(Contribution.successful.sum(:amount))} in contributions
         - if logged_in?
           span class="user-detail"
             = user_link(current_user)
