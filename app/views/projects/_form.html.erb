@@ -6,7 +6,7 @@
 </p>
 
 <%= form_for(project) do |f| %>
-  <%= f.label("name") %>
+  <%= f.label("name", "Project Name") %>
   <%= f.text_field("name", :required => true) %>
   <%= f.label("image_url") %>
   <%= f.text_field("image_url") %>
