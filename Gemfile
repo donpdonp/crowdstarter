@@ -55,3 +55,6 @@ group :development do
   gem "letter_opener" # show email in the browser in dev mode
 end
 
+group :development, :test do
+  gem 'factory_girl_rails'
+end
