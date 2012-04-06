@@ -25,10 +25,12 @@
             <div class="title">Funders: </div>
             <div class="count"><%= project.contributions.successful.count %></div>
           </div>
+          <!--
           <div class="hangboard project-due">
             <div class="title">Due by: </div>
             <%= project.funding_due.strftime("%h ")+project.funding_due.day.to_s %>
           </div>
+          -->
           <div class="hangboard project-goal">
             <div class="title">Goal: </div>
             <div class="money"><%= number_to_currency(project.amount) %> </div>
