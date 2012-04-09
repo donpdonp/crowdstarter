@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :name, :funding_due, :amount, :user_id
 
   def collected
-    contributions.succesful.sum(&:amount)
+    contributions.successful.sum(&:amount)
   end
 
   def remaining
