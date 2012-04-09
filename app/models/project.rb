@@ -22,11 +22,17 @@ class Project < ActiveRecord::Base
   end
 
   def disburse
-    contributions.successful.map(&:token).each do |sender_token|
-      payment = FPS.pay( caller_reference:      "#{id}-#{rand(100)}",
-                         recipient_token_id:    user.aws_token,
-                         sender_token_id:       sender_token,
-                         transaction_amount:    amount.to_s )
+    contributions.successful.each do |contrib|
+      begin
+        payment = FPS.pay( caller_reference:      "#{id}-#{rand(100)}",
+                           marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,
+                           recipient_token_id:    user.aws_token,
+                           sender_token_id:       contrib.token,
+                           transaction_amount:    contrib.amount.to_s )
+      rescue Boomerang::Errors::HTTPError => e
+        puts e.inspect
+        puts e.http_response.body
+      end
     end
   end
 end
