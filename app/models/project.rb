@@ -22,11 +22,11 @@ class Project < ActiveRecord::Base
   end
 
   def disburse
-    payment = FPS.pay( caller_reference:      "#{id}-payment",
-                       charge_fee_to:         "Recipient",
-                       marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,
-                       recipient_token_id:    user.aws_token,
-                       sender_token_id:       contributions.successful.map(&:token).join(','),
-                       transaction_amount:    amount.to_s )
+    contributions.successful.map(&:token).each do |sender_token|
+      payment = FPS.pay( caller_reference:      "#{id}-#{rand(100)}",
+                         recipient_token_id:    user.aws_token,
+                         sender_token_id:       sender_token,
+                         transaction_amount:    amount.to_s )
+    end
   end
 end
