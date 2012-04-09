@@ -55,3 +55,6 @@ group :development do
   gem "letter_opener" # show email in the browser in dev mode
 end
 
+group :test do
+  gem 'capybara'
+end
