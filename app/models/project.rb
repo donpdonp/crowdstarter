@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :name, :funding_due, :amount, :user_id
 
   def collected
-    contributions.select{|c| c.status == "SC"}.sum(&:amount)
+    contributions.succesful.sum(&:amount)
   end
 
   def remaining
@@ -19,5 +19,14 @@ class Project < ActiveRecord::Base
 
   def percent_complete
     collected / amount
+  end
+
+  def disburse
+    payment = FPS.pay( caller_reference:      "#{id}-payment",
+                       charge_fee_to:         "Recipient",
+                       marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,
+                       recipient_token_id:    user.aws_token,
+                       sender_token_id:       contributions.successful.map(&:token).join(','),
+                       transaction_amount:    amount.to_s )
   end
 end

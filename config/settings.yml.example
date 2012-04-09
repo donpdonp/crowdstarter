@@ -2,6 +2,7 @@ aws:
   access_key: abcd
   access_secret: abcd
   sandbox: true
+  fee_percentage: 2.5
 facebook:
   key: abcd
   secret: abcd
