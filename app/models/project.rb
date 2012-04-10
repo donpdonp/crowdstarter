@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   extend FriendlyId
+  include Workflow
 
   belongs_to :user
   has_many :contributions
@@ -8,6 +9,9 @@ class Project < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
   validates_presence_of :name, :funding_due, :amount, :user_id
+
+  workflow do
+  end
 
   def collected
     contributions.successful.sum(&:amount)
