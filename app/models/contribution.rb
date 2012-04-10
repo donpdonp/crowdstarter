@@ -8,6 +8,13 @@ class Contribution < ActiveRecord::Base
 
   #after_create :thank_the_user
   workflow do
+    state :incomplete do
+      event :approve, :transitions_to => :authorized
+    end
+    state :authorized do
+      event :collect, :transitions_to => :collected
+    end
+    state :collected
   end
 
   def successful?

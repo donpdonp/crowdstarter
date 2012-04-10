@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
       event :publish, :transitions_to => :fundable
     end
     state :fundable do
-      event :close, :transitions_to => :funded
+      event :finish, :transitions_to => :funded
     end
     state :funded do
       event :disburse, :transitions_to => :disbursed
