@@ -6,9 +6,8 @@ p
 p
   | It cannot be edited after its publish, but it can be cancelled early.
 
-div
-  input type="checkbox" name="terms"
-    | I understand
-
+a href="#{root_path}" class="pull-right"
+  span class="btn"
+    | Cancel
 form action="#{publish_project_path(@project)}" method="post"
   input type="submit" class="btn btn-success" value="Publish"
