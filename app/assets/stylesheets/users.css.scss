@@ -2,6 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.users-show p {
-  text-align: center;
+.users-show {
+  p {
+    text-align: center;
+  }
+  li {
+    clear: both;
+    list-style-type: none;
+    height: 85px
+  }
+
+  .project-row {
+    .box {
+      width: 11em;
+      height: 75px
+    }
+  }
 }
+

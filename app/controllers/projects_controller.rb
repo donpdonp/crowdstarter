@@ -43,7 +43,16 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = current_user.projects.find(params[:id])
+    @project = current_user.projects.find_by_id(params[:id])
+    if @project
+      unless @project.editable?
+        flash[:error] = "Project is not editable"
+        redirect_to @project
+      end
+    else
+      flash[:error] = "Project #{params[:id]} not found"
+      redirect_to root_path
+    end
   end
 
   def update
