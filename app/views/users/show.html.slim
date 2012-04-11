@@ -16,5 +16,6 @@ div class="action users-show"
         = link_to "Remove token", payment_clear_path
 
   div
-    - @user.projects.each do |project|
-      = render :partial => "projects/item_thin", :locals => {:project=>project}
+    ul
+      - @user.projects.each do |project|
+        = render :partial => "projects/item_thin", :locals => {:project=>project}

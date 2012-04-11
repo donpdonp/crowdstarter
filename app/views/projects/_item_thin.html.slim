@@ -1,5 +1,8 @@
-div style="clear:both"
-  div class="project-box-inner-photo"
-    = image_tag(project.image_url)
+li style="clear:both"
   div
-    = project.name
+    div class="pull-left"
+      = image_tag(project.image_url, :width => "75px")
+    div class="pull-left hangboard"
+      = project.name
+    div class="pull-left hangboard"
+      = project.amount
