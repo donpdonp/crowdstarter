@@ -1,0 +1,5 @@
+h2
+  | Projects for #{@user.name}
+div
+  - @projects.each do |project|
+    = render :partial => "projects/item", :locals => {:project=>project}

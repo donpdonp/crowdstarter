@@ -1,4 +1,17 @@
 class ProjectsController < ApplicationController
+  def index
+    if params[:user]
+      # username search
+      @user = User.find(params[:user])
+      if @user
+        @projects = Project.where(:user_id => @user.id)
+      else
+        flash[:error] = "No user #{params[:user]}"
+        redirect_to root_path
+      end
+    end
+  end
+
   def new
     if logged_in?
       @project = current_user.projects.build
@@ -51,7 +64,7 @@ class ProjectsController < ApplicationController
   end
 
   def count
-    stats = {:created => Project.where("created_at > ?", 
+    stats = {:created => Project.where("created_at > ?",
                            params[:hours].to_i.hours.ago).count,
              :contributed => Contribution.where("created_at > ?",
                              params[:hours].to_i.hours.ago).count }
