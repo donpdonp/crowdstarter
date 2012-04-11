@@ -81,4 +81,8 @@ class ProjectsController < ApplicationController
                              params[:hours].to_i.hours.ago).count }
     render :json => stats
   end
+
+  def publish_review
+    @project = Project.find(params[:id])
+  end
 end

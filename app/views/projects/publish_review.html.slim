@@ -1,0 +1,14 @@
+H1
+  | Publish
+
+p
+  | Once a projcet is published, it becomes available to collect contributions.
+p
+  | It cannot be edited after its publish, but it can be cancelled early.
+
+div
+  input type="checkbox" name="terms"
+    | I understand
+
+form action="#{publish_project_path(@project)}" method="post"
+  input type="submit" class="btn btn-success" value="Publish"
