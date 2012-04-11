@@ -9,6 +9,8 @@ class ProjectsController < ApplicationController
         flash[:error] = "No user #{params[:user]}"
         redirect_to root_path
       end
+    else
+      @projects = Project.fundables.limit(10).order(:funding_due)
     end
   end
 

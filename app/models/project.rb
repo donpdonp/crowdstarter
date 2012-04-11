@@ -10,6 +10,8 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name, :funding_due, :amount, :user_id
 
+  scope :fundables, where(:workflow_state => :fundable)
+
   workflow do
     state :editable do
       event :publish, :transitions_to => :fundable

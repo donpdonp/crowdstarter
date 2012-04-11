@@ -1,5 +1,8 @@
 h2
-  | Projects for #{@user.name}
+  - if @user
+    | Projects for #{@user.name}
+  - else
+    | Browsing projects
 div
   - @projects.each do |project|
     = render :partial => "projects/item", :locals => {:project=>project}
