@@ -52,7 +52,9 @@ class ProjectsController < ApplicationController
 
   def count
     stats = {:created => Project.where("created_at > ?", 
-                           params[:hours].to_i.hours.ago).count }
+                           params[:hours].to_i.hours.ago).count,
+             :contributed => Contribution.where("created_at > ?",
+                             params[:hours].to_i.hours.ago).count }
     render :json => stats
   end
 end
