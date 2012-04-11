@@ -1,0 +1,9 @@
+- if flash[:error]
+  div class="alert alert-error"
+    = flash[:error]
+- if flash[:success]
+  div class="alert alert-success"
+    = flash[:success]
+- if flash[:info]
+  div class="alert alert-info"
+    = flash[:info]

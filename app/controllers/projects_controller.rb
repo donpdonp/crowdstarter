@@ -85,4 +85,12 @@ class ProjectsController < ApplicationController
   def publish_review
     @project = Project.find(params[:id])
   end
+
+  def publish
+    @project = Project.find(params[:id])
+
+    flash[:success] = "Project now published!"
+
+    redirect_to @project
+  end
 end
