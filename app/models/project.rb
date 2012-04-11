@@ -24,7 +24,7 @@ class Project < ActiveRecord::Base
   end
 
   def collected
-    contributions.successful.sum(&:amount)
+    contributions.authorizeds.sum(&:amount)
   end
 
   def remaining
@@ -36,7 +36,7 @@ class Project < ActiveRecord::Base
   end
 
   def collect_contributions
-    contributions.successful.each do |contrib|
+    contributions.authorizeds.each do |contrib|
       begin
         payment = FPS.pay( caller_reference:      "#{id}-#{rand(100)}",
                            marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,

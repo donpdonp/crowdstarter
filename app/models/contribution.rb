@@ -4,7 +4,7 @@ class Contribution < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  scope :successful, where(:status => "SC")
+  scope :authorizeds, where(:workflow_state => :authorized)
 
   #after_create :thank_the_user
   workflow do

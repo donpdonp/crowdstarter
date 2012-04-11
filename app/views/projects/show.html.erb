@@ -26,7 +26,7 @@
 <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
 
-<% contribs =  @project.contributions.select(&:successful?) %>
+<% contribs =  @project.contributions.authorizeds %>
 <% if contribs.size > 0 %>
   <div class="contributors">
     <div class="contributors-inner">
