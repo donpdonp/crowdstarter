@@ -1,6 +1,8 @@
 div class="action users-show"
   h2
-    | Profile for #{@user.name}
+    = image_tag @user.image_url
+    span style="margin-left: 1em"
+      | #{@user.name}
 
   p
     - if @user == current_user
@@ -15,8 +17,9 @@ div class="action users-show"
         | Amazon Payments token exists.
         = link_to "Remove token", payment_clear_path, :class => "btn"
 
-  div
-    | Project list
-    ul
-      - @user.projects.each do |project|
-        = render :partial => "item_thin", :locals => {:project=>project}
+      div
+        h3
+          | Project Management
+        ul
+          - @user.projects.each do |project|
+            = render :partial => "item_thin", :locals => {:project=>project}

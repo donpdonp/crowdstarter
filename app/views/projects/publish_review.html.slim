@@ -9,5 +9,6 @@ p
 a href="#{root_path}" class="pull-right"
   span class="btn"
     | Cancel
-form action="#{publish_project_path(@project)}" method="post"
+
+= form_tag publish_project_path(@project) do |f|
   input type="submit" class="btn btn-success" value="Publish"

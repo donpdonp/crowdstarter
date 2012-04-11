@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :require_login, :only => [:publish_review, :publish]
+
   def index
     if params[:user]
       # username search

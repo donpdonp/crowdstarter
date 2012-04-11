@@ -7,6 +7,10 @@ div class="navbar"
       ul class="nav"
         li class="controller-dashboard"
 
+        li
+          a href="#{projects_path}"
+            | Projects
+
       div class="user-nav pull-right"
         span style="margin-right: 1em"
           | #{Project.count} projects
@@ -20,3 +24,4 @@ div class="navbar"
         - else
           a class="login" href="/auth/facebook"
             = image_tag "signin_facebook.png"
+
