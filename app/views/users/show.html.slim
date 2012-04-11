@@ -1,7 +1,8 @@
 div class="action users-show"
-  | Profile for #{@user.name}
+  h2
+    | Profile for #{@user.name}
 
-  div
+  p
     - if @user == current_user
       - if current_user.aws_token.blank?
         | Connect Amazon.com Payment Service
@@ -12,7 +13,7 @@ div class="action users-show"
                        max_variable_fee: SETTINGS['aws']['fee_percentage'] )
       - else
         | Amazon Payments token exists.
-          = link_to "Remove token", payment_clear_path
+        = link_to "Remove token", payment_clear_path
 
   div
     - @user.projects.each do |project|
