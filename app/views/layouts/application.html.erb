@@ -7,19 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container-fluid">
+  <div class="container-fluid">
+    <%= render :partial => "layouts/navbar" %>
+    <%= render :partial => "layouts/flashbar" %>
 
-<%= render :partial => "layouts/navbar" %>
-<%= render :partial => "layouts/flashbar" %>
+    <script>
+      $(function(){$(".controller-"+<%=raw controller_name.to_json%>).addClass('active')})
+    </script>
 
-<script>
-  $(function(){$(".controller-"+<%=raw controller_name.to_json%>).addClass('active')})
-</script>
+    <%= yield %>
 
-  <%= yield %>
-
-<%= render :partial => "layouts/footer" %>
-</div>
+    <%= render :partial => "layouts/footer" %>
+  </div>
 
 <%= render :partial => "layouts/google" %>
 </body>
