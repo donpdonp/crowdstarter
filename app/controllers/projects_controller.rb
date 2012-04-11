@@ -39,17 +39,22 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    begin
+      @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Project #{params[:id]} not found"
+      redirect_to root_path
+    end
   end
 
   def edit
-    @project = current_user.projects.find_by_id(params[:id])
-    if @project
+    begin
+      @project = current_user.projects.find(params[:id])
       unless @project.editable?
         flash[:error] = "Project is not editable"
         redirect_to @project
       end
-    else
+    rescue ActiveRecord::RecordNotFound
       flash[:error] = "Project #{params[:id]} not found"
       redirect_to root_path
     end
@@ -88,7 +93,7 @@ class ProjectsController < ApplicationController
 
   def publish
     @project = Project.find(params[:id])
-
+    @project.publish!
     flash[:success] = "Project now published!"
 
     redirect_to @project

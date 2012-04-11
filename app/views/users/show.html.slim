@@ -19,4 +19,4 @@ div class="action users-show"
     | Project list
     ul
       - @user.projects.each do |project|
-        = render :partial => "projects/item_thin", :locals => {:project=>project}
+        = render :partial => "item_thin", :locals => {:project=>project}
