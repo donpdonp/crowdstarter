@@ -3,6 +3,10 @@ class DashboardController < ApplicationController
     @example_projects = projects_tagged("frontpage")
   end
 
+  def jobs
+    @jobs = Delayed::Job.all
+  end
+
   private
   def projects_tagged(tag)
     Tag.find_by_name(tag).projects.where(:workflow_state => 'fundable').

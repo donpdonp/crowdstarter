@@ -1,0 +1,4 @@
+ul
+  - @jobs.each do |job|
+    li
+      | ##{job.id} #{job.name} #{job.run_at} runs in: #{time_ago_in_words(job.run_at)} #{job.run_at < Time.now ? "ago" : ""}

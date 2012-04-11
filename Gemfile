@@ -31,6 +31,7 @@ gem 'slim'
 gem 'friendly_id'
 gem 'workflow'
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
