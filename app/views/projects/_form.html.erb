@@ -9,7 +9,7 @@
 <%= form_for(project) do |f| %>
   <div class="row-fluid">
     <div class="span6">
-      <%= f.label("name", "Project Name") %>
+      <%= f.label("name", "Project Name", :class => "text") %>
       <%= f.text_field("name", :required => true) %>
       <%= f.label("image", "Descriptive Image") %>
       <%= f.file_field :image %>
@@ -37,6 +37,7 @@
           };
 
           $('#project_amount').change(recalc).blur(recalc).focus(recalc).keyup(recalc)
+          recalc()
         })
       </script>
       <%= f.label("descripton") %>
