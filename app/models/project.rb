@@ -10,6 +10,9 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name, :funding_due, :amount, :user_id
 
+  has_attached_file :image, :styles => {:medium => "300x300>",
+                                        :thumb => "100x100>"}
+
   scope :fundables, where(:workflow_state => :fundable)
 
   workflow do
