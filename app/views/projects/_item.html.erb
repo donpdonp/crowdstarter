@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="project-box-border">
- <div class="project-box">
+ <div class="project-box" id="project-<%=project.id%>">
     <div class="project-box-rolodex">
       <div class="project-box-rolodex-text">
         <%= link_to project.name, project %>
@@ -31,10 +31,19 @@
           </div>
           <div class="pull-right hangboard project-due">
             <div class="title" style="margin-bottom: 0.1em">Due by: </div>
-            <%= project.funding_due.strftime("%h ")+project.funding_due.day.to_s %>
+            <script>
+              $(function() {
+                var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+                var ptime = new Date(Date.parse(<%=raw project.funding_due.to_json%>))
+                $("#project-<%=project.id%> #ptime_day").html(months[ptime.getMonth()]+" "+ptime.getDate())
+                $("#project-<%=project.id%> #ptime_hour").html(ptime.getHours()+":"+ptime.getMinutes())
+                $("#project-<%=project.id%> #ptime_zone").html(ptime.toString().substr(35,3))
+              })
+            </script>
+            <span id="ptime_day"></span>
             <br/>
-            <%= project.funding_due.strftime("%H:%m")%>
-            <span style="font-size:80%"><%= project.funding_due.strftime("%Z") %></span>
+            <span id="ptime_hour"></span>
+            <span id="ptime_zone" style="font-size:80%"></span>
           </div>
           <div class="pull-right hangboard project-goal">
             <div class="title">Goal: </div>
