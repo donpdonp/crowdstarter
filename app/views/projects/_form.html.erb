@@ -23,10 +23,10 @@
 
   <div class="row-fluid">
     <div class="span6">
-      <%= f.label("amount") %>
+      <%= f.label("amount", "Collection amount") %>
       $<%= f.text_field("amount", :required => true, :class => "money") %>
       - $<input class="money" disabled="" id="feepercent" style="width:2em">(6%) =
-      $<input class="money" disabled="" id="feetotal"> remaining
+      $<input class="money" disabled="" id="feetotal"> collected
       <script>
         $(function() {
           var recalc = function(){
@@ -45,7 +45,8 @@
     </div>
     <div class="span6">
        If your project is successful, EverythingFunded charges a 3% fee. In addition, Amazon
-       <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=6022">
+       <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=6022"
+          style="text-decoration:underline">
          charges approximately 3%
        </a>
         for credit card processing.
