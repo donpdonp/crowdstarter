@@ -15,6 +15,7 @@
       <%= f.file_field :image %>
       <%= f.label("funding_due") %>
       <%= f.text_field("funding_due", :required => true) %>
+      <%= hidden_field_tag("timezone","", :id=> "timezone") %>
     </div>
     <div class="span6">
 
@@ -28,6 +29,10 @@
       - $<input class="money" disabled="" id="feepercent" style="width:2em">(6%) =
       $<input class="money" disabled="" id="feetotal"> collected
       <script>
+        var datematch = (new Date()).toString().match(/\(([A-Z]{3})\)/);
+        if(datematch) {
+          document.forms[0].timezone.value=datematch[1]
+        }
         $(function() {
           var recalc = function(){
             var total = $('#project_amount').val()
