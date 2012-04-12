@@ -102,6 +102,7 @@ class ProjectsController < ApplicationController
 
   def publish
     @project = Project.find(params[:id])
+    @project.delay(run_at:@project.funding_due).collect_contributions
     @project.publish!
     flash[:success] = "Project now published!"
 
