@@ -26,20 +26,20 @@
 <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
 
-<% if @project.fundable? || @project.funded? %>
-  <% contribs =  @project.contributions.authorizeds %>
-  <% if contribs.size > 0 %>
-    <div class="contributors">
-      <div class="contributors-inner">
-        Contributors
-        <% contribs.each do |c| %>
-          <div>
-          <%= render :partial => "projects/contribution", :locals => {:contribution => c} %>
-          </div>
-        <% end %>
-      </div>
+<% contribs =  @project.contributions.authorizeds %>
+<% if contribs.size > 0 %>
+  <div class="contributors">
+    <div class="contributors-inner">
+      Contributors
+      <% contribs.each do |c| %>
+        <div>
+        <%= render :partial => "projects/contribution", :locals => {:contribution => c} %>
+        </div>
+      <% end %>
     </div>
-  <% else %>
+  </div>
+<% else %>
+  <% unless @project.editable? %>
     Be the first to contribute to this project.
   <% end %>
 <% end %>
