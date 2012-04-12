@@ -10,6 +10,7 @@ class SessionController < ApplicationController
     redirect_to params[:redirect_to] || :root
   end
 
+  private
   def auth_hash
     request.env['omniauth.auth']
   end
