@@ -24,12 +24,30 @@
   <div class="row-fluid">
     <div class="span6">
       <%= f.label("amount") %>
-      $<%= f.text_field("amount", :required => true) %>
+      $<%= f.text_field("amount", :required => true, :class => "money") %>
+      - $<input class="money" disabled="" id="feepercent" style="width:2em">(6%) =
+      $<input class="money" disabled="" id="feetotal"> remaining
+      <script>
+        $(function() {
+          var recalc = function(){
+            var total = $('#project_amount').val()
+            var fee = (total*0.06).toFixed(2)
+            $('#feepercent').val(fee)
+            $('#feetotal').val((total-fee).toFixed(2))
+          };
+
+          $('#project_amount').change(recalc).blur(recalc).focus(recalc).keyup(recalc)
+        })
+      </script>
       <%= f.label("descripton") %>
       <%= f.text_area("description", :rows => 4) %>
     </div>
     <div class="span6">
-       If your project is successful, EverythingFunded keeps 3% as a fee. In addition, Amazon charges 2-4% for credit card processing.
+       If your project is successful, EverythingFunded charges a 3% fee. In addition, Amazon
+       <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=6022">
+         charges approximately 3%
+       </a>
+        for credit card processing.
     </div>
   </div>
 
