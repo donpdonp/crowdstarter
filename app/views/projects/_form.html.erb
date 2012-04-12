@@ -15,21 +15,30 @@
       <%= f.file_field :image %>
       <%= f.label("funding_due") %>
       <%= f.text_field("funding_due", :required => true) %>
-      <%= f.label("amount") %>
-      <%= f.text_field("amount", :required => true) %>
-      <%= f.label("descripton") %>
-      <%= f.text_area("description", :rows => 4) %>
     </div>
     <div class="span6">
 
     </div>
   </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <%= f.label("amount") %>
+      $<%= f.text_field("amount", :required => true) %>
+      <%= f.label("descripton") %>
+      <%= f.text_area("description", :rows => 4) %>
+    </div>
+    <div class="span6">
+       If your project is successful, EverythingFunded keeps 3% as a fee. In addition, Amazon charges 2-4% for credit card processing.
+    </div>
+  </div>
+
   <div class="row-fluid">
     <div class="span6">
       <%= submit_tag "Save Details", :class => "btn" %>
     </div>
     <div class="span6">
-       Save as often as you like. The project is not public until published.
+       Save as often as you like. The details are for your eyes only until published.
     </div>
   </div>
 <% end %>
