@@ -14,8 +14,8 @@
       <%= f.label("image", "Descriptive Image") %>
       <%= f.file_field :image %>
       <%= f.label("funding_due") %>
-      <%= f.text_field("funding_due", :required => true) %>
-      <%= text_field_tag("timezone","", :id=> "timezone", :style=>"width:2em", :readonly=>"") %>
+      <%= text_field_tag("project[funding_due]", "time", :required => true) %>
+      <%= text_field_tag("timezone","", :id=> "timezone", :style=>"width:2em", :readonly=>"", :title => "Timezone") %>
     </div>
     <div class="span6">
 
@@ -29,10 +29,13 @@
       - $<input class="money" disabled="" id="feepercent" style="width:2em">(6%) =
       $<input class="money" disabled="" id="feetotal"> collected
       <script>
+        var projectdate = new Date(Date.parse(<%=raw project.funding_due.to_json%>));
+        document.getElementById('project_funding_due').value = projectdate.getFullYear() + "-" + (projectdate.getMonth()+1) + "-" + projectdate.getDate() + " " + projectdate.getHours() + ":" + projectdate.getMinutes();
         var datematch = (new Date()).toString().match(/\(([A-Z]{3})\)/);
         if(datematch) {
           document.forms[0].timezone.value=datematch[1]
         }
+
         $(function() {
           var recalc = function(){
             var total = $('#project_amount').val()

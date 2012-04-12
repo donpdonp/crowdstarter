@@ -4,5 +4,5 @@ ul
   - @jobs.each do |job|
     li
       | ##{job.id} #{job.name} #{job.run_at}
-      span style="#{"color:red" if job.run_at.past?}"
+      span style="color: #{job.run_at.past? ? "red" : "green"}"
         |  #{time_ago_in_words(job.run_at)} #{job.run_at.past? ? "ago" : ""}

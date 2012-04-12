@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   end
 
   def jobs
-    @jobs = Delayed::Job.all
+    @jobs = Delayed::Job.order("run_at desc").all
   end
 
   private

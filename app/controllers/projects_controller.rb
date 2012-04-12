@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
 
   def create
     if logged_in?
+      params[:project][:funding_due] += " #{params[:timezone]}"
       project = current_user.projects.create(params[:project])
       if project.valid?
         redirect_to project
@@ -71,6 +72,8 @@ class ProjectsController < ApplicationController
 
   def update
     project = current_user.projects.find(params[:id])
+    params[:project][:funding_due] += " #{params[:timezone]}"
+    logger.info "new date "+params[:project][:funding_due]
     project.update_attributes params[:project]
     redirect_to project
   end
