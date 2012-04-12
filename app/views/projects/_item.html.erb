@@ -29,12 +29,13 @@
             <div class="title">Funders: </div>
             <div class="count"><%= project.contributions.authorizeds.count %></div>
           </div>
-          <!--
           <div class="pull-right hangboard project-due">
-            <div class="title">Due by: </div>
+            <div class="title" style="margin-bottom: 0.1em">Due by: </div>
             <%= project.funding_due.strftime("%h ")+project.funding_due.day.to_s %>
+            <br/>
+            <%= project.funding_due.strftime("%H:%m")%>
+            <span style="font-size:80%"><%= project.funding_due.strftime("%Z") %></span>
           </div>
-          -->
           <div class="pull-right hangboard project-goal">
             <div class="title">Goal: </div>
             <div class="money"><%= number_to_currency(project.amount) %> </div>
