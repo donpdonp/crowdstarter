@@ -21,3 +21,4 @@ db/schema.rb
 /gems
 
 /app/assets/images/samples/
+/public/system/

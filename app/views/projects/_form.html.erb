@@ -1,23 +1,35 @@
 <h1>
-  List a project
+  Add a project
 </h1>
 <p>
-  Tell potential contributors about your project.
+  Tell potential contributors about your project by filling in
+  some inital details.
 </p>
 
 <%= form_for(project) do |f| %>
-  <%= f.label("name", "Project Name") %>
-  <%= f.text_field("name", :required => true) %>
-  <%= f.label("image_url") %>
-  <%= f.text_field("image_url") %>
-  <%= f.file_field :image %>
-  <%= f.label("funding_due") %>
-  <%= f.text_field("funding_due", :required => true) %>
-  <%= f.label("amount") %>
-  <%= f.text_field("amount", :required => true) %>
-  <%= f.label("descripton") %>
-  <%= f.text_area("description", :rows => 4) %>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= f.label("name", "Project Name") %>
+      <%= f.text_field("name", :required => true) %>
+      <%= f.label("image", "Descriptive Image") %>
+      <%= f.file_field :image %>
+      <%= f.label("funding_due") %>
+      <%= f.text_field("funding_due", :required => true) %>
+      <%= f.label("amount") %>
+      <%= f.text_field("amount", :required => true) %>
+      <%= f.label("descripton") %>
+      <%= f.text_area("description", :rows => 4) %>
+    </div>
+    <div class="span6">
 
-  <br/>
-  <%= submit_tag nil, :class => "btn" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <%= submit_tag "Save Details", :class => "btn" %>
+    </div>
+    <div class="span6">
+       Save as often as you like. The project is not public until published.
+    </div>
+  </div>
 <% end %>
