@@ -43,6 +43,13 @@ class ProjectsController < ApplicationController
   def show
     begin
       @project = Project.find(params[:id])
+      if @project.editable?
+        if logged_in? && current_user == @project.user
+        else
+          flash[:info] = "Project #{params[:id]} is not finished"
+          redirect_to root_path
+        end
+      end
     rescue ActiveRecord::RecordNotFound
       flash[:error] = "Project #{params[:id]} not found"
       redirect_to root_path
