@@ -26,28 +26,33 @@
 <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
 
-<% contribs =  @project.contributions.authorizeds %>
-<% if contribs.size > 0 %>
-  <div class="contributors">
-    <div class="contributors-inner">
-      Contributors
-      <% contribs.each do |c| %>
-        <div>
-        <%= render :partial => "projects/contribution", :locals => {:contribution => c} %>
-        </div>
-      <% end %>
+<% if @project.fundable? || @project.funded? %>
+  <% contribs =  @project.contributions.authorizeds %>
+  <% if contribs.size > 0 %>
+    <div class="contributors">
+      <div class="contributors-inner">
+        Contributors
+        <% contribs.each do |c| %>
+          <div>
+          <%= render :partial => "projects/contribution", :locals => {:contribution => c} %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% else %>
-  Be the first to contribute to this project.
+  <% else %>
+    Be the first to contribute to this project.
+  <% end %>
 <% end %>
 
 
 <% if logged_in? && current_user == @project.user %>
 
   <div class="btn-group">
-  <%= link_to 'edit', edit_project_path(@project), :class => "btn" %>
-  <%= link_to 'delete', project_path(@project), :method => :delete, :class => "btn" %>
+  <% if @project.editable? %>
+    <%= link_to 'Edit', edit_project_path(@project), :class => "btn" %>
+    <%= link_to 'Delete', project_path(@project), :method => :delete, :class => "btn", :confirm => "Delete this project?" %>
+    <%= link_to 'Publish', publish_review_project_path(@project), :class => "btn" %>
+  <% end %>
   </div>
 
 <% end %>
