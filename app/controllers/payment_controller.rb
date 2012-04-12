@@ -16,6 +16,7 @@ class PaymentController < ApplicationController
     if contribution
       contribution.update_attribute :token, params[:tokenID]
       contribution.update_attribute :status, params[:status]
+      contribution.approve! if params[:status] == "SC"
       redirect_to contribution.project
     end
   end
