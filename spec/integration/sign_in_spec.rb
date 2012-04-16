@@ -5,7 +5,7 @@ describe "Sign in", :type => :request do
     visit '/'
     #puts page.html
     within(".user-nav") do
-      #click_link "facebook-login"
+      click_link "facebook-login"
     end
   end
 end

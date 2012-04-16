@@ -32,3 +32,15 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 end
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:facebook] = Hashie::Mash.new({
+      :provider => 'facebook',
+      :uid => '123545',
+      :info => {
+        :email => "user@test.site",
+        :name => "Test User",
+        :image => "face.jpg"
+      },
+      :credentials => { :token => "abc123" }
+    })
