@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def explain
-    @example_projects = projects_tagged("frontpage").order(:funding_due).limit(10)
+    @example_projects = projects_tagged("frontpage", 10)
   end
 
   def jobs
@@ -8,7 +8,8 @@ class DashboardController < ApplicationController
   end
 
   private
-  def projects_tagged(tag)
-    Tag.find_by_name(tag).projects.where(:workflow_state => 'fundable')
+  def projects_tagged(tag, limit)
+    Tag.find_by_name(tag).projects.where(:workflow_state => 'fundable').
+                                   order(:funding_due).limit(limit)
   end
 end

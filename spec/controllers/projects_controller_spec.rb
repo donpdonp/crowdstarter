@@ -1,11 +1,8 @@
 require 'spec_helper'
 
-describe DashboardController do
+describe ProjectsController do
 
-  it "should display the explanation page" do
-    subject.should_receive(:projects_tagged).with("frontpage").and_return([])
-    get :explain
-    response.should render_template("dashboard/explain")
+  it "should do something" do
   end
 
 end
