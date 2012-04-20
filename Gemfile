@@ -57,6 +57,7 @@ group :development do
 
   # other
   gem "letter_opener" # show email in the browser in dev mode
+  gem "guard-rspec"
 end
 
 group :test do
