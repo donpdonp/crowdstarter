@@ -53,5 +53,12 @@ describe "Project management", :type => :request do
     click_on "Give"
     page.should have_content("Contribute $10.00 to")
     #click_on "Continue to Amazon Payments"
+    reference = find(:xpath, "//input[@name='callerReference']")["value"]
+
+    #Amazon callback
+    visit "/payment/receive?callerReference=#{reference}&tokenID=abczzz&status=SC"
+    within(".contributors") do
+      page.should have_content("Customer Person $10")
+    end
   end
 end
