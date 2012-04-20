@@ -11,5 +11,6 @@ div class="explain"
 
   - @example_projects.each do |project|
     div class="project-box-container-left"
-      = render(:partial => "projects/item", :locals =>  {:project =>  project,
-                                                         :inline_support =>  true})
+      = render(:partial => "projects/item",
+               :locals =>  {:project =>  project,
+                            :inline_support =>  true})

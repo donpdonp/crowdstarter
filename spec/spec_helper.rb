@@ -34,13 +34,3 @@ RSpec.configure do |config|
 end
 
 OmniAuth.config.test_mode = true
-OmniAuth.config.mock_auth[:facebook] = Hashie::Mash.new({
-      :provider => 'facebook',
-      :uid => '123545',
-      :info => {
-        :email => "user@test.site",
-        :name => "Test User",
-        :image => "face.jpg"
-      },
-      :credentials => { :token => "abc123" }
-    })
