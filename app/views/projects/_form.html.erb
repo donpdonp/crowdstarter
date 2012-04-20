@@ -14,7 +14,7 @@
       <%= f.label("image", "Descriptive Image") %>
       <%= f.file_field :image %>
       <%= f.label("funding_due") %>
-      <%= text_field_tag("project[funding_due]", "time", :required => true) %>
+      <%= text_field_tag("project[funding_due]", nil, :required => true) %>
       <%= text_field_tag("timezone","", :id=> "timezone", :style=>"width:2em", :readonly=>"", :title => "Timezone") %>
     </div>
     <div class="span6">
