@@ -24,4 +24,10 @@ class Contribution < ActiveRecord::Base
   def thank_the_user
     Notification.thanks(self)
   end
+
+  def receive_payment(token, status)
+    update_attribute :token, token
+    update_attribute :status, status
+    approve! if status == "SC"
+  end
 end

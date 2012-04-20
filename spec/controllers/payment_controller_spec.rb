@@ -14,9 +14,7 @@ describe PaymentController do
 
     project = mock_model(Project)
     contribution = mock_model(Contribution, {:project => project})
-    contribution.should_receive(:update_attribute).with(:token, params["tokenID"])
-    contribution.should_receive(:update_attribute).with(:status, params["status"])
-    contribution.should_receive(:approve!)
+    contribution.should_receive(:receive_payment)
     Contribution.should_receive(:find_by_reference).with(params["callerReference"]).and_return(contribution)
     get :receive, params
     response.should redirect_to(project_path(project))

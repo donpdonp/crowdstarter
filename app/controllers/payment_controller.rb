@@ -14,9 +14,7 @@ class PaymentController < ApplicationController
   def receive
     contribution = Contribution.find_by_reference(params[:callerReference])
     if contribution
-      contribution.update_attribute :token, params[:tokenID]
-      contribution.update_attribute :status, params[:status]
-      contribution.approve! if params[:status] == "SC"
+      contribution.receive_payment(params[:tokenID], params[:status])
       redirect_to contribution.project
     end
   end
