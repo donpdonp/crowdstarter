@@ -59,16 +59,17 @@ class Project < ActiveRecord::Base
   def fund
     contributions.authorizeds.each do |contrib|
       begin
-        payment = FPS.pay( caller_reference:      "#{id}-#{rand(100)}",
-                           marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,
-                           recipient_token_id:    user.aws_token,
-                           sender_token_id:       contrib.token,
-                           transaction_amount:    contrib.amount.to_s )
-        activities.create(:detail => "Collecting #{contrib.user.email} $#{contrib.amount}",
-                          :code => "collect")
+        response = contrib.collect_payment_for(user)
+        activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",
+                          :code => "collect",
+                          :contribution => contrib)
+        logger.info response.inspect
       rescue Boomerang::Errors::HTTPError => e
-        puts e.inspect
-        puts e.http_response.body
+        activities.create(:detail => "Failed to collect from #{contrib.user.email} $#{contrib.amount}",
+                          :code => "collect-fail",
+                          :contribution => contrib)
+        logger.error e.message
+        logger.error e.http_response.body
       end
     end
   end

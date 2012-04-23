@@ -5,7 +5,7 @@ class CreateActivities < ActiveRecord::Migration
       t.integer :project_id
       t.integer :user_id
       t.string :code
-      t.string :detail
+      t.text :detail
 
       t.timestamps
     end
