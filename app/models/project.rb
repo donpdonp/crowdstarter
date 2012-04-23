@@ -22,11 +22,13 @@ class Project < ActiveRecord::Base
       event :publish, :transitions_to => :fundable
     end
     state :fundable do
-      event :finish, :transitions_to => :funded
+      event :fund, :transitions_to => :funded
+      event :fail, :transitions_to => :failed
     end
     state :funded do
       event :disburse, :transitions_to => :disbursed
     end
+    state :failed
     state :disbursed
   end
 
@@ -42,7 +44,19 @@ class Project < ActiveRecord::Base
     collected / amount
   end
 
-  def collect_contributions
+  def end_of_project_processing
+    if collected >= amount
+      activities.create(:detail => "Final processing - Funded! Collecting contributions",
+                        :code => "funded")
+      fund!
+    else
+      activities.create(:detail => "Final processing - Insufficient contributions",
+                        :code => "failed")
+      fail!
+    end
+  end
+
+  def fund
     contributions.authorizeds.each do |contrib|
       begin
         payment = FPS.pay( caller_reference:      "#{id}-#{rand(100)}",

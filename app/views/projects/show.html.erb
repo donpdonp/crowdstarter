@@ -51,7 +51,7 @@
       <% @project.activities.each do |a| %>
         <div class="contribution">
           <ul>
-            <li><%= a.created_at %> <%= a.user.name %> <%= a.detail %></li>
+            <li><%= a.created_at %> <%= a.user ? a.user.name : "System" %> <%= a.detail %></li>
           </ul>
         </div>
       <% end %>
