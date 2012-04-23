@@ -20,7 +20,7 @@ class PaymentController < ApplicationController
         if contribution
           contribution.receive_payment(params[:tokenID], params[:status])
           if contribution.authorized?
-            Activity.create({:detail => "contributed",
+            Activity.create({:detail => "Contributed $#{contribution.amount}",
                              :code => "contributed",
                              :contribution => contribution,
                              :user => contribution.user,

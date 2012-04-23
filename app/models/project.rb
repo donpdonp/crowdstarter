@@ -64,6 +64,8 @@ class Project < ActiveRecord::Base
                            recipient_token_id:    user.aws_token,
                            sender_token_id:       contrib.token,
                            transaction_amount:    contrib.amount.to_s )
+        activities.create(:detail => "Collecting #{contrib.user.email} $#{contrib.amount}",
+                          :code => "collect")
       rescue Boomerang::Errors::HTTPError => e
         puts e.inspect
         puts e.http_response.body
