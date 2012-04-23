@@ -44,6 +44,19 @@
   <% end %>
 <% end %>
 
+<div class="contributors">
+  <div class="contributors-inner">
+    Activity
+    <% @project.activities.each do |a| %>
+      <div>
+        <ul>
+          <li><%= a.user.name %> <%= a.detail %></li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 
 <% if logged_in? && current_user == @project.user %>
 

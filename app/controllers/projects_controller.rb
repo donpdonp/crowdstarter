@@ -31,6 +31,9 @@ class ProjectsController < ApplicationController
       params[:project][:funding_due] += " #{params[:timezone]}"
       project = current_user.projects.create(params[:project])
       if project.valid?
+        project.activities.create({:detail => "Created project",
+                                   :code => "create",
+                                   :user => current_user})
         redirect_to project
       else
         flash[:error] = "invalid project"
