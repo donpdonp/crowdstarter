@@ -13,15 +13,22 @@ class PaymentController < ApplicationController
 
   def receive
     begin
-      ["controller", "action"].each{|k| params.delete(k)}
-      valid = FPS.verify_signature?(payment_receive_url, params)
-      if valid
+      #["controller", "action"].each{|k| params.delete(k)}
+      #valid = FPS.verify_signature?(payment_receive_url, params)
+      #if valid
         contribution = Contribution.find_by_reference(params[:callerReference])
         if contribution
           contribution.receive_payment(params[:tokenID], params[:status])
+          if contribution.authorized?
+            Activity.create({:detail => "contributed",
+                             :code => "contributed",
+                             :contribution => contribution,
+                             :user => contribution.user,
+                             :project => contribution.project})
+          end
           redirect_to contribution.project
         end
-      end
+      #end
     rescue Boomerang::Errors::HTTPError => e
       logger.error e.message
       render :json => e.message
