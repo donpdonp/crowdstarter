@@ -12,10 +12,13 @@ div class="action users-show"
                        return_url:         payment_tokenize_url,
                        caller_reference:   "fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
                        recipient_pays_fee: "True",
-                       max_variable_fee: SETTINGS['aws']['fee_percentage'] )
+                       max_variable_fee: SETTINGS['aws']['fee_percentage'],
+                       submit_tag: "<button type='submit' class='btn'>Connect with Amazon Payments</button>" )
       - else
-        | Amazon Payments token exists.
-        = link_to "Remove token", payment_clear_path, :class => "btn"
+        | Amazon Payments is connected.
+        br
+        - if @user.projects.fundables.count == 0
+          = link_to "Remove token", payment_clear_path, :class => "btn"
 
       div
         h3
