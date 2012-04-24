@@ -104,6 +104,10 @@ class ProjectsController < ApplicationController
 
   def publish_review
     @project = Project.find(params[:id])
+    if @project.user.aws_token.blank?
+      flash[:error] = "Please connect your account to Amazon Payments first"
+      redirect_to @project.user
+    end
   end
 
   def publish
