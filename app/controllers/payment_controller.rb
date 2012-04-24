@@ -27,6 +27,9 @@ class PaymentController < ApplicationController
                              :project => contribution.project})
           end
           redirect_to contribution.project
+        else
+          flash[:error] = "Amazon response not understood"
+          redirect_to :root
         end
       #end
     rescue Boomerang::Errors::HTTPError => e
