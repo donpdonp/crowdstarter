@@ -115,6 +115,9 @@ class ProjectsController < ApplicationController
     @project.publish!
     @project.delay(run_at:@project.funding_due).end_of_project_processing
     flash[:success] = "Project now published!"
+    @project.activities.create({:detail => "Project published",
+                               :code => "publish",
+                               :user => current_user})
 
     redirect_to @project
   end
