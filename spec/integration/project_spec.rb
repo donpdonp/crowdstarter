@@ -29,6 +29,11 @@ describe "Project management", :type => :request do
     visit '/'
     click_on "facebook-login"
     page.should have_content("manager@test.site")
+
+    # Setup Amazon multiuse token
+    visit "/payment/tokenize?tokenID=abc123"
+
+    visit '/'
     click_on "Add a project"
     page.has_css?("form#new_project")
     fill_in('Project Name', :with => "A new pony")
