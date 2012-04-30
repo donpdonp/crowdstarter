@@ -13,8 +13,11 @@ describe PaymentController do
               "callerReference"=>"proj:8-fbid:692421751-time:1334266878"}
 
     project = mock_model(Project)
-    contribution = mock_model(Contribution, {:project => project})
+    user = mock_model(User)
+    contribution = mock_model(Contribution, {:project => project,
+                                             :user => user})
     contribution.should_receive(:receive_payment)
+    contribution.should_receive(:authorized?).and_return(true)
     Contribution.should_receive(:find_by_reference).with(params["callerReference"]).and_return(contribution)
     get :receive, params
     response.should redirect_to(project_path(project))
