@@ -1,84 +1,20 @@
-<div class="contribute-box" style="float:right; width:20%">
-  <div class="project-box-border">
-    <div class="project-box-rolodex">
-      Contribute to this project
-    </div>
-    <div class="project-box-inner">
-      <div class="contribute-box-text">
-        <% if logged_in? && @project.fundable?%>
-            <%= form_tag(contribute_project_path) do %>
-             <div class="contribute-amount">
-             <%= label_tag(:amount, "Amount") %>
-             $<%= text_field_tag(:amount, nil, :required => true) %>
-             </div>
-             <button type="submit" class="btn">Give</button>
-            <% end %>
-        <% end %>
-        <% if !logged_in? %>
-          Please login to contribute.
-        <% end %>
-        <% if @project.editable? %>
-          The project is still being edited.
-        <% end %>
-        <% if @project.funded? %>
-          The project had been funded.
-        <% end %>
-        <% if @project.failed? %>
-          The project had insufficient funding.
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="util-box pull-right">
+  <%= render :partial => "contribute_box" %>
+  <%= render :partial => "rewards_box" %>
 </div>
 
 <div style="float:right; width:75%; margin-right: 1em">
 
-<%= render :partial => "projects/item", :locals => {:project => @project}%>
+  <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
+  <%= render :partial => "contributions" %>
 
-<% contribs =  @project.contributions.authorizeds %>
-<% if contribs.size > 0 %>
-  <div class="contributors">
-    <div class="contributors-inner">
-      Contributors
-      <% contribs.each do |c| %>
-        <div>
-        <%= render :partial => "projects/contribution", :locals => {:contribution => c} %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% else %>
-  <% unless @project.editable? %>
-    Be the first to contribute to this project.
-  <% end %>
-<% end %>
-
-<% if current_user == @project.user %>
-  <div class="contributors">
-    <div class="contributors-inner">
-      Activity
-      <% @project.activities.each do |a| %>
-        <div class="contribution">
-          <ul>
-            <li><%= a.created_at %> <%= a.user ? "#{a.user.name}/#{a.user.email}" : "System" %> <%= a.detail %></li>
-          </ul>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+  <%= render :partial => "activity_log" %>
 
 
 <% if logged_in? && current_user == @project.user %>
 
-  <div class="btn-group">
-  <% if @project.editable? %>
-    <%= link_to 'Edit', edit_project_path(@project), :class => "btn" %>
-    <%= link_to 'Delete', project_path(@project), :method => :delete, :class => "btn", :confirm => "Delete this project?" %>
-    <%= link_to 'Publish', publish_review_project_path(@project), :class => "btn" %>
-  <% end %>
-  </div>
+  <%= render :partial => "menu_buttons" %>
 
 <% end %>
 
