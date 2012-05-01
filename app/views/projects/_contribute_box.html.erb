@@ -1,0 +1,32 @@
+<div class="contribute-box">
+  <div class="project-box-border">
+    <div class="project-box-rolodex">
+      Contribute to this project
+    </div>
+    <div class="project-box-inner">
+      <div class="contribute-box-text">
+        <% if logged_in? && @project.fundable?%>
+            <%= form_tag(contribute_project_path) do %>
+             <div class="contribute-amount">
+             <%= label_tag(:amount, "Amount") %>
+             $<%= text_field_tag(:amount, nil, :required => true) %>
+             </div>
+             <button type="submit" class="btn">Give</button>
+            <% end %>
+        <% end %>
+        <% if !logged_in? %>
+          Please login to contribute.
+        <% end %>
+        <% if @project.editable? %>
+          The project is still being edited.
+        <% end %>
+        <% if @project.funded? %>
+          The project had been funded.
+        <% end %>
+        <% if @project.failed? %>
+          The project had insufficient funding.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
