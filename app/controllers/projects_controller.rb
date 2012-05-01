@@ -92,6 +92,10 @@ class ProjectsController < ApplicationController
                            :user_id => current_user.id,
                            :amount => params[:amount],
                            :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
+    reward = @contribution.nearest_reward
+    if reward
+      @contribution.update_attribute :reward_id, reward.id
+    end
   end
 
   def count

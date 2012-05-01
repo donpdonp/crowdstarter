@@ -1,17 +1,26 @@
 <div class="project-contribute">
 
-<div>
-  Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>
-  to <span class="project-name"><%= link_to(@contribution.project.name, @contribution.project)%></span> (Project #<%=@contribution.project.id%>).
-</div>
+  <div>
+    Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>
+    to <span class="project-name"><%= link_to(@contribution.project.name, @contribution.project)%></span> (Project #<%=@contribution.project.id%>).
+  </div>
 
-<div>
-EverythingFunded uses Amazon Payments to process contributions.
-</div>
+  <% if @contribution.reward %>
+    <div id="reward_text">
+      Your contribution will earn the following reward!
+      <br/>
+      <%= number_to_currency(@contribution.amount) %> or more:
+      &quot;<%= @contribution.reward.description %>&quot;
+    </div>
+  <% end %>
 
-<div class="payments-logo">
-<%= image_tag "amazon-payments.gif" %>
-</div>
+  <div>
+  EverythingFunded uses Amazon Payments to process contributions.
+  </div>
+
+  <div class="payments-logo">
+  <%= image_tag "amazon-payments.gif" %>
+  </div>
 
   <%= raw FPS.cbui_form( :multi_use,
               return_url:         payment_receive_url,
@@ -23,4 +32,6 @@ EverythingFunded uses Amazon Payments to process contributions.
               payment_reason: "Contribution to Project ##{@contribution.project.id}",
               submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
 
+
 </div>
+

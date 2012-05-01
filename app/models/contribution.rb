@@ -36,4 +36,13 @@ class Contribution < ActiveRecord::Base
                      transaction_amount:    amount.to_s )
   end
 
+  def reward_available?
+    cheapest_reward = project.rewards.order("amount asc").first
+    cheapest_reward && cheapest_reward.amount >= amount
+  end
+
+  def nearest_reward
+    rewards = project.rewards.order("amount asc")
+    rewards.select{|r| r.amount >= amount}.first
+  end
 end
