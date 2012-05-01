@@ -6,3 +6,7 @@ div class="rewards-box"
       ul
         li The Things
         li Stuff
+        - if current_user == @project.user
+          li
+            a href="#{new_reward_path(:project_id=>@project.id)}"
+              | + Add a reward

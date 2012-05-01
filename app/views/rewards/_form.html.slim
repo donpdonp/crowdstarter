@@ -1,0 +1,14 @@
+h2
+  | Add a reward for Project "#{@project.name}"
+= form_for(@reward) do |f|
+  label for="reward-"
+    | Minimum amount to contribute to earn this reward.
+  | $
+  input name="reward-amount" class="money"
+  label for="reward-description"
+    | Description of reward.
+  textarea name="reward-description"
+  input type="hidden" name="project_id" value="#{@project.id}"
+  div
+    button
+      | Add Reward
