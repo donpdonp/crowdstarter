@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
   has_many :tags, :through => :taggings
   has_many :taggings
   has_many :activities
+  has_many :rewards
   friendly_id :name, :use => :slugged
 
   validates_presence_of :name, :funding_due, :amount, :user_id

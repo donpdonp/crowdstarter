@@ -3,6 +3,7 @@ class Contribution < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :user
+  belongs_to :reward
 
   scope :authorizeds, where(:workflow_state => :authorized)
 
