@@ -1,9 +1,9 @@
-<div class="util-box pull-right">
+<div class="util-box pull-right" style="width: 23%">
   <%= render :partial => "contribute_box" %>
   <%= render :partial => "rewards_box" %>
 </div>
 
-<div style="float:right; width:75%; margin-right: 1em">
+<div class="pull-right" style="width:75%; margin-right: 1em">
 
   <%= render :partial => "projects/item", :locals => {:project => @project}%>
 
@@ -12,10 +12,8 @@
   <%= render :partial => "activity_log" %>
 
 
-<% if logged_in? && current_user == @project.user %>
-
-  <%= render :partial => "menu_buttons" %>
-
-<% end %>
+  <% if logged_in? && current_user == @project.user %>
+    <%= render :partial => "menu_buttons" %>
+  <% end %>
 
 </div>
