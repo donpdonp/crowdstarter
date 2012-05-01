@@ -1,10 +1,10 @@
 div class="rewards-box"
   div class="project-box-border"
     div class="project-box-rolodex"
-      | Rewards
+      | Contribution Rewards
     div class="project-box-inner"
       ul
-        - @project.rewards.each do |reward|
+        - @project.rewards.order("amount asc").each do |reward|
           = render :partial => "reward_row", :locals => {reward: reward}
         - if current_user == @project.user
           li

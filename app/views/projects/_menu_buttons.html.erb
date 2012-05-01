@@ -1,3 +1,4 @@
+<div class="project-buttons">
   <div class="btn-group">
     <% if @project.editable? %>
       <%= link_to 'Edit', edit_project_path(@project), :class => "btn" %>
@@ -5,3 +6,4 @@
       <%= link_to 'Publish', publish_review_project_path(@project), :class => "btn" %>
     <% end %>
   </div>
+</div>
