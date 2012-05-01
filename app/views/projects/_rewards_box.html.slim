@@ -4,8 +4,8 @@ div class="rewards-box"
       | Rewards
     div class="project-box-inner"
       ul
-        li The Things
-        li Stuff
+        - @project.rewards.each do |reward|
+          = render :partial => "reward_row", :locals => {reward: reward}
         - if current_user == @project.user
           li
             a href="#{new_reward_path(:project_id=>@project.id)}"
