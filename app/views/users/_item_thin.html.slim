@@ -5,9 +5,12 @@ li
     div class="pull-left box"
       = link_to(project.name, project)
     div class="pull-left box"
-      = number_to_currency(project.amount)
+      | #{project.contributions.authorizeds.count} contributors
     div class="pull-left box"
-      | #{time_ago_in_words(project.funding_due)}
+      | #{number_to_currency(project.collected)} / #{number_to_currency(project.amount)}
+    div class="pull-left box"
+      - if project.funding_due.future?
+        | #{time_ago_in_words(project.funding_due)}
 
     - if @user == current_user
       div class="pull-left box"
