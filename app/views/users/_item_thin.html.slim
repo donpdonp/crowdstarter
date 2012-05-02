@@ -21,3 +21,9 @@ li
         - if project.fundable?
           span class="label label-success"
             | Published
+        - if project.funded?
+          span class="label label-success"
+            | Funded!
+        - if project.failed?
+          span class="label"
+            | Unfunded
