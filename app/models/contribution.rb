@@ -43,6 +43,6 @@ class Contribution < ActiveRecord::Base
 
   def nearest_reward
     rewards = project.rewards.order("amount asc")
-    rewards.select{|r| r.amount >= amount}.first
+    rewards.select{|r| amount >= r.amount}.last
   end
 end

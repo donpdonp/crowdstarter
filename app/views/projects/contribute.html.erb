@@ -9,7 +9,7 @@
     <div id="reward_text">
       Your contribution will earn the following reward!
       <br/>
-      <%= number_to_currency(@contribution.amount) %> or more:
+      <%= number_to_currency(@contribution.reward.amount) %> or more:
       &quot;<%= @contribution.reward.description %>&quot;
     </div>
   <% end %>
