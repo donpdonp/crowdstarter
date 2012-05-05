@@ -3,7 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .rewards-box{
-  ul li {
-    list-style: none
+  ul {
+    margin-left: 15px;
+    li {
+      list-style: none;
+      margin-bottom: 0.5em;
+
+      .money {
+        color: white;
+      }
+    }
   }
 }

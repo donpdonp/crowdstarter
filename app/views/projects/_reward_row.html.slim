@@ -1,5 +1,7 @@
-li
+li.bob
   div
-    | #{number_to_currency(reward.amount)} or more
+    span.money
+      | #{number_to_currency(reward.amount)}
+    |  or more
   div
     | #{reward.description}
