@@ -5,7 +5,8 @@
 
 <div class="pull-right" style="width:75%; margin-right: 1em">
 
-  <%= render :partial => "projects/item", :locals => {:project => @project}%>
+  <%= render :partial => "projects/item", :locals => {:project => @project,
+                                                      :description => true}%>
 
   <%= render :partial => "contributions" %>
 
