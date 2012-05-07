@@ -3,36 +3,30 @@ $boxcolor_lighter: #999999;
 $boxcolor_light: #eeeeee;
 $boxcolor_lightest: #ffffff;
 
-.project-box-border {
+.threetone-box {
   background: $boxcolor_lighter;
   padding: 0.7em;
   font-size: 120%;
   border-radius: 6px;
   margin: 0.5em 1em;
-}
 
-.project-box {
-  background: $boxcolor_lightest;
-}
-
-.project-box-rolodex {
-  text-align: center;
-  background: $boxcolor_dark;
-  height: 15%;
-  color: #eeeeee;
-  a {
+  .header {
+    text-align: center;
+    background: $boxcolor_dark;
+    height: 15%;
     color: #eeeeee;
-    font-size: 140%
+    padding-top: 0.3em;
+    a {
+      color: #eeeeee;
+      font-size: 140%
+    }
+  }
+  .body {
+    height: 70%;
+    background: $boxcolor_lightest;
   }
 }
 
-.project-box-rolodex-text {
-  padding-top: 0.5em;
-}
-
-.project-box-inner {
-  height: 70%
-}
 
 .project-box-inner-top-row {
   height: 75px;
@@ -104,12 +98,3 @@ $boxcolor_lightest: #ffffff;
   padding: 1em;
 }
 
-.contribute-box {
-  padding: 0.7em;
-  .project-box-inner {
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-right-style: solid;
-    padding-left: 0.5em;
-  }
-}

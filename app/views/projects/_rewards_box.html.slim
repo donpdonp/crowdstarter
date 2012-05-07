@@ -1,8 +1,8 @@
-div class="rewards-box"
-  div class="project-box-border"
-    div class="project-box-rolodex"
+div.rewards-box
+  div.threetone-box
+    div.header
       | Contribution Rewards
-    div class="project-box-inner"
+    div.body
       ul
         - @project.rewards.order("amount asc").each do |reward|
           = render :partial => "reward_row", :locals => {reward: reward}

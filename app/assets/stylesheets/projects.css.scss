@@ -23,10 +23,6 @@
   margin-top: 1em
 }
 
-.contribute-amount input {
-  width: 5em;
-}
-
 .project-contribute {
   text-align: center;
   font-size: 140%;
@@ -44,9 +40,26 @@
   }
 }
 
-.contribute-box-text {
-  text-align: center;
-  color: white
+.contribute-box {
+  padding: 0.7em;
+  .outline {
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    padding-left: 0.5em;
+  }
+
+  .body {
+    $boxcolor_lighter: #999999;
+    background: $boxcolor_lighter;
+    text-align: center;
+    color: white
+  }
+  input {
+    width: 5em;
+    margin-bottom: 0px;
+    margin-right: 3px;
+  }
 }
 
 .util-box {
@@ -55,4 +68,25 @@
 #reward_text {
   margin-top: 1em;
   margin-bottom: 1em
+}
+
+.rewards-box{
+  .body {
+    $boxcolor_lighter: #999999;
+    background: $boxcolor_lighter;
+    text-align: center;
+    color: white
+  }
+
+  ul {
+    margin-left: 15px;
+    li {
+      list-style: none;
+      margin-bottom: 0.5em;
+
+      .money {
+        color: white;
+      }
+    }
+  }
 }

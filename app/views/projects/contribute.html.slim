@@ -1,0 +1,37 @@
+<div class="project-contribute">
+
+  <div>
+    Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>
+    to <span class="project-name"><%= link_to(@contribution.project.name, @contribution.project)%></span> (Project #<%=@contribution.project.id%>).
+  </div>
+
+  <% if @contribution.reward %>
+    <div id="reward_text">
+      Your contribution will earn the following reward!
+      <br/>
+      <%= number_to_currency(@contribution.reward.amount) %> or more:
+      &quot;<%= @contribution.reward.description %>&quot;
+    </div>
+  <% end %>
+
+  <div>
+  EverythingFunded uses Amazon Payments to process contributions.
+  </div>
+
+  <div class="payments-logo">
+  <%= image_tag "amazon-payments.gif" %>
+  </div>
+
+  <%= raw FPS.cbui_form( :multi_use,
+              return_url:         payment_receive_url,
+              caller_reference:   @contribution.reference,
+              global_amount_limit:   @contribution.amount,
+              recipient_token_list: [SETTINGS['aws']['recipient_token'],
+                                      @contribution.project.user.aws_token],
+              payment_method: "CC",
+              payment_reason: "Contribution to Project ##{@contribution.project.id}",
+              submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
+
+
+</div>
+

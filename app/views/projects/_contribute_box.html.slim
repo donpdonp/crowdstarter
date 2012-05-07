@@ -1,0 +1,20 @@
+div.contribute-box
+  div.threetone-box
+    div.header
+      | Contribute to this project
+    div.outline
+      div.body
+        - if logged_in? && @project.fundable?
+            = form_tag(contribute_project_path) do
+              = label_tag(:amount, "Amount")
+              | $
+              = text_field_tag(:amount, nil, :required => true)
+              button.btn type="submit" Give
+        - if !logged_in?
+          Please login to contribute.
+        - if @project.editable?
+          The project is still being edited.
+        - if @project.funded?
+          The project had been funded.
+        - if @project.failed?
+          The project had insufficient funding.
