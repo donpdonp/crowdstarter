@@ -42,12 +42,6 @@
 
 .contribute-box {
   padding: 0.7em;
-  .outline {
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-right-style: solid;
-    padding-left: 0.5em;
-  }
 
   .body {
     $boxcolor_lighter: #999999;
@@ -72,21 +66,19 @@
 
 .rewards-box{
   .body {
-    $boxcolor_lighter: #999999;
+    padding-top: 0.5em;
+    $boxcolor_lighter: #999;
     background: $boxcolor_lighter;
-    text-align: center;
-    color: white
+    .money {
+      color: white
+    }
   }
 
   ul {
-    margin-left: 15px;
+    margin-left: 0.5em;
     li {
       list-style: none;
       margin-bottom: 0.5em;
-
-      .money {
-        color: white;
-      }
     }
   }
 }

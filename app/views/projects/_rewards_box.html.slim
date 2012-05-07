@@ -2,11 +2,12 @@ div.rewards-box
   div.threetone-box
     div.header
       | Contribution Rewards
-    div.body
-      ul
-        - @project.rewards.order("amount asc").each do |reward|
-          = render :partial => "reward_row", :locals => {reward: reward}
-        - if @project.editable? && current_user == @project.user
-          li
-            a href="#{new_reward_path(:project_id=>@project.id)}"
-              | + Add a reward
+    div.outline
+      div.body
+        ul
+          - @project.rewards.order("amount asc").each do |reward|
+            = render :partial => "reward_row", :locals => {reward: reward}
+          - if @project.editable? && current_user == @project.user
+            li
+              a href="#{new_reward_path(:project_id=>@project.id)}"
+                | + Add a reward

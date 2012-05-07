@@ -21,6 +21,14 @@ $boxcolor_lightest: #ffffff;
       font-size: 140%
     }
   }
+
+  .outline {
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    padding-left: 0.5em;
+  }
+
   .body {
     height: 70%;
     background: $boxcolor_lightest;
