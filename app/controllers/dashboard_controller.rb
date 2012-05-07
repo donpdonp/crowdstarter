@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  def explain
+  def landing
     @example_projects = projects_tagged("frontpage", 10)
   end
 
