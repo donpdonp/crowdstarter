@@ -11,10 +11,10 @@ div.contribute-box
               = text_field_tag(:amount, nil, :required => true)
               button.btn type="submit" Give
         - if !logged_in?
-          Please login to contribute.
+          | Please Sign in to contribute.
         - if @project.editable?
-          The project is still being edited.
+          | The project is still being edited.
         - if @project.funded?
-          The project had been funded.
+          | The project had been funded.
         - if @project.failed?
-          The project had insufficient funding.
+          | The project had insufficient funding.
