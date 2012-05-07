@@ -6,7 +6,7 @@ class SessionController < ApplicationController
     else
       flash[:error] = "Sorry, there was a problem logging you in. #{@user.errors.full_messages}"
     end
-    redirect_to params[:redirect_to] || :root
+    redirect_to params[:state] || :root
   end
 
   def destroy
