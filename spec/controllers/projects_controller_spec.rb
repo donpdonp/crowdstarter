@@ -14,10 +14,19 @@ describe ProjectsController do
       subject.should_receive(:require_login).and_return(true)
     end
 
+    it "should publish a project" do
+      @projects_delegate.should_receive(:find).with(@project.id.to_s).and_return(@project)
+      @project.should_receive(:publish!)
+      delay = mock('delay')
+      delay.should_receive(:end_of_project_processing)
+      @project.should_receive(:delay).and_return(delay)
+      post :publish, {id: @project.id}
+    end
+
     it "should unpublish a project" do
-      @projects_delegate.should_receive(:find).and_return(@project)
+      @projects_delegate.should_receive(:find).with(@project.id.to_s).and_return(@project)
       @project.should_receive(:unpublish!)
-      post :unpublish
+      post :unpublish, {id: @project.id}
     end
   end
 end
