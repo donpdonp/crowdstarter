@@ -1,6 +1,10 @@
 li.bob
   div
-    = link_to contribute_project_path(:amount => reward.amount), :method => :post do
+    - if logged_in?
+      = link_to contribute_project_path(:amount => reward.amount), :method => :post do
+        span.money
+          |  #{ number_to_currency(reward.amount)}
+    - else
       span.money
         |  #{ number_to_currency(reward.amount)}
     |  or more
