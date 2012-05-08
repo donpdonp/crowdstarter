@@ -92,9 +92,15 @@ class ProjectsController < ApplicationController
                            :user_id => current_user.id,
                            :amount => params[:amount],
                            :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
-    reward = @contribution.nearest_reward
-    if reward
-      @contribution.update_attribute :reward_id, reward.id
+    if @contribution.valid?
+      reward = @contribution.nearest_reward
+      if reward
+        @contribution.update_attribute :reward_id, reward.id
+      end
+    else
+      flash[:error] = "There is a problem with the contribution: "+
+                       @contribution.errors.full_messages.join('. ')
+      redirect_to project
     end
   end
 

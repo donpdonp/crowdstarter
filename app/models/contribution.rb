@@ -5,6 +5,8 @@ class Contribution < ActiveRecord::Base
   belongs_to :user
   belongs_to :reward
 
+  validates :amount, :numericality => true
+
   scope :authorizeds, where(:workflow_state => :authorized)
 
   #after_create :thank_the_user

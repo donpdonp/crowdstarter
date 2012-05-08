@@ -24,6 +24,8 @@ li
         - if project.fundable?
           span class="label label-success"
             | Published
+          - if project.contributions.authorizeds == 0
+            span.btn Unpublish
         - if project.funded?
           span class="label label-success"
             | Funded!
