@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  before_filter :require_login, :only => [:edit, :publish_review, :publish]
+  before_filter :require_login, :only => [:edit, :publish_review, :publish,
+                                          :destroy, :contribute]
 
   def index
     if params[:user]
