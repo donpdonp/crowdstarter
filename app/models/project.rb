@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
 
   scope :fundables, where(:workflow_state => :fundable)
 
+  html_fragment :description, :scrub => :escape
+
   workflow do
     state :editable do
       event :publish, :transitions_to => :fundable

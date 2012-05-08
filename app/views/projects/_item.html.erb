@@ -59,7 +59,7 @@
       <% if defined?(description) %>
         <% unless project.description.blank? %>
           <div class="project-box-description" style="clear:both">
-            "<%= project.description %>"
+            <%= project.description.html_safe %>
           </div>
         <% end %>
       <% end %>
