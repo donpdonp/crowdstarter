@@ -1,0 +1,9 @@
+div.activity-log
+  div.threetone-box
+    div.header
+      | Activity (the project owner sees this)
+    div.body
+      ul
+      - @project.activities.each do |a|
+        li
+          | #{a.created_at} #{a.user ? "#{a.user.name}/#{a.user.email}" : "System"} #{a.detail}
