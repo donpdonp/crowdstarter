@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
     state :fundable do
       event :fund, :transitions_to => :funded
       event :fail, :transitions_to => :failed
+      event :unpublish, :transitions_to => :editable
     end
     state :funded do
       event :disburse, :transitions_to => :disbursed
@@ -73,5 +74,9 @@ class Project < ActiveRecord::Base
         logger.error e.http_response.body
       end
     end
+  end
+
+  def unpublish
+    # kill delayed job
   end
 end
