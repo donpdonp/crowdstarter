@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :require_login, :only => [:edit, :publish_review, :publish,
-                                          :destroy, :contribute]
+                                          :destroy, :contribute, :unpublish]
 
   def index
     if params[:user]
@@ -122,12 +122,23 @@ class ProjectsController < ApplicationController
   end
 
   def publish
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
     @project.publish!
     @project.delay(run_at:@project.funding_due).end_of_project_processing
     flash[:success] = "Project now published!"
     @project.activities.create({:detail => "Project published",
                                :code => "publish",
+                               :user => current_user})
+
+    redirect_to @project
+  end
+
+  def unpublish
+    @project = current_user.projects.find(params[:id])
+    @project.unpublish!
+    flash[:success] = "Project has been unpublished!"
+    @project.activities.create({:detail => "Project unpublished",
+                               :code => "unpublish",
                                :user => current_user})
 
     redirect_to @project

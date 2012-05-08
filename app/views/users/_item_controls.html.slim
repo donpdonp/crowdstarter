@@ -7,14 +7,6 @@ div class="pull-left box"
       span class="btn"
         | Publish
   - if project.fundable?
-    span class="label label-success"
-      | Published
     - if project.contributions.authorizeds.count == 0
-      a href="#{unpublish_project_path(project)}"
+      a href="#{unpublish_project_path(project)}" data-method="post"
         span.btn Unpublish
-  - if project.funded?
-    span class="label label-success"
-      | Funded!
-  - if project.failed?
-    span class="label"
-      | Unfunded
