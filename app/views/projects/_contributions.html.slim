@@ -1,10 +1,12 @@
 - contribs =  @project.contributions.authorizeds
 - if contribs.size > 0
   div.contributors
-    div.contributors-inner
-      | Contributors
-      - contribs.each do |c|
-        = render :partial => "projects/contribution_row", :locals => {:contribution => c}
+    div.threetone-box
+      div.header
+        | Contributors
+      div.body
+        - contribs.each do |c|
+          = render :partial => "projects/contribution_row", :locals => {:contribution => c}
 - else
   - unless @project.editable?
     | Be the first to contribute to this project.
