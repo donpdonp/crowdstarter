@@ -25,4 +25,7 @@ div class="action users-show"
           | Project Management
         ul
           - @user.projects.each do |project|
-            = render :partial => "item_thin", :locals => {:project=>project}
+            li
+              = render :partial => "item_thin", :locals => {:project=>project}
+              - if @user == current_user
+                = render :partial => "item_controls", :locals => {:project=>project}

@@ -1,0 +1,20 @@
+div class="pull-left box"
+  - if project.editable?
+    a href="#{edit_project_path(project)}"
+      span class="btn"
+        | Edit
+    a href="#{publish_review_project_path(project)}"
+      span class="btn"
+        | Publish
+  - if project.fundable?
+    span class="label label-success"
+      | Published
+    - if project.contributions.authorizeds.count == 0
+      a href="#{unpublish_project_path(project)}"
+        span.btn Unpublish
+  - if project.funded?
+    span class="label label-success"
+      | Funded!
+  - if project.failed?
+    span class="label"
+      | Unfunded

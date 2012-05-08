@@ -14,6 +14,7 @@ Crowdstarter::Application.routes.draw do
       post :contribute
       get :publish_review
       post :publish
+      post :unpublish
     end
     collection do
       get :count
