@@ -103,7 +103,10 @@ $boxcolor_lightest: #ffffff;
 }
 
 .project-box-description {
-  font-family: "helvetica";
-  padding: 1em;
+  padding: 0.4em;
+
+  p {
+    font-size: 20px;
+  }
 }
 
