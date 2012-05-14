@@ -79,6 +79,18 @@ class Project < ActiveRecord::Base
   end
 
   def unpublish
-    # kill delayed job
+    # kill delayed job(s)
+    djobs = jobs
+    djobs.each{|job| job.destroy}
+  end
+
+  def jobs
+    Delayed::Job.all.select do |job|
+      begin
+        job.payload_object.object == self
+      rescue Delayed::DeserializationError
+        # skip this one
+      end
+    end
   end
 end
