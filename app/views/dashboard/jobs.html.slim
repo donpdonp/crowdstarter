@@ -1,9 +1,16 @@
 p
   | #{@jobs.size} Jobs
 ul
-  - @jobs.each do |job|
+  - @jobs.each do |job, payload|
     li
-      | ##{job.id} #{job.name} #{job.run_at}
+      | Job##{job.id}
+      - if payload
+        a href="#{project_path(payload)}"
+          |  #{payload.class.name}##{payload.id} #{payload.name}
+      - else
+        |  ?/?
+      |  #{job.name}
+      |  #{job.run_at}
       span style="color: #{job.run_at.past? ? "red" : "green"}"
         |  #{time_ago_in_words(job.run_at)} #{job.run_at.past? ? "ago" : ""}
       |   attempts:#{job.attempts} #{job.last_error}
