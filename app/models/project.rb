@@ -80,8 +80,7 @@ class Project < ActiveRecord::Base
 
   def unpublish
     # kill delayed job(s)
-    djobs = jobs
-    djobs.each{|job| job.destroy}
+    self.jobs.each{|job| job.destroy}
   end
 
   def jobs
