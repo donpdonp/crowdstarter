@@ -16,7 +16,7 @@ div class="navbar"
 
       div class="user-nav pull-right"
         span style="margin-right: 1em"
-          | #{Project.count} projects
+          | #{Project.fundables.count} projects
         span style="margin-right: 1em"
           | #{number_to_currency(Contribution.authorizeds.sum(:amount))} in contributions
         - if logged_in?
