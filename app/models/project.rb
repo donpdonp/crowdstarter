@@ -80,11 +80,19 @@ class Project < ActiveRecord::Base
 
   def fail
     contributions.authorizeds.each do |contrib|
-      response = contrib.cancel!
+      begin
+        response = contrib.cancel!
         activities.create(:detail => "Cancelled #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-cancel",
                           :contribution => contrib)
         logger.info response.inspect
+      rescue Boomerang::Errors::HTTPError => e
+        activities.create(:detail => "Failed to cancel from #{contrib.user.email} $#{contrib.amount}",
+                          :code => "collect-cancel-fail",
+                          :contribution => contrib)
+        logger.error e.message
+        logger.error e.http_response.body
+      end
     end
   end
 

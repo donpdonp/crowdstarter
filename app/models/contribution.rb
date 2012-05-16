@@ -38,6 +38,7 @@ class Contribution < ActiveRecord::Base
                      recipient_token_id:    receiving_user.aws_token,
                      sender_token_id:       token,
                      transaction_amount:    amount.to_s )
+    update_attribute :txid, payment[:transaction_id]
   end
 
   def reward_available?
@@ -51,6 +52,7 @@ class Contribution < ActiveRecord::Base
   end
 
   def cancel
-    FPS.cancel_token(token_id: token)
+    response = FPS.cancel_token(token_id: token)
+    update_attribute :cancel_request_id, response[:request_id]
   end
 end
