@@ -4,4 +4,14 @@
   <%= number_to_currency(contribution.amount) %>
 
   <%= contribution.created_at.strftime("%Y-%m-%d") %>
+
+  <% if contribution.authorized? %>
+    <span class="label">authorized</span>
+  <% end %>
+  <% if contribution.collected? %>
+    <span class="label label-success">collected</span>
+  <% end %>
+  <% if contribution.cancelled? %>
+    <span class="label label-important">cancelled</span>
+  <% end %>
 </div>
