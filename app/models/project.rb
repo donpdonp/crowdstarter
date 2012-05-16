@@ -78,6 +78,16 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def fail
+    contributions.authorizeds.each do |contrib|
+      response = contrib.cancel!
+        activities.create(:detail => "Cancelled #{contrib.user.email} $#{contrib.amount}",
+                          :code => "collect-cancel",
+                          :contribution => contrib)
+        logger.info response.inspect
+    end
+  end
+
   def unpublish
     # kill delayed job(s)
     self.jobs.each{|job| job.destroy}

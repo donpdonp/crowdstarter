@@ -16,8 +16,10 @@ class Contribution < ActiveRecord::Base
     end
     state :authorized do
       event :collect, :transitions_to => :collected
+      event :cancel, :transitions_to => :cancelled
     end
     state :collected
+    state :cancelled
   end
 
   def thank_the_user
@@ -46,5 +48,9 @@ class Contribution < ActiveRecord::Base
   def nearest_reward
     rewards = project.rewards.order("amount asc")
     rewards.select{|r| amount >= r.amount}.last
+  end
+
+  def cancel
+    FPS.cancel_token(token_id: token)
   end
 end
