@@ -36,20 +36,24 @@ class Project < ActiveRecord::Base
     state :disbursed
   end
 
-  def collected
+  def contributed_amount
     contributions.authorizeds.sum(&:amount)
   end
 
+  def collected_amount
+    contributions.collecteds.sum(&:amount)
+  end
+
   def remaining
-    amount - collected
+    amount - collected_amount
   end
 
   def percent_complete
-    collected / amount
+    collected_amount / amount
   end
 
   def end_of_project_processing
-    if collected >= amount
+    if contributed_amount >= amount
       activities.create(:detail => "Final processing - Funded! Collecting contributions",
                         :code => "funded")
       fund!

@@ -8,6 +8,7 @@ class Contribution < ActiveRecord::Base
   validates :amount, :numericality => true
 
   scope :authorizeds, where(:workflow_state => :authorized)
+  scope :collecteds, where(:workflow_state => :collected)
 
   #after_create :thank_the_user
   workflow do
