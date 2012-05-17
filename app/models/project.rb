@@ -74,6 +74,7 @@ class Project < ActiveRecord::Base
                           :code => "collect",
                           :contribution => contrib)
         logger.info response.inspect
+        Notifications.delay(:queue => 'mailer').contribution_collected(contrib)
       rescue Boomerang::Errors::HTTPError => e
         activities.create(:detail => "Failed to collect from #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-fail",

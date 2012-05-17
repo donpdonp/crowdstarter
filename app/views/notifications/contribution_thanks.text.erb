@@ -1,6 +1,6 @@
 Hello <%= @user.name %>
 
-Thanks for your contribution of <%= number_to_currency(@contribution.amount) %> to the project "<%= @project %>" at everythingfunded.com.
+Thanks for your contribution of <%= number_to_currency(@contribution.amount) %> to the project "<%= @project.name %>".
 
 Project link: <%= project_url(@project,
                               :host => SETTINGS["mailer"]["host"]) %>
