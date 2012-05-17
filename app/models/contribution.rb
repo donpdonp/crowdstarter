@@ -10,7 +10,6 @@ class Contribution < ActiveRecord::Base
   scope :authorizeds, where(:workflow_state => :authorized)
   scope :collecteds, where(:workflow_state => :collected)
 
-  #after_create :thank_the_user
   workflow do
     state :incomplete do
       event :approve, :transitions_to => :authorized
@@ -21,10 +20,6 @@ class Contribution < ActiveRecord::Base
     end
     state :collected
     state :cancelled
-  end
-
-  def thank_the_user
-    Notification.thanks(self)
   end
 
   def receive_payment(token, status)

@@ -18,13 +18,19 @@ class PaymentController < ApplicationController
       #if valid
         contribution = Contribution.find_by_reference(params[:callerReference])
         if contribution
-          contribution.receive_payment(params[:tokenID], params[:status])
-          if contribution.authorized?
-            Activity.create({:detail => "Contributed $#{contribution.amount}",
-                             :code => "contributed",
-                             :contribution => contribution,
-                             :user => contribution.user,
-                             :project => contribution.project})
+          if contribution.incomplete?
+            contribution.receive_payment(params[:tokenID], params[:status])
+            if contribution.authorized?
+              Activity.create({:detail => "Contributed $#{contribution.amount}",
+                               :code => "contributed",
+                               :contribution => contribution,
+                               :user => contribution.user,
+                               :project => contribution.project})
+              Notifications.delay.contribution_thanks(contribution)
+              flash[:success] = "Contribution received!"
+            end
+          else
+            flash[:error] = "The contribution has already been processed"
           end
           redirect_to contribution.project
         else

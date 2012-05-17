@@ -1,14 +1,13 @@
 class Notifications < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "robot@everythingfunded.com"
 
-  def thanks(contrib)
-    @greeting = "Hi #{contrib.user.username},"
-    @to = contrib.user.email
-    @subject = "Thanks for your donation!"
-    @project = contrib.project.name
-    @donation = contrib.amount
+  def contribution_thanks(contrib)
+    @user = contrib.user
+    @to = @user.email
+    @project = contrib.project
+    @subject = "Contribution: {@project.name}"
+    @contribution = contrib
 
-    mail to: @to, subject: @subject, greeting: @greeting,
-         project: @project, donation: @donation
+    mail to: @to, subject: @subject
   end
 end
