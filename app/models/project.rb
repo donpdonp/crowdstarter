@@ -61,6 +61,7 @@ class Project < ActiveRecord::Base
       activities.create(:detail => "Final processing - Insufficient contributions",
                         :code => "failed")
       fail!
+      Notifications.delay.project_failed(self)
     end
   end
 
