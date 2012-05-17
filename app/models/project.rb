@@ -57,6 +57,7 @@ class Project < ActiveRecord::Base
       activities.create(:detail => "Final processing - Funded! Collecting contributions",
                         :code => "funded")
       fund!
+      Notifications.delay(:queue => 'mailer').project_funded(self)
     else
       activities.create(:detail => "Final processing - Insufficient contributions",
                         :code => "failed")

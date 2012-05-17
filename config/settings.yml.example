@@ -1,3 +1,8 @@
+notices:
+  from: "robot@company"
+  bcc: "quality-control@company"
+mailer:
+  host: "example.com"
 aws:
   access_key: abcd
   access_secret: abcd

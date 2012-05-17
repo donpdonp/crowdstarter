@@ -1,0 +1,6 @@
+Hello <%= @project.user.name %>,
+
+  The project "<%= @project.name %>" is now closed. The contributions of <%= number_to_currency(@project.contributed_amount) %> were sufficient to fund the project for <%= number_to_currency(@project.amount) %>!
+
+Project link: <%= project_url(@project,
+                              :host => SETTINGS["mailer"]["host"]) %>
