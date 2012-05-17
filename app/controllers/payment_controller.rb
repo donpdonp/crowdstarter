@@ -26,7 +26,7 @@ class PaymentController < ApplicationController
                                :contribution => contribution,
                                :user => contribution.user,
                                :project => contribution.project})
-              Notifications.delay.contribution_thanks(contribution)
+              Notifications.delay(:queue => 'mailer').contribution_thanks(contribution)
               flash[:success] = "Contribution received!"
             end
           else

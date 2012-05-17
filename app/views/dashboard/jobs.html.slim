@@ -3,10 +3,13 @@ p
 ul
   - @jobs.each do |job, payload|
     li
-      | Job##{job.id}
+      | #{job.queue}/Job##{job.id}
       - if payload
         a href="#{project_path(payload)}"
-          |  #{payload.class.name}##{payload.id} #{payload.name}
+          - if payload.is_a?(Project)
+            |  #{payload.class.name}##{payload.id} #{payload.name}
+          - if payload.class == Class
+            |  #{payload}
       - else
         |  ?/?
       |  #{job.name}
