@@ -1,0 +1,8 @@
+Hello <%= @user.name %>
+
+The project "<%= @project.name %>" has closed.
+
+Your contribution of <%= number_to_currency(@contribution.amount) %> has been cancelled and will not be charged. Thank you for your consideration.
+
+Project link: <%= project_url(@project,
+                              :host => SETTINGS["mailer"]["host"]) %>

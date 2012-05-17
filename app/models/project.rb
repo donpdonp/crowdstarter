@@ -93,6 +93,7 @@ class Project < ActiveRecord::Base
                           :code => "collect-cancel",
                           :contribution => contrib)
         logger.info response.inspect
+        Notifications.delay(:queue => 'mailer').contribution_cancelled(contrib)
       rescue Boomerang::Errors::HTTPError => e
         activities.create(:detail => "Failed to cancel from #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-cancel-fail",

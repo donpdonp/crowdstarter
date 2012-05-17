@@ -21,6 +21,15 @@ class Notifications < ActionMailer::Base
     mail to: @user.email, subject: subject
   end
 
+  def contribution_cancelled(contrib)
+    subject = "Contribution cancelled: #{contrib.project.name}"
+    @user = contrib.user
+    @project = contrib.project
+    @contribution = contrib
+
+    mail to: @user.email, subject: subject
+  end
+
   def project_failed(project)
     subject = "Project closed: #{project.name}"
     @project = project
