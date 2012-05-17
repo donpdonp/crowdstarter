@@ -6,7 +6,8 @@
         | Contributors
       div.body
         - contribs.each do |c|
-          = render :partial => "projects/contribution_row", :locals => {:contribution => c}
+          - unless c.incomplete?
+            = render :partial => "projects/contribution_row", :locals => {:contribution => c}
 - else
   - unless @project.editable?
     | Be the first to contribute to this project.
