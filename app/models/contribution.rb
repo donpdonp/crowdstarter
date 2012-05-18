@@ -28,10 +28,10 @@ class Contribution < ActiveRecord::Base
     approve! if status == "SC"
   end
 
-  def collect_payment_for(receiving_user)
+  def collect
     payment = FPS.pay( caller_reference:      "proj:#{project.id}-ctrb:#{id}-#{rand(100)}",
                      marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,
-                     recipient_token_id:    receiving_user.aws_token,
+                     recipient_token_id:    project.user.aws_token,
                      sender_token_id:       token,
                      transaction_amount:    amount.to_s )
     update_attribute :txid, payment[:transaction_id]

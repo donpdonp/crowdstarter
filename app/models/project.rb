@@ -69,7 +69,7 @@ class Project < ActiveRecord::Base
   def fund
     contributions.authorizeds.each do |contrib|
       begin
-        response = contrib.collect_payment_for(user)
+        response = contrib.collect!
         activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect",
                           :contribution => contrib)
