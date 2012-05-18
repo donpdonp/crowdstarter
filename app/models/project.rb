@@ -44,6 +44,10 @@ class Project < ActiveRecord::Base
     contributions.collecteds.sum(&:amount)
   end
 
+  def cancelled_amount
+    contributions.cancelleds.sum(&:amount)
+  end
+
   def remaining
     amount - collected_amount
   end

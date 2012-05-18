@@ -9,6 +9,7 @@ class Contribution < ActiveRecord::Base
 
   scope :authorizeds, where(:workflow_state => :authorized)
   scope :collecteds, where(:workflow_state => :collected)
+  scope :cancelleds, where(:workflow_state => :cancelled)
 
   workflow do
     state :incomplete do
