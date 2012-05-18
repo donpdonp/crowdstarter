@@ -13,3 +13,5 @@ facebook:
   secret: abcd
 exception_notifier:
   recipients: ["devops@company"]
+google:
+  analytics: 'UA-XXXXXX-Z'
