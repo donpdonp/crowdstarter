@@ -12,4 +12,4 @@ facebook:
   key: abcd
   secret: abcd
 exception_notifier:
-  recpipents: ["devops@company"]
+  recipients: ["devops@company"]
