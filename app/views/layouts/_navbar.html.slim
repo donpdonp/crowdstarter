@@ -18,7 +18,7 @@ div class="navbar"
         span style="margin-right: 1em"
           | #{Project.fundables.count} projects
         span style="margin-right: 1em"
-          | #{number_to_currency(Contribution.authorizeds.sum(:amount))} in contributions
+          | #{number_to_currency(Contribution.where("workflow_state != ?",'incomplete').sum(:amount))} in contributions
         - if logged_in?
           span class="user-detail"
             = user_link(current_user)
