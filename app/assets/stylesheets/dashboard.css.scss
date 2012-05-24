@@ -2,13 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.project-box-container-left {
+.project-box-container {
   float:right;
   width: 50%;
   height: 180px;
-}
 
-.project-box-container-right {
+ .project-box-inner-photo img { height: 75px}
 }
 
 .explain h1 {

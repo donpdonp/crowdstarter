@@ -12,7 +12,8 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name, :funding_due, :amount, :user_id
 
-  has_attached_file :image, :styles => {:thumb => "75x75>"},
+  has_attached_file :image, :styles => {:thumb => "133x75>",
+                                        :medium => "533x300>"},
               :default_url => "/assets/:style/missing.png"
 
 

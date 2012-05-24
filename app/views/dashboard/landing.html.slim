@@ -10,7 +10,7 @@ div class="explain"
     | Get funding for a group project or activity!
 
   - @example_projects.each do |project|
-    div class="project-box-container-left"
+    div class="project-box-container"
       = render(:partial => "projects/item",
                :locals =>  {:project =>  project,
                             :inline_support =>  true})

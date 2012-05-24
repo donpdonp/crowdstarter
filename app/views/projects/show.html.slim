@@ -1,14 +1,16 @@
-div class="util-box pull-right" style="width: 23%"
-  = render :partial => "contribute_box"
-  = render :partial => "rewards_box"
+div.projects-show
+  div class="util-box pull-right" style="width: 23%"
+    = render :partial => "contribute_box"
+    = render :partial => "rewards_box"
 
-div class="pull-right" style="width:75%; margin-right: 1em"
+  div class="pull-right" style="width:75%; margin-right: 1em"
 
-  = render :partial => "projects/item", :locals => {:project => @project,
-                                                      :description => true}
+    = render :partial => "projects/item", :locals => {:project => @project,
+                                                        :description => true,
+                                                        :owner => true}
 
-  = render :partial => "contributions"
+    = render :partial => "contributions"
 
-  - if logged_in? && current_user == @project.user
-    = render :partial => "activity_log"
-    = render :partial => "menu_buttons"
+    - if logged_in? && current_user == @project.user
+      = render :partial => "activity_log"
+      = render :partial => "menu_buttons"
