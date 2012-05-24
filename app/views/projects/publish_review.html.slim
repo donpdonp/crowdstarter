@@ -1,14 +1,15 @@
-H1
-  | Publish Project "#{@project.name}"
+div.projects-publish
+  H1
+    | Publish Project "#{@project.name}"
 
-p
-  | Once a project is published, it becomes available to collect contributions.
-p
-  | A published project cannot be edited, but it can be cancelled early.
+  p
+    | Once a project is published, it becomes available for others to view and to collect contributions.
+  p
+    | A published project can be unpublished up until the first contribution is made. Unpublishing the project makes the project available for editing again. After a contribution is made, the projcet is 'locked' and cannot be edited.
 
-a href="#{root_path}" class="pull-right"
-  span class="btn"
-    | Cancel
+  a href="#{root_path}" class="pull-right"
+    span class="btn"
+      | Cancel
 
-= form_tag publish_project_path(@project) do |f|
-  input type="submit" class="btn btn-success" value="Publish"
+  = form_tag publish_project_path(@project) do |f|
+    input type="submit" class="btn btn-success" value="Publish"
