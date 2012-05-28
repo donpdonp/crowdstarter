@@ -48,7 +48,7 @@ $boxcolor_lightest: #ffffff;
 .project-box-inner-photo {
   border-radius: 0 0 0 6px;
   margin: 0px auto;
-  text-align: center;
+
 }
 
 .project-box-inner-owner {
@@ -63,6 +63,7 @@ $boxcolor_lightest: #ffffff;
 
 .hangboards {
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .hangboard {

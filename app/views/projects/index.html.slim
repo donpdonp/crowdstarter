@@ -1,9 +1,11 @@
-h2
-  - if @user
-    | Projects for #{@user.name}
-  - else
-    | Browsing projects
-div
-  - @projects.each do |project|
-    = render :partial => "projects/item", :locals => {:project=>project,
-                                                      :image_size => :thumb}
+div.projects-index
+  h2
+    - if @user
+      | Projects for #{@user.name}
+    - else
+      | Browsing projects
+  div
+    - @projects.each do |project|
+      = render :partial => "projects/item", :locals => {:project=>project,
+                                                        :image_size => :thumb,
+                                                        :funder_count => true}

@@ -24,10 +24,12 @@
               <div class="name"> <%= link_to project.user.name, project.user %></div>
             </div>
           <% end %>
+          <% if defined?(funder_count) %>
           <div class="pull-right hangboard contributor-count">
             <div class="title">Funders: </div>
             <div class="count"><%= project.contributions.authorizeds.count %></div>
           </div>
+          <% end %>
           <div class="pull-right hangboard project-due">
             <div class="title" style="margin-bottom: 0.1em">Due by: </div>
             <script>
