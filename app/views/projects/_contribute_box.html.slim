@@ -5,11 +5,13 @@ div.contribute-box
     div.outline
       div.body
         - if logged_in? && @project.fundable?
+          div.body_content
             = form_tag(contribute_project_path) do
               = label_tag(:amount, "Amount")
               | $
               = text_field_tag(:amount, nil, :required => true)
               button.btn type="submit" Give
+            | Minimum #{number_to_currency(@project.rewards.minimum(:amount))}
         - if !logged_in?
           | Please Sign in to contribute.
         - if @project.editable?
