@@ -68,8 +68,9 @@
 
     <% if defined?(inline_support) %>
     <div class="project-box-actions">
-      <a href="<%=project_path(project)%>">
-        <button type="submit" class="btn">Details</button>
+      Managed by: <%= link_to project.user.name, project.user %>
+      <a href="<%=project_path(project)%>" style="float:right">
+        <button type="submit" class="label">Details</button>
       </a>
     </div>
     <% end %>
