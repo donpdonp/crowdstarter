@@ -11,6 +11,25 @@
     <div class="span6">
       <%= f.label("name", "Project Name", :class => "text") %>
       <%= f.text_field("name", :required => true) %>
+      <% if false #@project.image.exists? %>
+        <%= hidden_field_tag 'crop_x' %>
+        <%= hidden_field_tag 'crop_y' %>
+        <%= hidden_field_tag 'crop_x2' %>
+        <%= hidden_field_tag 'crop_y2' %>
+        <%= image_tag @project.image.url(:medium), :id => 'image_edit' %>
+        <script language="Javascript">
+          jQuery(function($) {
+            $('#image_edit').Jcrop({aspectRatio: 1.776,
+                                    setSelect: [0,0,533,300],
+                                    onSelect: function(c) {
+                                      $('#crop_x').val(c.x);
+                                      $('#crop_y').val(c.y);
+                                      $('#crop_x2').val(c.x2);
+                                      $('#crop_y2').val(c.y2);
+                                    }});
+          });
+        </script>
+      <% end %>
       <%= f.label("image", "Descriptive Image") %>
       <%= f.file_field :image %>
       <%= f.label("funding_due") %>

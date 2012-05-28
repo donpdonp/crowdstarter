@@ -13,4 +13,5 @@ div class="explain"
     div class="project-box-container"
       = render(:partial => "projects/item",
                :locals =>  {:project =>  project,
-                            :inline_support =>  true})
+                            :image_size => :thumb,
+                            :inline_support => true})

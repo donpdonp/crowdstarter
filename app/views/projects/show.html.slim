@@ -7,6 +7,7 @@ div.projects-show
 
     = render :partial => "projects/item", :locals => {:project => @project,
                                                         :description => true,
+                                                        :image_size => :medium,
                                                         :owner => true}
 
     = render :partial => "contributions"

@@ -5,4 +5,5 @@ h2
     | Browsing projects
 div
   - @projects.each do |project|
-    = render :partial => "projects/item", :locals => {:project=>project}
+    = render :partial => "projects/item", :locals => {:project=>project,
+                                                      :image_size => :thumb}
