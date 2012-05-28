@@ -109,6 +109,12 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def publish
+    if rewards.empty?
+      halt! "Define at least one reward before publishing."
+    end
+  end
+
   def unpublish
     # kill delayed job(s)
     self.jobs.each{|job| job.destroy}

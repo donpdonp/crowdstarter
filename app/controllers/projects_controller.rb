@@ -122,14 +122,17 @@ class ProjectsController < ApplicationController
   end
 
   def publish
-    @project = current_user.projects.find(params[:id])
-    @project.publish!
-    @project.delay(run_at:@project.funding_due).end_of_project_processing
-    flash[:success] = "Project now published!"
-    @project.activities.create({:detail => "Project published",
-                               :code => "publish",
-                               :user => current_user})
-
+    begin
+      @project = current_user.projects.find(params[:id])
+      @project.publish!
+      @project.delay(run_at:@project.funding_due).end_of_project_processing
+      flash[:success] = "Project now published!"
+      @project.activities.create({:detail => "Project published",
+                                 :code => "publish",
+                                 :user => current_user})
+    rescue Workflow::TransitionHalted => e
+      flash[:error] = e.halted_because
+    end
     redirect_to @project
   end
 
