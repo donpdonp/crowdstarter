@@ -43,4 +43,14 @@ class PaymentController < ApplicationController
       render :json => e.message
     end
   end
+
+  def wepay_request
+    # convert request token into access token
+    token = WEPAY.auth_code.get_token(params[:code],
+                        :redirect_uri => payment_wepay_access_url)
+  end
+
+  def wepay_access
+    current_user.update_attribute :wepay_token, params["tokenID"]
+  end
 end

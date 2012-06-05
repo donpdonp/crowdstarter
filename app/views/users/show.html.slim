@@ -9,7 +9,11 @@ div class="action users-show"
       div
         - if current_user.wepay_token.blank?
           | Connect to WePay
-          a href="https://stage.wepay.com/v2/oauth2/authorize?client_id=173736&redirect_uri=http://localhost:3000/&scope=manage_accounts,view_balance,collect_payments,refund_payments,view_user&user_email=#{current_user.email}"
+          - url = WEPAY.auth_code.authorize_url({ :client_id => SETTINGS['wepay']['client']['id'],
+                           :redirect_uri => payment_wepay_request_url,
+                           :scope => "manage_accounts,view_balance,collect_payments,refund_payments,view_user",
+                           :user_email => current_user.email})
+          a href="#{url}"
             button
               | Connect
       div
