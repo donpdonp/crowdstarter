@@ -6,19 +6,26 @@ div class="action users-show"
 
   p
     - if @user == current_user
-      - if current_user.aws_token.blank?
-        | Connect Amazon.com Payment Service
-        = raw FPS.cbui_form( :recipient,
-                       return_url:         payment_tokenize_url,
-                       caller_reference:   "fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
-                       recipient_pays_fee: "True",
-                       max_variable_fee: SETTINGS['aws']['fee_percentage'],
-                       submit_tag: "<button type='submit' class='btn'>Connect with Amazon Payments</button>" )
-      - else
-        | Amazon Payments is connected.
-        br
-        - if @user.projects.fundables.count == 0
-          = link_to "Remove token", payment_clear_path, :class => "btn"
+      div
+        - if current_user.wepay_token.blank?
+          | Connect to WePay
+          a href="https://stage.wepay.com/v2/oauth2/authorize?client_id=173736&redirect_uri=http://localhost:3000/&scope=manage_accounts,view_balance,collect_payments,refund_payments,view_user&user_email=#{current_user.email}"
+            button
+              | Connect
+      div
+        - if current_user.aws_token.blank?
+          | Connect Amazon.com Payment Service
+          = raw FPS.cbui_form( :recipient,
+                         return_url:         payment_tokenize_url,
+                         caller_reference:   "fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
+                         recipient_pays_fee: "True",
+                         max_variable_fee: SETTINGS['aws']['fee_percentage'],
+                         submit_tag: "<button type='submit' class='btn'>Connect with Amazon Payments</button>" )
+        - else
+          | Amazon Payments is connected.
+          br
+          - if @user.projects.fundables.count == 0
+            = link_to "Remove token", payment_clear_path, :class => "btn"
 
       div
         h3
