@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
                          :oauth_token => hash.credentials.token)
     end
   end
+
+  def wepay
+    OAuth2::AccessToken.from_hash(WEPAY, JSON.parse(wepay_token))
+  end
 end

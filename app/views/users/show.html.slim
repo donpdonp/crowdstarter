@@ -19,7 +19,7 @@ div class="action users-show"
         - else
           | WePay is connected.
           br
-          - if @user.projects.fundables.count == 0
+
             = link_to "Remove token", payment_wepay_clear_path, :class => "btn"
 
       div
