@@ -47,10 +47,15 @@ class PaymentController < ApplicationController
   def wepay_request
     # convert request token into access token
     token = WEPAY.auth_code.get_token(params[:code],
-                        :redirect_uri => payment_wepay_access_url)
+                        :redirect_uri => payment_wepay_request_url)
+    current_user.update_attribute :wepay_token, token.token
+    flash[:info] = "WePay connected successfully!"
+    redirect_to current_user
   end
 
-  def wepay_access
-    current_user.update_attribute :wepay_token, params["tokenID"]
+  def wepay_clear
+    current_user.update_attribute :wepay_token, nil
+    flash[:info] = "WePay connection removed."
+    redirect_to current_user
   end
 end
