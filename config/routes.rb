@@ -7,6 +7,7 @@ Crowdstarter::Application.routes.draw do
   get "payment/receive"
   get "payment/wepay_request"
   get "payment/wepay_clear"
+  get "payment/wepay_account"
   post "github/commit"
   match "session" => "session#destroy", :via => :delete
   match "auth/:provider/callback" => "session#create"

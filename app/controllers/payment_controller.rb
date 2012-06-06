@@ -53,12 +53,33 @@ class PaymentController < ApplicationController
                                      :expires_at => token.expires_at})
     current_user.update_attribute :wepay_token, token_hash.to_json
     flash[:info] = "WePay connected successfully!"
-    redirect_to current_user
+    redirect_to payment_wepay_account_path
   end
 
   def wepay_clear
     current_user.update_attribute :wepay_token, nil
     flash[:info] = "WePay connection removed."
+    redirect_to current_user
+  end
+
+  def wepay_account
+    wepay_params = {:name => "EverythingFunded",
+                    :description => "Contributions to projects",
+                    :reference_id => "everythingfunded"}
+    resp = current_user.wepay.get('/v2/account/find', :params => {
+                             :reference_id => wepay_params[:reference_id]})
+    accounts = JSON.parse(resp.body)
+    if accounts.size > 0
+      account = accounts.first
+      account_id = account["account_id"]
+    else
+      # Create one
+      resp = current_user.wepay.get('/v2/account/create', :params => wepay_params)
+      new_account = JSON.parse(resp.body)
+      account_id = new_account["account_id"]
+    end
+    flash[:info] = "A WePay account is connected and ready receive contributions!"
+    current_user.update_attribute :wepay_account_id, account_id
     redirect_to current_user
   end
 end
