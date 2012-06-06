@@ -93,24 +93,26 @@ class PaymentController < ApplicationController
            :reference_id => "contribution-#{contribution.id}",
            :app_fee => contribution.amount.to_f * (SETTINGS['aws']['fee_percentage'].to_i/100),
            :fee_payer => "Payee",
-           :redirect_uri => project_url(contribution.project),
+           :redirect_uri => project_wepay_finish_url,
            :auto_capture => false,
            :require_shipping => true,
       }
+    logger.info wp_params.inspect
     resp = current_user.wepay.get('/v2/checkout/create', :params => wp_params)
     checkout = JSON.parse(resp.body)
+    logger.info checkout.inspect
     if checkout["checkout_id"] > 0
       contribution.update_attribute :wepay_checkout_id, checkout["checkout_id"]
-      Activity.create({:detail => "Contributed $#{contribution.amount}",
-                       :code => "contributed",
-                       :contribution => contribution,
-                       :user => contribution.user,
-                       :project => contribution.project})
-      Notifications.delay(:queue => 'mailer').contribution_thanks(contribution)
-      flash[:success] = "Contribution received!"
+      redirect_to checkout["checkout_uri"]
     else
       flash[:error] = "Payment processing failed."
+      redirect_to contribution.project
     end
+  end
+
+  def wepay_finish
+    contribution = current_user.contributions.find_by_wepay_checkout_id(params[:checkout_id])
+
     redirect_to contribution.project
   end
 end
