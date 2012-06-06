@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   friendly_id :username
 
   has_many :projects
+  has_many :contributions
 
   validates :email, :uniqueness => true
   validates :username, :uniqueness => true
