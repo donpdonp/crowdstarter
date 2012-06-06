@@ -21,7 +21,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def wepay_token_hash
+    JSON.parse(wepay_token)
+  end
+
   def wepay
-    OAuth2::AccessToken.from_hash(WEPAY, JSON.parse(wepay_token))
+    OAuth2::AccessToken.from_hash(WEPAY, wepay_token_hash)
   end
 end

@@ -31,7 +31,19 @@
               payment_method: "CC",
               payment_reason: "Contribution to Project ##{@contribution.project.id}",
               submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
-
-
+  <% wphash = {
+           :account_id => @contribution.project.user.wepay_token_hash["user_id"],
+           :amount => @contribution.amount,
+           :short_description => "Contribution to Project #{@contribution.project.id}",
+           :type => "GOODS",
+           :reference_id => "contribution-#{@contribution.id}",
+           :app_fee => @contribution.amount.to_f * (SETTINGS['aws']['fee_percentage'].to_i/100),
+           :fee_payer => "Payee",
+           :redirect_uri => project_url(@contribution.project),
+           :auto_capture => false,
+           :require_shipping => true,
+      }%>
+      <%= logger.info wphash.inspect %>
+  <%= current_user.wepay.get('/v2/checkout/create', :params => wphash)%>
 </div>
 
