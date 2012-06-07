@@ -10,10 +10,10 @@ class Gateways::WepayController < ApplicationController
            :app_fee => contribution.amount * (SETTINGS['aws']['fee_percentage']/100.0),
            :fee_payer => "Payee",
            :redirect_uri => gateways_wepay_finish_url,
-           :callback_uri => gateways_wepay_ipn_url,
            :auto_capture => 0,
            :require_shipping => 1,
       }
+    wp_params.merge!(:callback_uri => gateways_wepay_ipn_url) unless Rails.env.development?
     logger.info wp_params.inspect
     resp = current_user.wepay.get('/v2/checkout/create', :params => wp_params)
     checkout = JSON.parse(resp.body)
