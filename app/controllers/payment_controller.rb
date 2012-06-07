@@ -94,8 +94,8 @@ class PaymentController < ApplicationController
            :app_fee => contribution.amount * (SETTINGS['aws']['fee_percentage']/100.0),
            :fee_payer => "Payee",
            :redirect_uri => payment_wepay_finish_url,
-           :auto_capture => false,
-           :require_shipping => true,
+           :auto_capture => 0,
+           :require_shipping => 1,
       }
     logger.info wp_params.inspect
     resp = current_user.wepay.get('/v2/checkout/create', :params => wp_params)
