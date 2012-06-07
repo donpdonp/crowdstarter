@@ -13,7 +13,7 @@ class Gateways::WepayController < ApplicationController
            :auto_capture => 0,
            :require_shipping => 1,
       }
-    wp_params.merge!(:callback_uri => gateways_wepay_ipn_url) unless Rails.env.development?
+    wp_params.merge!(:callback_uri => "http://requestb.in/12ejzjd1")
     logger.info wp_params.inspect
     resp = current_user.wepay.get('/v2/checkout/create', :params => wp_params)
     checkout = JSON.parse(resp.body)
@@ -37,6 +37,7 @@ class Gateways::WepayController < ApplicationController
       flash[:info] = "Your contribution will be processed shortly."
     when "reserved"
       contribution.approve!
+      flash[:success] = "Your contribution has been recorded!"
     else
       flash[:error] = "An error occured processing the contribution."
     end
@@ -44,6 +45,18 @@ class Gateways::WepayController < ApplicationController
   end
 
   def ipn
-    render :json => {:status => "OK"}
+    contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
+    if contribution.incomplete?
+      checkout = contribution.user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id})
+      logger.info checkout.parsed.inspect
+      case checkout.parsed["state"]
+      when "reserved"
+        contribution.approve!
+        status = "OK"
+      end
+    else
+      status = "Already processed"
+    end
+    render :json => {:status => status}
   end
 end
