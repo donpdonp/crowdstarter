@@ -4,10 +4,10 @@ h2
   label for="reward-amount"
     | Minimum amount to contribute to earn this reward.
   | $
-  input name="reward[amount]" class="money"
+  input id="reward-amount" name="reward[amount]" class="money"
   label for="reward-description"
     | Description of reward.
-  textarea name="reward[description]"
+  textarea id="reward-description" name="reward[description]"
   input type="hidden" name="project_id" value="#{@project.id}"
   div
     button
