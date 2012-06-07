@@ -91,7 +91,7 @@ class PaymentController < ApplicationController
            :short_description => "Contribution to Project #{contribution.project.id}",
            :type => "GOODS",
            :reference_id => "contribution-#{contribution.id}",
-           :app_fee => contribution.amount.to_f * (SETTINGS['aws']['fee_percentage'].to_i/100),
+           :app_fee => contribution.amount * (SETTINGS['aws']['fee_percentage']/100.0),
            :fee_payer => "Payee",
            :redirect_uri => payment_wepay_finish_url,
            :auto_capture => false,
@@ -114,7 +114,11 @@ class PaymentController < ApplicationController
     contribution = current_user.contributions.find_by_wepay_checkout_id(params[:checkout_id])
     resp = current_user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id})
     checkout = JSON.parse(resp.body)
-    if checkout["state"] == "reserved"
+    logger.info checkout.inspect
+    case checkout["state"]
+    when "authorized"
+      flash[:info] = "Your contribution will be processed shortly."
+    when "reserved"
       contribution.approve!
     else
       flash[:error] = "An error occured processing the contribution."
