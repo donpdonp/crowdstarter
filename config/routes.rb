@@ -8,8 +8,6 @@ Crowdstarter::Application.routes.draw do
   get "payment/wepay_request"
   get "payment/wepay_clear"
   get "payment/wepay_account"
-  post "payment/wepay_checkout"
-  get "payment/wepay_finish"
   post "github/commit"
   match "session" => "session#destroy", :via => :delete
   match "auth/:provider/callback" => "session#create"
@@ -27,6 +25,12 @@ Crowdstarter::Application.routes.draw do
   end
   resources :users
   resources :rewards
+
+  namespace :gateways do
+    get "wepay/ipn"
+    post "wepay/checkout"
+    get "wepay/finish"
+  end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

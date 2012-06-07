@@ -32,7 +32,7 @@
               payment_reason: "Contribution to Project ##{@contribution.project.id}",
               submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
 
-  <%= form_tag payment_wepay_checkout_path do %>
+  <%= form_tag gateways_wepay_checkout_path do %>
     <input type="hidden" name="contribution_id" value="<%=@contribution.id%>"/>
     <button>Continue to WePay Checkout</button>
   <% end %>
