@@ -13,7 +13,7 @@ class Gateways::WepayController < ApplicationController
            :auto_capture => 0,
            :require_shipping => 1,
       }
-    wp_params.merge!(:callback_uri => "http://requestb.in/12ejzjd1")
+    wp_params.merge!(:callback_uri => gateways_wepay_ipn_url) unless Rails.env.development?
     logger.info wp_params.inspect
     resp = current_user.wepay.get('/v2/checkout/create', :params => wp_params)
     checkout = JSON.parse(resp.body)
