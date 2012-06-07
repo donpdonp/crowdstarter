@@ -44,5 +44,6 @@ class Gateways::WepayController < ApplicationController
   end
 
   def ipn
+    render :json => {:status => "OK"}
   end
 end
