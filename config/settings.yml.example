@@ -6,11 +6,17 @@ mailer:
 aws:
   access_key: abcd
   access_secret: abcd
+  recipient_token: "token"
   sandbox: true
   fee_percentage: 2.5
 facebook:
   key: abcd
   secret: abcd
+wepay:
+  access_token: "token"
+  client:
+    id: "123"
+    secret: "abc"
 exception_notifier:
   recipients: ["devops@company"]
 google:
