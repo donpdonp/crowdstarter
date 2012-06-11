@@ -2,6 +2,8 @@ class ProjectsController < ApplicationController
   before_filter :require_login, :only => [:edit, :publish_review, :publish,
                                           :destroy, :contribute, :unpublish]
 
+  include ActionView::Helpers::NumberHelper
+
   def index
     if params[:user]
       # username search
@@ -94,9 +96,12 @@ class ProjectsController < ApplicationController
                            :amount => params[:amount],
                            :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
     if @contribution.valid?
-      reward = @contribution.nearest_reward
+      reward = project.closest_reward(@contribution.amount)
       if reward
         @contribution.update_attribute :reward_id, reward.id
+      else
+        flash[:error] = "The minimum reward for this project requires a contribution of #{number_to_currency(project.smallest_reward.amount)}"
+        redirect_to project
       end
     else
       flash[:error] = "There is a problem with the contribution: "+

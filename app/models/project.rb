@@ -129,4 +129,12 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+  def closest_reward(amount)
+    rewards.order("amount asc").select{|r| amount >= r.amount}.last
+  end
+
+  def smallest_reward
+    rewards.order("amount asc").first
+  end
 end

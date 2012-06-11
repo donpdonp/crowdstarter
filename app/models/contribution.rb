@@ -43,11 +43,6 @@ class Contribution < ActiveRecord::Base
     cheapest_reward && cheapest_reward.amount >= amount
   end
 
-  def nearest_reward
-    rewards = project.rewards.order("amount asc")
-    rewards.select{|r| amount >= r.amount}.last
-  end
-
   def cancel
     response = FPS.cancel_token(token_id: token)
     update_attribute :cancel_request_id, response[:request_id]
