@@ -45,6 +45,7 @@ gem 'exception_notification'
 group :production do
   # Use unicorn as the web server
   gem 'unicorn'
+  gem 'pg'
 end
 
 # Deploy with Capistrano
