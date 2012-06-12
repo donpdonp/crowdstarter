@@ -32,6 +32,7 @@ class ProjectsController < ApplicationController
   def create
     if logged_in?
       params[:project][:funding_due] += " #{params[:timezone]}"
+      params[:project][:payment_gateway] = SETTINGS.default_payment_gateway
       project = current_user.projects.create(params[:project])
       if project.valid?
         project.activities.create({:detail => "Created project",

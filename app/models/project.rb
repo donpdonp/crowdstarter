@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   has_many :rewards
   friendly_id :name, :use => :slugged
 
-  validates_presence_of :name, :funding_due, :amount, :user_id
+  validates_presence_of :name, :funding_due, :amount, :user_id, :payment_gateway
 
   has_attached_file :image, :styles => {:thumb => "133x75>",
                                         :medium => "533x300>"},
