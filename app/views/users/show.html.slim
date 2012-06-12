@@ -12,18 +12,21 @@ div class="action users-show"
         div
           - if current_user.wepay_token.blank?
             | Connect to WePay
-            - url = WEPAY.auth_code.authorize_url({ :client_id => SETTINGS['wepay']['client']['id'],
+            - url = WEPAY.auth_code.authorize_url({ :client_id => SETTINGS.payment_gateways.wepay.client.id,
                              :redirect_uri => payment_wepay_request_url,
                              :scope => "manage_accounts,view_balance,collect_payments,refund_payments,view_user",
                              :user_email => current_user.email})
+            br
             a href="#{url}"
               button
                 | Connect
           - else
-            | WePay is connected and locked.
-            br
+            | WePay is connected
             - if @user.projects.fundables.count == 0
+              br
               = link_to "Remove token", payment_wepay_clear_path, :class => "btn"
+            - else
+              |  and locked.
 
       - if current_user.payment_gateway == "amazon"
         div
@@ -33,13 +36,15 @@ div class="action users-show"
                            return_url:         payment_tokenize_url,
                            caller_reference:   "fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
                            recipient_pays_fee: "True",
-                           max_variable_fee: SETTINGS['aws']['fee_percentage'],
+                           max_variable_fee: SETTINGS['fee_percentage'],
                            submit_tag: "<button type='submit' class='btn'>Connect with Amazon Payments</button>" )
           - else
-            | Amazon Payments is connected and locked.
-            br
+            | Amazon Payments is connected
             - if @user.projects.fundables.count == 0
+              br
               = link_to "Remove token", payment_clear_path, :class => "btn"
+            - else
+              |  and locked.
 
       div
         h3 Project Management
