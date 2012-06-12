@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PaymentController do
 
-  it "should process a payment notification" do
+  it "should process an Amazon payment notification" do
     params = {"signature"=>"r4mc8LVObGwlnDykuMAb0TM=",
               "expiry"=>"09/2017",
               "signatureVersion"=>"2",
@@ -17,6 +17,7 @@ describe PaymentController do
     contribution = mock_model(Contribution, {:project => project,
                                              :user => user})
     contribution.should_receive(:receive_payment)
+    contribution.should_receive(:incomplete?).and_return(true)
     contribution.should_receive(:authorized?).and_return(true)
     Contribution.should_receive(:find_by_reference).with(params["callerReference"]).and_return(contribution)
     get :receive, params

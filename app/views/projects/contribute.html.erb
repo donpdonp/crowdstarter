@@ -15,23 +15,42 @@
   <% end %>
 
   <div>
-  EverythingFunded uses Amazon Payments to process contributions.
+  EverythingFunded uses
+  <% if @contribution.project.payment_gateway == 'wepay' %>
+    WePay
+  <% end %>
+  <% if @contribution.project.payment_gateway == 'amazon' %>
+    Amazon Payments
+  <% end %>
+   to process contributions.
   </div>
 
   <div class="payments-logo">
-  <%= image_tag "amazon-payments.gif" %>
+  <% if @contribution.project.payment_gateway == 'wepay' %>
+    <%= image_tag "wepay_small.png" %>
+  <% end %>
+  <% if @contribution.project.payment_gateway == 'amazon' %>
+    <%= image_tag "amazon-payments.gif" %>
+  <% end %>
   </div>
 
-  <%= raw FPS.cbui_form( :multi_use,
-              return_url:         payment_receive_url,
-              caller_reference:   @contribution.reference,
-              global_amount_limit:   @contribution.amount,
-              recipient_token_list: [SETTINGS['aws']['recipient_token'],
-                                      @contribution.project.user.aws_token],
-              payment_method: "CC",
-              payment_reason: "Contribution to Project ##{@contribution.project.id}",
-              submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
+  <% if @contribution.project.payment_gateway == 'amazon' %>
+    <%= raw FPS.cbui_form( :multi_use,
+                return_url:         payment_receive_url,
+                caller_reference:   @contribution.reference,
+                global_amount_limit:   @contribution.amount,
+                recipient_token_list: [SETTINGS.payment_gateways.amazon.recipient_token,
+                                        @contribution.project.user.aws_token],
+                payment_method: "CC",
+                payment_reason: "Contribution to Project ##{@contribution.project.id}",
+                submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
+  <% end %>
 
-
+  <% if @contribution.project.payment_gateway == 'wepay' %>
+    <%= form_tag gateways_wepay_checkout_path do %>
+      <input type="hidden" name="contribution_id" value="<%=@contribution.id%>"/>
+      <button>Continue to WePay Checkout</button>
+    <% end %>
+  <% end %>
 </div>
 

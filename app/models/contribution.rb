@@ -30,8 +30,21 @@ class Contribution < ActiveRecord::Base
   end
 
   def collect
+    wepay_collect
+  end
+
+  def wepay_collect
+    payment = user.wepay.get("/v2/checkout/capture",
+                             :params => {:checkout_id => wepay_checkout_id}).parsed
+    logger.info payment.inspect
+    if payment["state"] == "captured"
+      collect!
+    end
+  end
+
+  def amazon_collect
     payment = FPS.pay( caller_reference:      "proj:#{project.id}-ctrb:#{id}-#{rand(100)}",
-                     marketplace_variable_fee: SETTINGS['aws']['fee_percentage'].to_s,
+                     marketplace_variable_fee: SETTINGS.payment_gateways.amazon.fee_percentage.to_s,
                      recipient_token_id:    project.user.aws_token,
                      sender_token_id:       token,
                      transaction_amount:    amount.to_s )
@@ -43,12 +56,25 @@ class Contribution < ActiveRecord::Base
     cheapest_reward && cheapest_reward.amount >= amount
   end
 
-  def nearest_reward
-    rewards = project.rewards.order("amount asc")
-    rewards.select{|r| amount >= r.amount}.last
+  def cancel
+    wepay_cancel
   end
 
-  def cancel
+  def wepay_cancel
+    begin
+      payment = user.wepay.get("/v2/checkout/cancel",
+                               :params => {:checkout_id => wepay_checkout_id,
+                                           :cancel_reason => "Cancelled by customer request"}).parsed
+      logger.info payment.inspect
+      if payment["state"] == "cancelled"
+        cancel!
+      end
+    rescue OAuth2::Error => e
+      logger.error e
+    end
+  end
+
+  def amazon_cancel
     response = FPS.cancel_token(token_id: token)
     update_attribute :cancel_request_id, response[:request_id]
   end

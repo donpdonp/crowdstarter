@@ -1,23 +1,27 @@
+---
 notices:
-  from: "robot@company"
-  bcc: "quality-control@company"
+  from: "robot@localhost"
+  bcc: ""
 mailer:
-  host: "example.com"
-aws:
-  access_key: abcd
-  access_secret: abcd
-  recipient_token: "token"
-  sandbox: true
-  fee_percentage: 2.5
+  host: "localhost"
 facebook:
-  key: abcd
-  secret: abcd
-wepay:
-  access_token: "token"
-  client:
-    id: "123"
-    secret: "abc"
+  app_id: "123"
+  secret: "ab"
 exception_notifier:
-  recipients: ["devops@company"]
+  from: "exceptions@localhost"
+  recipients: ["admin@example.com"]
 google:
-  analytics: 'UA-XXXXXX-Z'
+  analytics: 'UA-XXXXXX-X'
+default_payment_gateway: 'wepay'
+payment_gateways:
+  amazon:
+    access_key: "123"
+    access_secret: "abc"
+    recipient_token: "abc123"
+    sandbox: true
+    fee_percentage: 2.9
+  wepay:
+    access_token: "abc123"
+    client:
+      id: "123"
+      secret: "abc"

@@ -41,6 +41,12 @@ describe "Project management", :type => :request do
     fill_in('Funding due', :with => 5.days.from_now)
     click_on "Save Details"
     page.should have_content("This project is not published.")
+    click_on "Add a reward"
+    page.should have_content("earn this reward")
+    fill_in('reward-amount', :with => "3")
+    fill_in('reward-description', :with => "A Pony")
+    click_on "Add Reward"
+    page.should have_content("$3.00 or more")
     click_on "Publish"
     page.should have_content("Publish Project")
     click_on "Publish"

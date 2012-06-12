@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   friendly_id :username
 
   has_many :projects
+  has_many :contributions
 
   validates :email, :uniqueness => true
   validates :username, :uniqueness => true
@@ -19,5 +20,17 @@ class User < ActiveRecord::Base
                          :image_url => hash.info.image,
                          :oauth_token => hash.credentials.token)
     end
+  end
+
+  def wepay_token_hash
+    JSON.parse(wepay_token)
+  end
+
+  def wepay
+    OAuth2::AccessToken.from_hash(WEPAY, wepay_token_hash)
+  end
+
+  def payment_gateway
+    attributes['payment_gateway'] || SETTINGS.default_payment_gateway
   end
 end

@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   has_many :rewards
   friendly_id :name, :use => :slugged
 
-  validates_presence_of :name, :funding_due, :amount, :user_id
+  validates_presence_of :name, :funding_due, :amount, :user_id, :payment_gateway
 
   has_attached_file :image, :styles => {:thumb => "133x75>",
                                         :medium => "533x300>"},
@@ -73,33 +73,31 @@ class Project < ActiveRecord::Base
 
   def fund
     contributions.authorizeds.each do |contrib|
-      begin
-        response = contrib.collect!
+      response = contrib.collect!
+      logger.info response.inspect
+      if contrib.collected?
         activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect",
                           :contribution => contrib)
-        logger.info response.inspect
         Notifications.delay(:queue => 'mailer').contribution_collected(contrib)
-      rescue Boomerang::Errors::HTTPError => e
-        activities.create(:detail => "Failed to collect from #{contrib.user.email} $#{contrib.amount}",
+      else
+        activities.create(:detail => "Collection failed for #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-fail",
                           :contribution => contrib)
-        logger.error e.message
-        logger.error e.http_response.body
       end
     end
   end
 
   def fail
     contributions.authorizeds.each do |contrib|
-      begin
-        response = contrib.cancel!
+      response = contrib.cancel!
+      logger.info response.inspect
+      if contrib.cancelled?
         activities.create(:detail => "Cancelled #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-cancel",
                           :contribution => contrib)
-        logger.info response.inspect
         Notifications.delay(:queue => 'mailer').contribution_cancelled(contrib)
-      rescue Boomerang::Errors::HTTPError => e
+      else
         activities.create(:detail => "Failed to cancel from #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-cancel-fail",
                           :contribution => contrib)
@@ -128,5 +126,13 @@ class Project < ActiveRecord::Base
         # skip this one
       end
     end
+  end
+
+  def closest_reward(amount)
+    rewards.order("amount asc").select{|r| amount >= r.amount}.last
+  end
+
+  def smallest_reward
+    rewards.order("amount asc").first
   end
 end
