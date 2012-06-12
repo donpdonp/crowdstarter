@@ -14,10 +14,9 @@ class Gateways::WepayController < ApplicationController
            :require_shipping => 1,
       }
     wp_params.merge!(:callback_uri => gateways_wepay_ipn_url) unless Rails.env.development?
-    logger.info wp_params.inspect
-    resp = current_user.wepay.get('/v2/checkout/create', :params => wp_params)
-    checkout = JSON.parse(resp.body)
-    logger.info checkout.inspect
+    logger.tagged("wepay params") { logger.info wp_params.inspect }
+    checkout = current_user.wepay.get('/v2/checkout/create', :params => wp_params).parsed
+    logger.tagged("wepay response") { logger.info checkout.inspect }
     if checkout["checkout_id"] > 0
       contribution.update_attribute :wepay_checkout_id, checkout["checkout_id"]
       redirect_to checkout["checkout_uri"]
@@ -29,12 +28,11 @@ class Gateways::WepayController < ApplicationController
 
   def finish
     contribution = current_user.contributions.find_by_wepay_checkout_id(params[:checkout_id])
-    resp = current_user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id})
-    checkout = JSON.parse(resp.body)
-    logger.info checkout.inspect
+    checkout = current_user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id}).parsed
+    logger.tagged("wepay response") { logger.info checkout.inspect }
     case checkout["state"]
     when "authorized"
-      flash[:info] = "Your contribution will be processed shortly."
+      flash[:info] = "Thank you! Your contribution will be processed shortly."
     when "reserved"
       contribution.approve!
       flash[:success] = "Your contribution has been recorded!"
@@ -47,9 +45,9 @@ class Gateways::WepayController < ApplicationController
   def ipn
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
     if contribution.incomplete?
-      checkout = contribution.user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id})
-      logger.info checkout.parsed.inspect
-      case checkout.parsed["state"]
+      checkout = contribution.user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id}).parsed
+      logger.tagged("wepay response") { logger.info checkout.inspect }
+      case checkout["state"]
       when "reserved"
         contribution.approve!
         status = "OK"
