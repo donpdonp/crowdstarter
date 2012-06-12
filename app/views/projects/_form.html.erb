@@ -79,12 +79,22 @@
       </script>
     </div>
     <div class="span6">
-       If the funding is successful, EverythingFunded charges a 3% fee. In addition, Amazon Payments
-       <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=6022"
-          style="text-decoration:underline">
-         charges approximately 3%
-       </a>
-        to each contributor for credit card processing.
+      If the funding is successful, EverythingFunded charges a 3% fee. In addition,
+
+      <% gateway = project.payment_gateway || current_user.payment_gateway %>
+      <% if gateway == 'wepay' %>
+        WePay
+        <a href="https://www.wepay.com/about/fees"
+           style="text-decoration:underline">
+          charges 3.5%</a>
+      <% end %>
+      <% if gateway == 'amazon' %>
+        Amazon Payments charges
+        <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=6022"
+           style="text-decoration:underline">
+          approximately 3%</a>
+      <% end %>
+       to each contributor for credit card processing.
     </div>
   </div>
 
