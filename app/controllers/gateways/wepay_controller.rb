@@ -7,7 +7,7 @@ class Gateways::WepayController < ApplicationController
            :short_description => "Contribution to Project #{contribution.project.id}",
            :type => "GOODS",
            :reference_id => "contribution-#{contribution.id}",
-           :app_fee => contribution.amount * (SETTINGS['aws']['fee_percentage']/100.0),
+           :app_fee => contribution.amount * (SETTINGS.fee_percentage/100.0),
            :fee_payer => "Payee",
            :redirect_uri => gateways_wepay_finish_url,
            :auto_capture => 0,
