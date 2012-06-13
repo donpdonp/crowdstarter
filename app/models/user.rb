@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :contributions
 
   validates :email, :uniqueness => true
-  validates :username, :uniqueness => true
+  validates :username, :uniqueness => {:allow_nil => true}
   validates :facebook_uid, :uniqueness => true
 
   def self.find_or_create_from_auth_hash(hash)
