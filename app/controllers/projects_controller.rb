@@ -121,7 +121,7 @@ class ProjectsController < ApplicationController
 
   def publish_review
     @project = Project.find(params[:id])
-    if @project.user.aws_token.blank?
+    if @project.user.wepay_token.blank?
       flash[:error] = "Please connect your account to a payment gateway."
       redirect_to @project.user
     end
