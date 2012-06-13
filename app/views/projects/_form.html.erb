@@ -45,7 +45,7 @@
     <div class="span6">
       <%= f.label("amount", "Collection amount") %>
       $<%= f.text_field("amount", :required => true, :class => "money") %>
-      - $<input class="money" disabled="" id="feepercent" style="width:2em">(6%) =
+      - $<input class="money" disabled="" id="feepercent" style="width:2em">(6.5%) =
       $<input class="money" disabled="" id="feetotal"> collected
       <script>
         var projectdate = new Date(Date.parse(<%=raw project.funding_due.to_json%>));
@@ -58,7 +58,7 @@
         $(function() {
           var recalc = function(){
             var total = $('#project_amount').val()
-            var fee = (total*0.06).toFixed(2)
+            var fee = (total*0.065).toFixed(2)
             $('#feepercent').val(fee)
             $('#feetotal').val((total-fee).toFixed(2))
           };
