@@ -63,11 +63,21 @@ describe "Project management", :type => :request do
     fill_in("Amount", :with => "10")
     click_on "Give"
     page.should have_content("Contribute $10.00 to")
+
+    #Amazon Payments
+    #reference = find(:xpath, "//input[@name='callerReference']")["value"]
     #click_on "Continue to Amazon Payments"
-    reference = find(:xpath, "//input[@name='callerReference']")["value"]
+
+    #WePay
+    #reference = find(:xpath, "//input[@name='contribution_id']")["value"]
+    #click_on "Continue to WePay Checkout"
 
     #Amazon callback
-    visit "/payment/receive?callerReference=#{reference}&tokenID=abczzz&status=SC"
+    #visit "/payment/receive?callerReference=#{reference}&tokenID=abczzz&status=SC"
+
+    #WePay
+    visit "/gateways/wepay/finish?checkout_id=123456"
+
     within(".contributors") do
       page.should have_content("Customer Person $10")
     end
