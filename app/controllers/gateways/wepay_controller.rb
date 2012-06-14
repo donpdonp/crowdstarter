@@ -11,7 +11,7 @@ class Gateways::WepayController < ApplicationController
            :fee_payer => "Payee",
            :redirect_uri => gateways_wepay_finish_url,
            :auto_capture => 0,
-           :require_shipping => 1,
+           :require_shipping => 0,
       }
     wp_params.merge!(:callback_uri => gateways_wepay_ipn_url) unless Rails.env.development?
     logger.tagged("wepay params") { logger.info wp_params.inspect }
