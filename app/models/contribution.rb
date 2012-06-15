@@ -8,18 +8,28 @@ class Contribution < ActiveRecord::Base
   validates :amount, :numericality => true
 
   scope :authorizeds, where(:workflow_state => :authorized)
+  scope :reserveds, where(:workflow_state => :reserved)
   scope :collecteds, where(:workflow_state => :collected)
   scope :cancelleds, where(:workflow_state => :cancelled)
 
   workflow do
-    state :incomplete do
-      event :approve, :transitions_to => :authorized
+    state :new do
+      event :authorize, :transitions_to => :authorized
     end
     state :authorized do
-      event :collect, :transitions_to => :collected
+      event :reserve, :transitions_to => :reserved
       event :cancel, :transitions_to => :cancelled
     end
-    state :collected
+    state :reserved do
+      event :capture, :transitions_to => :captured
+      event :cancel, :transitions_to => :cancelled
+    end
+    state :captured do
+      event :settle, :transitions_to => :settled
+      event :refund, :transitions_to => :refunded
+    end
+    state :refunded
+    state :settled
     state :cancelled
   end
 
