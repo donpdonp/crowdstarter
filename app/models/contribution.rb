@@ -60,6 +60,11 @@ class Contribution < ActiveRecord::Base
     wepay_cancel
   end
 
+  def wepay_status
+    user.wepay.get("/v2/checkout",
+                   :params => {:checkout_id => wepay_checkout_id}).parsed
+  end
+
   def wepay_cancel
     begin
       payment = user.wepay.get("/v2/checkout/cancel",
