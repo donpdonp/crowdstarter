@@ -1,40 +1,34 @@
-<div class="project-contribute">
+div.project-contribute
 
-  <div>
-    Contribute <span class="amount"><%= number_to_currency(@contribution.amount) %></span>
-    to <span class="project-name"><%= link_to(@contribution.project.name, @contribution.project)%></span> (Project #<%=@contribution.project.id%>).
-  </div>
+  div
+    | Contribute
+    span.amount
+      = number_to_currency(@contribution.amount)
+    |  to
+    span.project-name
+      |  #{link_to(@contribution.project.name, @contribution.project)}
+    |  (Project ##{@contribution.project.id}).
 
-  <% if @contribution.reward %>
-    <div id="reward_text">
-      Your contribution will earn the following reward!
-      <br/>
-      <%= number_to_currency(@contribution.reward.amount) %> or more:
-      &quot;<%= @contribution.reward.description %>&quot;
-    </div>
-  <% end %>
+  - if @contribution.reward
+    div#reward_text
+      | Your contribution will earn the following reward!
+      br
+      = number_to_currency(@contribution.reward.amount)
+      | or more: "#{@contribution.reward.description}"
 
-  <div>
-  EverythingFunded uses
-  <% if @contribution.project.payment_gateway == 'wepay' %>
-    WePay
-  <% end %>
-  <% if @contribution.project.payment_gateway == 'amazon' %>
-    Amazon Payments
-  <% end %>
-   to process contributions.
-  </div>
+  div
+    | EverythingFunded uses
+    - if @contribution.project.payment_gateway == 'wepay'
+      WePay
+    - if @contribution.project.payment_gateway == 'amazon'
+      Amazon Payments
+    | to process contributions.
 
-  <div class="payments-logo">
-  <% if @contribution.project.payment_gateway == 'wepay' %>
-    <%= image_tag "wepay_small.png" %>
-  <% end %>
-  <% if @contribution.project.payment_gateway == 'amazon' %>
-    <%= image_tag "amazon-payments.gif" %>
-  <% end %>
-  </div>
+  div.payments-logo
+    - if @contribution.project.payment_gateway == 'wepay'
+      = image_tag "wepay_small.png"
+    - if @contribution.project.payment_gateway == 'amazon'
+      = image_tag "amazon-payments.gif"
 
   = render :partial => "checkout_#{@contribution.project.payment_gateway}"
-
-</div>
 
