@@ -72,17 +72,17 @@ class Project < ActiveRecord::Base
   end
 
   def fund
-    contributions.authorizeds.each do |contrib|
-      response = contrib.collect!
+    contributions.reserveds.each do |contrib|
+      response = contrib.capture!
       logger.info response.inspect
-      if contrib.collected?
+      if contrib.captured?
         activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",
-                          :code => "collect",
+                          :code => "capture",
                           :contribution => contrib)
         Notifications.delay(:queue => 'mailer').contribution_collected(contrib)
       else
         activities.create(:detail => "Collection failed for #{contrib.user.email} $#{contrib.amount}",
-                          :code => "collect-fail",
+                          :code => "capture-fail",
                           :contribution => contrib)
       end
     end

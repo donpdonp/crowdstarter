@@ -9,7 +9,7 @@ class Contribution < ActiveRecord::Base
 
   scope :authorizeds, where(:workflow_state => :authorized)
   scope :reserveds, where(:workflow_state => :reserved)
-  scope :collecteds, where(:workflow_state => :collected)
+  scope :captureds, where(:workflow_state => :captured)
   scope :cancelleds, where(:workflow_state => :cancelled)
 
   workflow do
@@ -39,20 +39,22 @@ class Contribution < ActiveRecord::Base
     approve! if status == "SC"
   end
 
-  def collect
-    wepay_collect
+  def capture
+    wepay_capture
   end
 
-  def wepay_collect
+  def wepay_capture
     payment = user.wepay.get("/v2/checkout/capture",
                              :params => {:checkout_id => wepay_checkout_id}).parsed
     logger.info payment.inspect
     if payment["state"] == "captured"
-      collect!
+      capture!
+    else
+      cancel!
     end
   end
 
-  def amazon_collect
+  def amazon_capture
     payment = FPS.pay( caller_reference:      "proj:#{project.id}-ctrb:#{id}-#{rand(100)}",
                      marketplace_variable_fee: SETTINGS.payment_gateways.amazon.fee_percentage.to_s,
                      recipient_token_id:    project.user.aws_token,
