@@ -47,10 +47,9 @@ class Contribution < ActiveRecord::Base
     payment = user.wepay.get("/v2/checkout/capture",
                              :params => {:checkout_id => wepay_checkout_id}).parsed
     logger.info payment.inspect
-    if payment["state"] == "captured"
-      capture!
-    else
-      cancel!
+    if payment["state"] != "captured"
+      logger.error "Payment capture failed!"
+      halt
     end
   end
 
@@ -83,8 +82,9 @@ class Contribution < ActiveRecord::Base
                                :params => {:checkout_id => wepay_checkout_id,
                                            :cancel_reason => "Cancelled by customer request"}).parsed
       logger.info payment.inspect
-      if payment["state"] == "cancelled"
-        cancel!
+      if payment["state"] != "cancelled"
+        logger.error "Payment cancellation failed!"
+        halt
       end
     rescue OAuth2::Error => e
       logger.error e
