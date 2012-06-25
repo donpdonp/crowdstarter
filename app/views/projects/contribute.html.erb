@@ -34,23 +34,7 @@
   <% end %>
   </div>
 
-  <% if @contribution.project.payment_gateway == 'amazon' %>
-    <%= raw FPS.cbui_form( :multi_use,
-                return_url:         payment_receive_url,
-                caller_reference:   @contribution.reference,
-                global_amount_limit:   @contribution.amount,
-                recipient_token_list: [SETTINGS.payment_gateways.amazon.recipient_token,
-                                        @contribution.project.user.aws_token],
-                payment_method: "CC",
-                payment_reason: "Contribution to Project ##{@contribution.project.id}",
-                submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
-  <% end %>
+  = render :partial => "checkout_#{@contribution.project.payment_gateway}"
 
-  <% if @contribution.project.payment_gateway == 'wepay' %>
-    <%= form_tag gateways_wepay_checkout_path do %>
-      <input type="hidden" name="contribution_id" value="<%=@contribution.id%>"/>
-      <button>Continue to WePay Checkout</button>
-    <% end %>
-  <% end %>
 </div>
 
