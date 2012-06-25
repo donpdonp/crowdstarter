@@ -8,8 +8,11 @@
   <% if contribution.authorized? %>
     <span class="label">authorized</span>
   <% end %>
-  <% if contribution.collected? %>
-    <span class="label label-success">collected</span>
+  <% if contribution.reserved? %>
+    <span class="label label-success">reserved</span>
+  <% end %>
+  <% if contribution.captured? %>
+    <span class="label label-success">captured</span>
   <% end %>
   <% if contribution.cancelled? %>
     <span class="label label-important">cancelled</span>

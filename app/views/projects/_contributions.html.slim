@@ -6,7 +6,7 @@
         | Contributors
       div.body
         - contribs.each do |c|
-          - unless c.incomplete?
+          - unless c.new?
             = render :partial => "projects/contribution_row", :locals => {:contribution => c}
 - else
   - unless @project.editable?
