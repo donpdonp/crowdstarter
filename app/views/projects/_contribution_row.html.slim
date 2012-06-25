@@ -9,5 +9,8 @@ tr.contribution-row
     = contribution.created_at.strftime("%Y-%m-%d")
 
   td
-    - ["authorized", "reserved", "captured", "cancelled"].each do |state|
-      span.label class="#{'label-success' if contribution.send(state+'?')}" #{state}
+    - [["authorized","label-warning"],
+       ["reserved","label-info"],
+       ["captured","label-success"],
+       ["cancelled","label-important"]].each do |state|
+      span.label class="#{state.last if contribution.send(state.first+'?')}" #{state.first}
