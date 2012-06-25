@@ -33,8 +33,10 @@ class Gateways::WepayController < ApplicationController
       logger.tagged("wepay response") { logger.info checkout.inspect }
       case checkout["state"]
       when "authorized"
+        checkout.authorize!
         flash[:info] = "Thank you! Your contribution will finish processing shortly."
       when "reserved"
+        checkout.authorize!
         contribution.approve!
         flash[:success] = "Your contribution has been recorded!"
       else
@@ -49,16 +51,17 @@ class Gateways::WepayController < ApplicationController
 
   def ipn
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
-    if contribution.incomplete?
+    if contribution.authorized?
       checkout = contribution.user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id}).parsed
       logger.tagged("wepay response") { logger.info checkout.inspect }
       case checkout["state"]
       when "reserved"
-        contribution.approve!
+        contribution.reserve!
         status = "OK"
       end
     else
       status = "Already processed"
+      logger.error "Contribution is in state #{contribution.workflow_state}, not authorized"
     end
     render :json => {:status => status}
   end
