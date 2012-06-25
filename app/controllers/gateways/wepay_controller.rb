@@ -33,10 +33,10 @@ class Gateways::WepayController < ApplicationController
       logger.tagged("wepay response") { logger.info checkout.inspect }
       case checkout["state"]
       when "authorized"
-        checkout.authorize!
+        contribution.authorize!
         flash[:info] = "Thank you! Your contribution will finish processing shortly."
       when "reserved"
-        checkout.authorize!
+        contribution.authorize!
         contribution.approve!
         flash[:success] = "Your contribution has been recorded!"
       else
