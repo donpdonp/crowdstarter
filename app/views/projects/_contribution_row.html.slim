@@ -1,6 +1,6 @@
 tr.contribution-row
   td
-    = contribution.user.name
+    = link_to contribution.user.name, contribution.user
 
   td.money
     = number_to_currency(contribution.amount)
