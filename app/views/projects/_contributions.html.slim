@@ -5,9 +5,10 @@
       div.header
         | Contributors
       div.body
-        - contribs.each do |c|
-          - unless c.new?
-            = render :partial => "projects/contribution_row", :locals => {:contribution => c}
+        table
+          - contribs.each do |c|
+            - unless c.new?
+              = render :partial => "projects/contribution_row", :locals => {:contribution => c}
 - else
   - unless @project.editable?
     | Be the first to contribute to this project.

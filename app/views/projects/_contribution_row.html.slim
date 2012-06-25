@@ -1,9 +1,13 @@
-div.contribution
-  = contribution.user.name
+tr.contribution-row
+  td
+    = contribution.user.name
 
-  = number_to_currency(contribution.amount)
+  td.money
+    = number_to_currency(contribution.amount)
 
-  = contribution.created_at.strftime("%Y-%m-%d")
+  td
+    = contribution.created_at.strftime("%Y-%m-%d")
 
-  - ["authorized", "reserved", "captured", "cancelled"].each do |state|
-    span.label class="#{'label-success' if contribution.send(state+'?')}" #{state}
+  td
+    - ["authorized", "reserved", "captured", "cancelled"].each do |state|
+      span.label class="#{'label-success' if contribution.send(state+'?')}" #{state}

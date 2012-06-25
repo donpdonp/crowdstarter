@@ -63,10 +63,12 @@
     margin-right: 40px
   }
 
-  .contribution {
+  .contribution-row {
     padding: 0.2em;
 
-    .label + .label { margin-left: 0.2em }
+    td { padding-right: 0.8em }
+    td.money { text-align: right; color: green}
+    .label + .label { margin-left: 0.1em }
   }
 }
 
