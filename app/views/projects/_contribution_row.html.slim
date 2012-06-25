@@ -1,20 +1,9 @@
-<div class="contribution">
-  <%= contribution.user.name %>
+div.contribution
+  = contribution.user.name
 
-  <%= number_to_currency(contribution.amount) %>
+  = number_to_currency(contribution.amount)
 
-  <%= contribution.created_at.strftime("%Y-%m-%d") %>
+  = contribution.created_at.strftime("%Y-%m-%d")
 
-  <% if contribution.authorized? %>
-    <span class="label">authorized</span>
-  <% end %>
-  <% if contribution.reserved? %>
-    <span class="label label-success">reserved</span>
-  <% end %>
-  <% if contribution.captured? %>
-    <span class="label label-success">captured</span>
-  <% end %>
-  <% if contribution.cancelled? %>
-    <span class="label label-important">cancelled</span>
-  <% end %>
-</div>
+  - ["authorized", "reserved", "captured", "cancelled"].each do |state|
+    span.label class="#{'label-success' if contribution.send(state+'?')}" #{state}
