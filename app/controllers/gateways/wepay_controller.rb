@@ -4,7 +4,7 @@ class Gateways::WepayController < ApplicationController
     wp_params = {
            :account_id => contribution.project.user.wepay_account_id,
            :amount => contribution.amount,
-           :short_description => "Contribution to Project #{contribution.project.id}",
+           :short_description => "Contribution to Project ##{contribution.project.id} - #{contribution.project.name}",
            :type => "GOODS",
            :reference_id => "contribution-#{contribution.id}",
            :app_fee => contribution.amount * (SETTINGS.fee_percentage/100.0),

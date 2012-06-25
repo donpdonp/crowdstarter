@@ -3,7 +3,7 @@ div.project-contribute
   div
     | Contribute
     span.amount
-      = number_to_currency(@contribution.amount)
+      |  #{number_to_currency(@contribution.amount)}
     |  to
     span.project-name
       |  #{link_to(@contribution.project.name, @contribution.project)}
