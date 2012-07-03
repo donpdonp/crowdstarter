@@ -10,6 +10,7 @@ class Gateways::WepayController < ApplicationController
            :app_fee => contribution.amount * (SETTINGS.fee_percentage/100.0),
            :fee_payer => "Payee",
            :redirect_uri => gateways_wepay_finish_url,
+           :callback_uri => gateways_wepay_ipn_url,
            :auto_capture => 0,
            :require_shipping => 0,
       }
@@ -29,7 +30,10 @@ class Gateways::WepayController < ApplicationController
   def finish
     contribution = current_user.contributions.find_by_wepay_checkout_id(params[:checkout_id])
     if contribution
-      checkout = current_user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id}).parsed
+      checkout = current_user.wepay.get('/v2/checkout/',
+                                        :params => {
+                                          :checkout_id =>
+                                            contribution.wepay_checkout_id}).parsed
       logger.tagged("wepay response") { logger.info checkout.inspect }
       case checkout["state"]
       when "authorized"
