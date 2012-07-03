@@ -10,7 +10,6 @@ class Gateways::WepayController < ApplicationController
            :app_fee => contribution.amount * (SETTINGS.fee_percentage/100.0),
            :fee_payer => "Payee",
            :redirect_uri => gateways_wepay_finish_url,
-           :callback_uri => gateways_wepay_ipn_url,
            :auto_capture => 0,
            :require_shipping => 0,
       }
