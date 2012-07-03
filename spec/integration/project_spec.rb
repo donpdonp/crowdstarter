@@ -32,6 +32,21 @@ describe "Project management", :type => :request do
 
     # Setup Amazon multiuse token
     visit "/payment/tokenize?tokenID=abc123"
+    # Setup Wepay token
+    wpauth = mock("Wepay auth", {:get_token => mock("Wepay token",
+                                                    {:params => {},
+                                                     :token => '1234',
+                                                     :refresh_token => 'abc',
+                                                     :expires_at => 'ab'})})
+    WEPAY.should_receive(:auth_code).and_return(wpauth)
+    user_wepay = mock("user wepay")
+    user_wepay.should_receive(:get).with('/v2/account/find',
+                                         {:params=>{
+                                            :reference_id=>"everythingfunded"}}).
+                                    and_return(mock("wepay response",
+                                                    {:parsed => ['fake account']}))
+    OAuth2::AccessToken.should_receive(:from_hash).and_return(user_wepay)
+    visit "/payment/wepay_request?code=abc123"
 
     visit '/'
     click_on "Add a project"
@@ -75,7 +90,7 @@ describe "Project management", :type => :request do
     #Amazon callback
     #visit "/payment/receive?callerReference=#{reference}&tokenID=abczzz&status=SC"
 
-    #WePay
+    #WePay callback
     visit "/gateways/wepay/finish?checkout_id=123456"
 
     within(".contributors") do

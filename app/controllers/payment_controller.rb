@@ -63,18 +63,17 @@ class PaymentController < ApplicationController
   end
 
   def wepay_account
-    wepay_params = {:name => "EverythingFunded",
+    wepay_account = {:name => "EverythingFunded",
                     :description => "Contributions to projects",
                     :reference_id => "everythingfunded"}
-    resp = current_user.wepay.get('/v2/account/find', :params => {
-                             :reference_id => wepay_params[:reference_id]})
-    accounts = JSON.parse(resp.body)
+    accounts = current_user.wepay.get('/v2/account/find', :params => {
+                             :reference_id => wepay_account[:reference_id]}).parsed
     if accounts.size > 0
       account = accounts.first
       account_id = account["account_id"]
     else
       # Create one
-      resp = current_user.wepay.get('/v2/account/create', :params => wepay_params)
+      resp = current_user.wepay.get('/v2/account/create', :params => wepay_account)
       new_account = JSON.parse(resp.body)
       account_id = new_account["account_id"]
     end
