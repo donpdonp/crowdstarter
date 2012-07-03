@@ -39,13 +39,13 @@ describe "Project management", :type => :request do
                                                      :refresh_token => 'abc',
                                                      :expires_at => 'ab'})})
     WEPAY.should_receive(:auth_code).and_return(wpauth)
-    user_wepay = mock("user wepay")
-    user_wepay.should_receive(:get).with('/v2/account/find',
+    manager_wepay = mock("manager wepay")
+    manager_wepay.should_receive(:get).with('/v2/account/find',
                                          {:params=>{
                                             :reference_id=>"everythingfunded"}}).
                                     and_return(mock("wepay response",
                                                     {:parsed => ['fake account']}))
-    OAuth2::AccessToken.should_receive(:from_hash).and_return(user_wepay)
+    OAuth2::AccessToken.should_receive(:from_hash).and_return(manager_wepay)
     visit "/payment/wepay_request?code=abc123"
 
     visit '/'
@@ -85,11 +85,15 @@ describe "Project management", :type => :request do
 
     #WePay
     #reference = find(:xpath, "//input[@name='contribution_id']")["value"]
-    #click_on "Continue to WePay Checkout"
+    user_wepay = mock("user wepay")
+    OAuth2::AccessToken.should_receive(:from_hash).and_return(user_wepay)
+    user_wepay.should_receive(:get).with('/v2/checkout/create')
+    click_on "Continue to WePay Checkout"
 
     #Amazon callback
     #visit "/payment/receive?callerReference=#{reference}&tokenID=abczzz&status=SC"
 
+    
     #WePay callback
     visit "/gateways/wepay/finish?checkout_id=123456"
 
