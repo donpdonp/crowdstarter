@@ -14,7 +14,18 @@ div class="navbar"
           a href="#{projects_path}"
             | Browse
 
-      div class="user-nav pull-right"
-        form id="login" onsubmit="email_login(this.elements); return false"
-          input placeholder="e-mail login" name="email"
-          button class="btn" Sign in
+      span.pull-right#user-nav
+        span.nav-info
+          | #{Project.fundables.count} projects
+        span.nav-info
+          | #{number_to_currency(Contribution.where("workflow_state != ?",'incomplete').sum(:amount))} in contributions
+
+        - if logged_in?
+          span class="user-detail"
+            = user_link(current_user)
+          span class="user-detail"
+            = link_to "logout", session_path, :method => :delete
+        - else
+          form id="login" onsubmit="email_login(this.elements); return false"
+            input placeholder="e-mail login" name="email"
+            button class="btn" Sign in

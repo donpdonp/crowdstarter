@@ -7,7 +7,7 @@
 credentials = (data)->
   if data.status == "EXISTS"
     if data.service == "facebook"
-
+      window.location.href = "/auth/facebook?state="+window.location.href
     else
       $('#modal-signin').modal()
   else

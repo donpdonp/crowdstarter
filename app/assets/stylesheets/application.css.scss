@@ -26,10 +26,15 @@ html a:hover {
   font-size: 16px;
 }
 
-.user-nav {
-  font-size: 16px;
-  padding-top: 5px;
+#user-nav {
   color: white;
+  font-size: 16px;
+  line-height: 28px;
+  margin-top: 5px;
+
+  .nav-info {
+    margin-right: 1em;
+  }
 
   .user-detail a {
     padding-right: 1em;
