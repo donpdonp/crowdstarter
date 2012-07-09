@@ -28,7 +28,7 @@ html a:hover {
 
 .user-nav {
   font-size: 16px;
-  padding-top: 8px;
+  padding-top: 5px;
   color: white;
 
   .user-detail a {
@@ -38,6 +38,13 @@ html a:hover {
 
   .login {
     float: right;
+  }
+
+  form#login {
+    margin: 0px;
+    display: inline;
+    input { margin: 0px }
+    button { margin: 0px }
   }
 }
 

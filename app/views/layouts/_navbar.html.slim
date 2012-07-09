@@ -15,16 +15,6 @@ div class="navbar"
             | Browse
 
       div class="user-nav pull-right"
-        span style="margin-right: 1em"
-          | #{Project.fundables.count} projects
-        span style="margin-right: 1em"
-          | #{number_to_currency(Contribution.where("workflow_state != ?",'incomplete').sum(:amount))} in contributions
-        - if logged_in?
-          span class="user-detail"
-            = user_link(current_user)
-          span class="user-detail"
-            = link_to "logout", session_path, :method => :delete
-        - else
-          a class="login" href="/auth/facebook?state=#{URI.encode(request.url)}" id="facebook-login"
-            = image_tag "signin_facebook.png"
-
+        form id="login"
+          input placeholder="e-mail login"
+          button class="btn" Sign in
