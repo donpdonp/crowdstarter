@@ -14,6 +14,15 @@ class SessionController < ApplicationController
     redirect_to params[:redirect_to] || :root
   end
 
+  def lookup
+    user = User.find_by_email(params[:email])
+    if user
+      render :json => {:status => "EXISTS"}
+    else
+      render :json => {:status => "MISSING"}
+    end
+  end
+
   private
   def auth_hash
     request.env['omniauth.auth']

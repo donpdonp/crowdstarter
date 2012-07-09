@@ -15,6 +15,6 @@ div class="navbar"
             | Browse
 
       div class="user-nav pull-right"
-        form id="login"
-          input placeholder="e-mail login"
+        form id="login" onsubmit="email_login(this.elements); return false"
+          input placeholder="e-mail login" name="email"
           button class="btn" Sign in
