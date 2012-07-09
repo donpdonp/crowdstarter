@@ -12,3 +12,5 @@ credentials = (data)->
       $('#modal-signin').modal()
   else
     $('#modal-signup').modal()
+    $('input#email').val(data.email)
+    $('input#username').focus()

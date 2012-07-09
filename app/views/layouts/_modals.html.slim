@@ -4,11 +4,13 @@ div class="modal hide efmodal" id="modal-signup"
       | Welcome. Please Sign Up to continue.
     form
       label for="email" e-mail
-      input name="email"
+      input name="email" id="email"
       label for="username" username
-      input name="username"
+      input name="username" id="username"
       label for="username" password
-      input name="password" type="password"
+      input name="password" type="password" id="password"
+      br
+      button.btn type="submit" Sign up
 
 div class="modal hide" id="modal-signin"
   div.content
@@ -16,6 +18,8 @@ div class="modal hide" id="modal-signin"
       | Welcome back. Please sign in to continue.
     form
       label for="email" e-mail
-      input name="email"
+      input name="email" id="email"
       label for="username" password
-      input name="password" type="password"
+      input name="password" type="password" id="password"
+      br
+      button.btn type="submit"

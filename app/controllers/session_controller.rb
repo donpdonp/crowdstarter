@@ -16,15 +16,16 @@ class SessionController < ApplicationController
 
   def lookup
     user = User.find_by_email(params[:email])
+    uson = {:email => params[:email]}
     if user
       uson = {:status => "EXISTS"}
       if user.facebook_uid
         uson.merge!({:service => "facebook"})
       end
-      render :json => uson
     else
-      render :json => {:status => "MISSING"}
+      uson.merge!({:status => "MISSING"})
     end
+    render :json => uson
   end
 
   private
