@@ -2,14 +2,15 @@ div class="modal hide efmodal" id="modal-signup"
   div.content
     h2
       | Welcome. Please Sign Up to continue.
-    form action="/session/login" method="post"
+    form action="/users" method="post" onsubmit="user_create(this.elements); return false"
       label for="email" e-mail
       input name="email" id="email"
       label for="username" username
       input name="username" id="username"
-      label for="username" password
-      input name="password" type="password" id="password"
-      br
+      fieldset.control-group#password-group
+        label for="username" password
+        input name="password" type="password" id="password"
+        span.help-inline#password-help
       button.btn type="submit" Sign up
 
 div class="modal hide efmodal" id="modal-signin"

@@ -34,3 +34,18 @@ do_login = (data)->
   else
     $('#modal-signin fieldset#password-group').addClass('error')
     $('#modal-signin fieldset#password-group span').html("Incorrect password")
+
+(exports ? this).user_create = (form_elements)->
+  data = {email: form_elements['email'].value, password: form_elements['password'].value}
+  $.ajax('/users', {
+         data: data,
+         type: 'post',
+      success: do_create
+      })
+
+do_create = (data)->
+  if data.status == "OK"
+    window.location.href = "/"
+  if data.status == "BADPASS"
+    $('#modal-signup #password-group').addClass('error')
+    $('#modal-signup #password-help').html("Invalid password")
