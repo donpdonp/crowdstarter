@@ -1,17 +1,25 @@
 div class="modal hide efmodal" id="modal-signup"
   div.content
     h2
-      | Welcome. Please Sign Up to continue.
-    form action="/users" method="post" onsubmit="user_create(this.elements); return false"
-      label for="email" e-mail
-      input name="email" id="email"
-      label for="username" username
-      input name="username" id="username"
-      fieldset.control-group#password-group
-        label for="username" password
-        input name="password" type="password" id="password"
-        span.help-inline#password-help
-      button.btn type="submit" Sign up
+      | Welcome to Everything Funded.
+    div.pull-left
+      h2 Sign up with email.
+      form action="/users" method="post" onsubmit="user_create(this.elements); return false"
+        label for="email" e-mail
+        input name="email" id="email"
+        label for="username" username
+        input name="username" id="username"
+        fieldset.control-group#password-group
+          label for="username" password
+          input name="password" type="password" id="password"
+          span.help-inline#password-help
+        button.btn type="submit" Sign up
+    div.pull-left style="margin-left: 2em"
+      h2 Sign in with Facebook.
+      a class="login" href="/auth/facebook?state=#{URI.encode(request.url)}" id="facebook-login"
+        = image_tag "signin_facebook.png"
+
+
 
 div class="modal hide efmodal" id="modal-signin"
   div.content

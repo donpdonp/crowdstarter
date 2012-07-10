@@ -15,8 +15,11 @@ credentials = (data)->
       $('#modal-signin input#password').focus()
   else
     $('#modal-signup').modal()
-    $('#modal-signup input#email').val(data.email)
-    $('#modal-signup input#username').focus()
+    if data.email.length > 0
+      $('#modal-signup input#email').val(data.email)
+      $('#modal-signup input#username').focus()
+    else
+      $('#modal-signup input#email').focus()
 
 (exports ? this).password_login = (form_elements)->
   $('#modal-signin fieldset#password').removeClass('error')
