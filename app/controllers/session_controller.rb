@@ -12,7 +12,7 @@ class SessionController < ApplicationController
   def login
     user = User.find_by_email(params[:email])
     if user
-      if user.password_digest && user.authenticate(params[:password])
+      if BCrypt::Password.new(user.password_digest) == params[:password]
         session[:logged_in_user_id] = user.id
         render :json => {:status => "OK"}
       else
