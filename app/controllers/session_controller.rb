@@ -18,7 +18,7 @@ class SessionController < ApplicationController
     user = User.find_by_email(params[:email])
     uson = {:email => params[:email]}
     if user
-      uson = {:status => "EXISTS"}
+      uson.merge!({:status => "EXISTS"})
       if user.facebook_uid
         uson.merge!({:service => "facebook"})
       end

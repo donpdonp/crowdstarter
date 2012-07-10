@@ -12,14 +12,14 @@ div class="modal hide efmodal" id="modal-signup"
       br
       button.btn type="submit" Sign up
 
-div class="modal hide" id="modal-signin"
+div class="modal hide efmodal" id="modal-signin"
   div.content
     h2
       | Welcome back. Please sign in to continue.
-    form
+    form action="/session/login" method="post"
       label for="email" e-mail
       input name="email" id="email"
       label for="username" password
       input name="password" type="password" id="password"
       br
-      button.btn type="submit"
+      button.btn type="submit" Sign in
