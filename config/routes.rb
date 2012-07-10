@@ -11,6 +11,7 @@ Crowdstarter::Application.routes.draw do
   post "github/commit"
   match "session" => "session#destroy", :via => :delete
   get "session/lookup"
+  post "session/login"
   match "auth/:provider/callback" => "session#create"
 
   resources :projects do

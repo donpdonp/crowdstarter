@@ -1,6 +1,6 @@
-(exports ? this).email_login = (elements)->
+(exports ? this).email_login = (form_elements)->
   $.ajax('/session/lookup', {
-         data: {email: elements['email'].value},
+         data: {email: form_elements['email'].value},
       success: credentials
       })
 
@@ -17,3 +17,20 @@ credentials = (data)->
     $('#modal-signup').modal()
     $('#modal-signup input#email').val(data.email)
     $('#modal-signup input#username').focus()
+
+(exports ? this).password_login = (form_elements)->
+  $('#modal-signin fieldset#password').removeClass('error')
+  $('#modal-signin fieldset#password span').html("")
+  data = {email: form_elements['email'].value, password: form_elements['password'].value}
+  $.ajax('/session/login', {
+         data: data,
+         type: 'post',
+      success: do_login
+      })
+
+do_login = (data)->
+  if data.status == "OK"
+    window.location.href = "/"
+  else
+    $('#modal-signin fieldset#password-group').addClass('error')
+    $('#modal-signin fieldset#password-group span').html("Incorrect password")

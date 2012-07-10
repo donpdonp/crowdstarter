@@ -2,7 +2,7 @@ div class="modal hide efmodal" id="modal-signup"
   div.content
     h2
       | Welcome. Please Sign Up to continue.
-    form
+    form action="/session/login" method="post"
       label for="email" e-mail
       input name="email" id="email"
       label for="username" username
@@ -16,10 +16,11 @@ div class="modal hide efmodal" id="modal-signin"
   div.content
     h2
       | Welcome back. Please sign in to continue.
-    form action="/session/login" method="post"
+    form action="/session/login" method="post" onsubmit="password_login(this.elements); return false"
       label for="email" e-mail
       input name="email" id="email"
-      label for="username" password
-      input name="password" type="password" id="password"
-      br
+      fieldset.control-group#password-group
+        label for="username" password
+        input name="password" type="password" id="password"
+        span.help-inline
       button.btn type="submit" Sign in
