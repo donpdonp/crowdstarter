@@ -4,7 +4,7 @@ module MiniAuth
     @current_user
   end
 
-  def login(id)
+  def log_in(id)
     @current_user = User.find(id)
   end
 
@@ -27,7 +27,7 @@ module MiniAuth
     id = session[:logged_in_user_id]
     if id
       begin
-        login(id)
+        log_in(id)
         logger.info("session login: ##{current_user.id} #{current_user.username.inspect}")
       rescue ActiveRecord::RecordNotFound
         logger.info("session user id of #{id} is bogus. removing")
