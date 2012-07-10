@@ -11,7 +11,7 @@ gem 'rails', '3.2.6'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'omniauth-facebook'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'boomerang', :git => "git://github.com/donpdonp/boomerang.git"
 
 # Gems used only for assets and not required
