@@ -5,10 +5,10 @@ $boxcolor_lightest: #ffffff;
 
 .threetone-box {
   background: $boxcolor_lighter;
-  padding: 0.7em;
+  padding: 10px;
   font-size: 120%;
   border-radius: 6px;
-  margin: 0.5em 1em;
+  margin: 7px 15px;
 
   .header {
     text-align: center;
@@ -37,8 +37,6 @@ $boxcolor_lightest: #ffffff;
 
 
 .project-box-inner-top-row {
-  margin-left: 0.2em;
-  margin-top: 0.2em;
   padding-bottom: 0.2em
  }
 
