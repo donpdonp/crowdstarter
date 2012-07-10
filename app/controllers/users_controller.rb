@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     if user.valid?
       # login
       session[:logged_in_user_id] = user.id
+      flash[:success] = "Your account has been created!"
       ret = {:status => "OK"}
     else
       ret = {:status => "ERR", :errors => user.errors.to_json}
