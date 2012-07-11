@@ -71,17 +71,22 @@ class Gateways::WepayController < ApplicationController
 
   def ipn
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
-    if contribution.authorized?
-      checkout = contribution.user.wepay.get('/v2/checkout/', :params => {:checkout_id => contribution.wepay_checkout_id}).parsed
-      logger.tagged("wepay response") { logger.info checkout.inspect }
+    wp_params = {:checkout_id => contribution.wepay_checkout_id}
+    logger.tagged("wepay params") { logger.info "/v2/checkout/ #{wp_params.inspect}" }
+    checkout = contribution.user.wepay.get('/v2/checkout/', :params => wp_params).parsed
+    logger.tagged("wepay response") { logger.info checkout.inspect }
+    begin
       case checkout["state"]
+      when "authorized"
+        contribution.authorize!
+        status = "OK"
       when "reserved"
         contribution.reserve!
         status = "OK"
       end
-    else
-      status = "Already processed"
-      logger.error "Contribution is in state #{contribution.workflow_state}, not authorized"
+    rescue Workflow::TransitionHalted => e
+      status = "ERR"
+      logger.error e.halted_because
     end
     render :json => {:status => status}
   end
