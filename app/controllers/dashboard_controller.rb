@@ -15,6 +15,9 @@ class DashboardController < ApplicationController
     @jobs.sort!
   end
 
+  def terms_of_service
+  end
+
   private
   def projects_tagged(tag, limit)
     Tag.find_by_name(tag).projects.where(:workflow_state => 'fundable').
