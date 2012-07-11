@@ -18,7 +18,7 @@ div class="navbar"
         span.nav-info
           | #{Project.fundables.count} projects
         span.nav-info
-          | #{number_to_currency(Contribution.where("workflow_state != ?",'incomplete').sum(:amount))} in contributions
+          | #{number_to_currency(Contribution.where(:workflow_state => ['reserved','captured']).sum(:amount))} in contributions
 
         - if logged_in?
           span class="user-detail"
