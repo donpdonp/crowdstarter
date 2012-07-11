@@ -19,10 +19,10 @@ div.project-contribute
   div
     | EverythingFunded uses
     - if @contribution.project.payment_gateway == 'wepay'
-      WePay
+      |  WePay
     - if @contribution.project.payment_gateway == 'amazon'
-      Amazon Payments
-    | to process contributions.
+      |  Amazon Payments
+    |  to process contributions.
 
   div.payments-logo
     - if @contribution.project.payment_gateway == 'wepay'
