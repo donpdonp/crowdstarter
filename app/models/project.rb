@@ -58,16 +58,18 @@ class Project < ActiveRecord::Base
   end
 
   def end_of_project_processing
-    if contributed_amount >= amount
-      activities.create(:detail => "Final processing - Funded! Collecting contributions",
-                        :code => "funded")
-      fund!
-      Notifications.delay(:queue => 'mailer').project_funded(self)
-    else
-      activities.create(:detail => "Final processing - Insufficient contributions",
-                        :code => "failed")
-      fail!
-      Notifications.delay(:queue => 'mailer').project_failed(self)
+    if fundable?
+      if contributed_amount >= amount
+        activities.create(:detail => "Final processing - Funded! Collecting contributions",
+                          :code => "funded")
+        fund!
+        Notifications.delay(:queue => 'mailer').project_funded(self)
+      else
+        activities.create(:detail => "Final processing - Insufficient contributions",
+                          :code => "failed")
+        fail!
+        Notifications.delay(:queue => 'mailer').project_failed(self)
+      end
     end
   end
 

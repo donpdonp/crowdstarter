@@ -33,7 +33,7 @@ class Contribution < ActiveRecord::Base
     state :cancelled
   end
 
-  def receive_payment(token, status)
+  def amazon_authorize(token, status)
     update_attribute :token, token
     update_attribute :status, status
     approve! if status == "SC"

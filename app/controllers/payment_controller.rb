@@ -19,7 +19,7 @@ class PaymentController < ApplicationController
         contribution = Contribution.find_by_reference(params[:callerReference])
         if contribution
           if contribution.incomplete?
-            contribution.receive_payment(params[:tokenID], params[:status])
+            contribution.amazon_authorize(params[:tokenID], params[:status])
             if contribution.authorized?
               Activity.create({:detail => "Contributed $#{contribution.amount}",
                                :code => "contributed",
