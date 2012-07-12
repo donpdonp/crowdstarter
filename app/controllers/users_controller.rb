@@ -23,7 +23,9 @@ class UsersController < ApplicationController
     begin
       @user = User.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      redirect_to :root
+      render :file => "#{Rails.root}/public/404.html",
+             :status => :not_found,
+             :layout => nil
     end
   end
 end
