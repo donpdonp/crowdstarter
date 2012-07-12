@@ -54,11 +54,14 @@ class Gateways::WepayController < ApplicationController
       case checkout["state"]
       when "authorized"
         contribution.authorize!
-        flash[:info] = "Thank you! Your contribution will finish processing shortly."
-      when "reserved"
-        contribution.authorize!
-        contribution.approve!
-        flash[:success] = "Your contribution has been recorded!"
+        flash[:success] = "Thank you! Your contribution has been recorded!"
+        Activity.create({:detail => "Contributed $#{contribution.amount}",
+                         :code => "contributed",
+                         :contribution => contribution,
+                         :user => contribution.user,
+                         :project => contribution.project})
+        Notifications.delay(:queue => 'mailer').contribution_thanks(contribution)
+        flash[:success] = "Contribution received!"
       else
         flash[:error] = "An error occured processing the contribution."
       end
