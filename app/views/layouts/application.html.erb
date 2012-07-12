@@ -14,7 +14,7 @@
     <%= render :partial => "layouts/flashbar" %>
 
     <script>
-      $(function(){$(".controller-"+<%=raw controller_name.to_json%>).addClass('active')})
+      $(navbar_highlight(<%=raw controller_name.to_json%>, <%=raw action_name.to_json%>))
     </script>
 
     <%= yield %>

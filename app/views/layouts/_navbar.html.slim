@@ -1,18 +1,12 @@
 div class="navbar"
   div class="navbar-inner"
     div class="container"
-      a class="brand" href="/"
-        | EverythingFunded.com
+      a class="brand" href="/" EverythingFunded
 
       ul class="nav"
-        li class="controller-dashboard"
-
-        li
+        li.action-projects-new.controller-projects
           a href="#{new_project_path}"
-            | Add
-        li
-          a href="#{projects_path}"
-            | Browse
+            | Add a project
 
       span.pull-right#user-nav
         span.nav-info
