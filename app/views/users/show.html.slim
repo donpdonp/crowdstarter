@@ -6,8 +6,8 @@ div class="action users-show"
 
   /! Payment Gateway
   div
-    H3 Payment Gateway
     - if @user == current_user
+      H3 Payment Gateway
       - if current_user.payment_gateway == "wepay"
         div
           - if current_user.wepay_token.blank?
