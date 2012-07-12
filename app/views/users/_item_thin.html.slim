@@ -1,5 +1,5 @@
 div class="pull-left box"
-  = image_tag(project.image.url(:thumb))
+  = link_to(image_tag(project.image.url(:thumb)), project)
 div class="pull-left box"
   = link_to(project.name, project)
 div class="pull-left box"
