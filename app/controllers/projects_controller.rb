@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
       @project = current_user.projects.build
       @project.funding_due = 1.week.from_now
     else
-      flash[:error] = "Login first"
+      flash[:error] = "Please sign in to begin creating your funding project."
       redirect_to :root
     end
   end
