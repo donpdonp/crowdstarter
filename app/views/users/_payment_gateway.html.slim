@@ -2,7 +2,7 @@
   div
     - if user.wepay_token.blank?
       | Connect to WePay
-      img src="wepay_small.png"
+      = image_tag "wepay_small.png"
       - url = WEPAY.auth_code.authorize_url({ :client_id => SETTINGS.payment_gateways.wepay.client.id,
                        :redirect_uri => payment_wepay_request_url,
                        :scope => "manage_accounts,view_balance,collect_payments,refund_payments,view_user",
