@@ -4,22 +4,19 @@ div class="action users-show"
     span style="margin-left: 1em"
       | #{@user.name}
 
-  /! Payment Gateway
-  div
-    - if @user == current_user
-      H3 Payment Gateway
-      = render :partial => "payment_gateway", :locals => {:user => current_user}
-
-    div
-      h3 Projects
-      - if @user == current_user
-        - projects = @user.projects
-      - else
-        - projects = @user.projects.fundables
-      ul
-        - projects.each do |project|
+  div.container-fluid
+    div.row-fluid
+      div.span2.sidenav
+        ul
           li
-            div.project-row
-              = render :partial => "item_thin", :locals => {:project=>project}
-              - if @user == current_user
-                = render :partial => "item_controls", :locals => {:project=>project}
+            = link_to "Profile", user_path(:tab => "profile")
+          li
+            = link_to "Projects", user_path(:tab => "projects")
+          - if @user == current_user
+            li
+              = link_to "Payment Gateway", user_path(:tab => "payment_gateway")
+
+      div.span10
+        - if params[:tab]
+          = render :partial => params[:tab], :locals => {:user => @user}
+

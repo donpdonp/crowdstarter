@@ -1,0 +1,13 @@
+div.project-list
+  h3 Projects
+  - if @user == current_user
+    - projects = @user.projects
+  - else
+    - projects = @user.projects.fundables
+  ul
+    - projects.each do |project|
+      li
+        div.project-row
+          = render :partial => "item_thin", :locals => {:project=>project}
+          - if @user == current_user
+            = render :partial => "item_controls", :locals => {:project=>project}

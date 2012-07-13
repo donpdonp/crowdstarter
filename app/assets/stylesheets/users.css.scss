@@ -6,10 +6,26 @@
   p {
     text-align: center;
   }
-  li {
+
+  .sidenav {
+    ul {
+      margin-left: 0px;
+    }
+    li {
+      margin-top: 0.5em;
+      list-style-type: none;
+      font-size: 130%;
+    }
+  }
+
+  .project-list li {
     clear: both;
     list-style-type: none;
     height: 85px
+  }
+
+  .profile-details li {
+    list-style-type: none;
   }
 
   .project-row {
