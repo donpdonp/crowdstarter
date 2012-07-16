@@ -38,11 +38,11 @@ class Project < ActiveRecord::Base
   end
 
   def contributed_amount
-    contributions.authorizeds.sum(&:amount)
+    contributions.reserveds.sum(&:amount)
   end
 
   def collected_amount
-    contributions.collecteds.sum(&:amount)
+    contributions.captureds.sum(&:amount)
   end
 
   def cancelled_amount
