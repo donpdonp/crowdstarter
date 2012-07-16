@@ -54,7 +54,11 @@ class Project < ActiveRecord::Base
   end
 
   def percent_complete
-    collected_amount / amount
+    if funded?
+      collected_amount / amount
+    else
+      contributed_amount / amount
+    end
   end
 
   def end_of_project_processing
