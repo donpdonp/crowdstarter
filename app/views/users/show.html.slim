@@ -9,11 +9,11 @@ div class="action users-show"
       div.span2.sidenav
         ul
           li
-            = link_to "Profile", user_path(:tab => "profile")
+            = link_to "Profile Details", user_path(:tab => "profile")
           li
-            = link_to "Activity", user_path(:tab => "newsfeed")
+            = link_to "Activity Log", user_path(:tab => "newsfeed")
           li
-            = link_to "Projects", user_path(:tab => "projects")
+            = link_to "My Projects", user_path(:tab => "projects")
           - if @user == current_user
             li
               = link_to "Payment Gateway", user_path(:tab => "payment_gateway")
