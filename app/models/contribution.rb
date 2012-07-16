@@ -39,14 +39,12 @@ class Contribution < ActiveRecord::Base
     approve! if status == "SC"
   end
 
-  def capture
-    wepay_capture
-  end
-
   def wepay_capture
+    wp_params = {:checkout_id => wepay_checkout_id}
+    logger.tagged("wepay params") { logger.info "/v2/checkout/capture #{wp_params.inspect}" }
     payment = user.wepay.get("/v2/checkout/capture",
-                             :params => {:checkout_id => wepay_checkout_id}).parsed
-    logger.info payment.inspect
+                             :params => wp_params).parsed
+    logger.tagged("wepay response") { logger.info payment.inspect }
     if payment["state"] != "captured"
       logger.error "Payment capture failed!"
       halt

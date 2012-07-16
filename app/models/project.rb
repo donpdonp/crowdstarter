@@ -75,7 +75,7 @@ class Project < ActiveRecord::Base
 
   def fund
     contributions.reserveds.each do |contrib|
-      response = contrib.capture!
+      response = contrib.wepay_capture
       logger.info response.inspect
       if contrib.captured?
         activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",

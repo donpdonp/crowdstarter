@@ -86,6 +86,9 @@ class Gateways::WepayController < ApplicationController
       when "reserved"
         contribution.reserve!
         status = "OK"
+      when "captured"
+        contribution.capture!
+        status = "OK"
       end
     rescue Workflow::TransitionHalted => e
       status = "ERR"
