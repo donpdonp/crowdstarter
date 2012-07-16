@@ -21,7 +21,7 @@ class Contribution < ActiveRecord::Base
       event :cancel, :transitions_to => :cancelled
     end
     state :reserved do
-      event :capturez, :transitions_to => :captured
+      event :capture, :transitions_to => :captured
       event :cancel, :transitions_to => :cancelled
     end
     state :captured do
@@ -37,6 +37,9 @@ class Contribution < ActiveRecord::Base
     update_attribute :token, token
     update_attribute :status, status
     approve! if status == "SC"
+  end
+
+  def capture
   end
 
   def wepay_capture
