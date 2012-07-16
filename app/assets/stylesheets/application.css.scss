@@ -12,7 +12,13 @@
  *= require_tree .
 */
 
-body { min-width: 934px }
+body {
+  min-width: 934px;
+}
+
+.container-fluid {
+  font-size: 15px;
+}
 
 html a {
   color: black;
