@@ -1,2 +1,12 @@
 H3 Edit
 
+= form_for(@user) do |f|
+  fieldset
+  label Name
+  = f.text_field :name
+
+  label Username
+  = f.text_field :username
+
+  br
+  = f.submit :class => "btn"
