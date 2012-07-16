@@ -11,3 +11,9 @@ ul.profile-details
     | Username: #{user.username}
   li
     | Member since: #{user.created_at.strftime("%Y-%m-%d")}
+
+p style="text-align: left"
+  | Share your gallery of projects with the following URL
+p style="text-align: left; font-size: 120%"
+  a href="/#{user.username || user.id}"
+    | http://everythingfunded.com/#{user.username || user.id}
