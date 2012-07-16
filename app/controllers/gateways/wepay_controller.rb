@@ -74,10 +74,7 @@ class Gateways::WepayController < ApplicationController
 
   def ipn
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
-    wp_params = {:checkout_id => contribution.wepay_checkout_id}
-    logger.tagged("wepay params") { logger.info "/v2/checkout/ #{wp_params.inspect}" }
-    checkout = contribution.user.wepay.get('/v2/checkout/', :params => wp_params).parsed
-    logger.tagged("wepay response") { logger.info checkout.inspect }
+    checkout = contribution.wepay_status
     begin
       case checkout["state"]
       when "authorized"

@@ -73,8 +73,12 @@ class Contribution < ActiveRecord::Base
   end
 
   def wepay_status
-    user.wepay.get("/v2/checkout",
-                   :params => {:checkout_id => wepay_checkout_id}).parsed
+    wp_params = {:checkout_id => wepay_checkout_id}
+    logger.info "/v2/checkout/ #{wp_params.inspect}"
+    response = project.user.wepay.get("/v2/checkout",
+                   :params => wp_params).parsed
+    logger.info response.inspect
+    response
   end
 
   def wepay_cancel
