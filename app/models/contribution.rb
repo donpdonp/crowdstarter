@@ -21,7 +21,7 @@ class Contribution < ActiveRecord::Base
       event :cancel, :transitions_to => :cancelled
     end
     state :reserved do
-      event :capture, :transitions_to => :captured
+      event :capturez, :transitions_to => :captured
       event :cancel, :transitions_to => :cancelled
     end
     state :captured do
