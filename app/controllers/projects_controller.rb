@@ -9,10 +9,11 @@ class ProjectsController < ApplicationController
       # username search
       @user = User.find(params[:user])
       if @user
-        @projects = Project.where(:user_id => @user.id)
+        @projects = @user.projects.fundables
       else
-        flash[:error] = "No user #{params[:user]}"
-        redirect_to root_path
+        render :file => "#{Rails.root}/public/404.html",
+               :status => :not_found,
+               :layout => nil
       end
     else
       @projects = Project.fundables.limit(10).order(:funding_due)

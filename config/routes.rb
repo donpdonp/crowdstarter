@@ -42,5 +42,5 @@ Crowdstarter::Application.routes.draw do
   root :to => 'dashboard#landing'
 
   # /username
-  get ":id" => "users#show"
+  get ":user" => "projects#index"
 end

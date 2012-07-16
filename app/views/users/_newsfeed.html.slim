@@ -1,0 +1,9 @@
+H3 Activity
+
+- user.activities.each do |activity|
+  div.row-fluid
+    div.span4
+      | #{activity.created_at.strftime("%Y-%m-%d")} #{activity.detail}
+    - if activity.project
+      div.span4
+        |  for project "#{activity.project.name}"

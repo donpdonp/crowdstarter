@@ -20,12 +20,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    begin
-      @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render :file => "#{Rails.root}/public/404.html",
-             :status => :not_found,
-             :layout => nil
-    end
+    @user = User.find(params[:id])
   end
 end

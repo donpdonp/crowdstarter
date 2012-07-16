@@ -1,8 +1,8 @@
 div class="action users-show"
   h2
-    = image_tag @user.image_url, :alt => "Profile Photo"
+    = link_to(image_tag(@user.image_url, :alt => "Profile Photo"), @user)
     span style="margin-left: 1em"
-      | #{@user.name}
+      = link_to @user.name, @user
 
   div.container-fluid
     div.row-fluid
@@ -11,12 +11,14 @@ div class="action users-show"
           li
             = link_to "Profile", user_path(:tab => "profile")
           li
+            = link_to "Activity", user_path(:tab => "newsfeed")
+          li
             = link_to "Projects", user_path(:tab => "projects")
           - if @user == current_user
             li
               = link_to "Payment Gateway", user_path(:tab => "payment_gateway")
 
       div.span10
-        - if params[:tab]
-          = render :partial => params[:tab], :locals => {:user => @user}
+        - partial = params[:tab] || "newsfeed"
+        = render :partial => partial, :locals => {:user => @user}
 

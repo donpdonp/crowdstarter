@@ -3,6 +3,10 @@ $boxcolor_lighter: #999999;
 $boxcolor_light: #eeeeee;
 $boxcolor_lightest: #ffffff;
 
+.project-box {
+  font-size: 13px;
+}
+
 .threetone-box {
   background: $boxcolor_lighter;
   padding: 10px;
