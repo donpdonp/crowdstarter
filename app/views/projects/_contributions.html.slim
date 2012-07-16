@@ -1,14 +1,13 @@
 - contribs =  @project.contributions
-- if contribs.size > 0
-  div.contributors
-    div.threetone-box
-      div.header
-        | Contributors
-      div.body
+div.contributors
+  div.threetone-box
+    div.header
+      | Contributors
+    div.body
+      - if contribs.size > 0
         table
           - contribs.each do |c|
             - unless c.new?
               = render :partial => "projects/contribution_row", :locals => {:contribution => c}
-- else
-  - unless @project.editable?
-    | Be the first to contribute to this project.
+      - else
+        | Be the first to contribute to this project.
