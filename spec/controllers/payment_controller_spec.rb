@@ -16,7 +16,7 @@ describe PaymentController do
     user = mock_model(User)
     contribution = mock_model(Contribution, {:project => project,
                                              :user => user})
-    contribution.should_receive(:receive_payment)
+    contribution.should_receive(:amazon_authorize)
     contribution.should_receive(:incomplete?).and_return(true)
     contribution.should_receive(:authorized?).and_return(true)
     Contribution.should_receive(:find_by_reference).with(params["callerReference"]).and_return(contribution)

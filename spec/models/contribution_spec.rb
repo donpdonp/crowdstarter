@@ -5,7 +5,7 @@ describe Contribution do
    subject.should_receive(:update_attribute).with(:token, "token")
    subject.should_receive(:update_attribute).with(:status, "SC")
    subject.should_receive(:approve!)
-   subject.receive_payment("token","SC")
+   subject.amazon_authorize("token","SC")
   end
 
 end

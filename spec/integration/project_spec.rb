@@ -22,6 +22,9 @@ PCustomer = Hashie::Mash.new({
       :credentials => { :token => "abc124" }
     })
 
+PProject = Hashie::Mash.new({
+})
+
 describe "Project management", :type => :request do
   it "Creates a new project using the big Add button" do
     # Manager creates project
@@ -87,13 +90,15 @@ describe "Project management", :type => :request do
     #reference = find(:xpath, "//input[@name='contribution_id']")["value"]
     user_wepay = mock("user wepay")
     OAuth2::AccessToken.should_receive(:from_hash).and_return(user_wepay)
-    user_wepay.should_receive(:get).with('/v2/checkout/create')
+    resp = mock("wepay checkout", :parsed => {"checkout_id" => 1,
+                                              "checkout_uri" => "uri"})
+    user_wepay.should_receive(:get).and_return(resp)
     click_on "Continue to WePay Checkout"
 
     #Amazon callback
     #visit "/payment/receive?callerReference=#{reference}&tokenID=abczzz&status=SC"
 
-    
+
     #WePay callback
     visit "/gateways/wepay/finish?checkout_id=123456"
 
