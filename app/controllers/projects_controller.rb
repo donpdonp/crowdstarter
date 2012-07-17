@@ -57,7 +57,17 @@ class ProjectsController < ApplicationController
         else
           flash[:info] = "Project #{params[:id]} is not finished"
           redirect_to root_path
+          return
         end
+      end
+      respond_to do |format|
+        format.html
+        format.json { render :json => {:name => @project.name,
+                                       :amount => @project.amount,
+                                       :contributed => @project.contributed_amount,
+                                       :state => @project.workflow_state,
+                                       :collected => @project.collected_amount,
+                                       :funding_due => @project.funding_due} }
       end
     rescue ActiveRecord::RecordNotFound
       flash[:error] = "Project #{params[:id]} not found"
