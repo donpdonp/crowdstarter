@@ -48,10 +48,6 @@ class Contribution < ActiveRecord::Base
     payment = user.wepay.get("/v2/checkout/capture",
                              :params => wp_params).parsed
     logger.tagged("wepay response") { logger.info payment.inspect }
-    if payment["state"] != "captured"
-      logger.error "Payment capture failed!"
-      halt
-    end
   end
 
   def amazon_capture
