@@ -4,7 +4,7 @@ Good news!
 
 The project "<%= @project.name %>" has been successfull funded!
 
-Your contribution of <%= number_to_currency(@contribution.amount) %> has been charged via Amazon Payments to your credit card. Thank you for your support!
+Your contribution of <%= number_to_currency(@contribution.amount) %> has been charged to your credit card. Thank you for your support!
 
 Project link: <%= project_url(@project,
                               :host => SETTINGS["mailer"]["host"]) %>
