@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   validates :email, :uniqueness => true
   validates :username, :uniqueness => {:allow_nil => true}
-  validates :facebook_uid, :uniqueness => true
+  validates :facebook_uid, :uniqueness => {:allow_nil => true}
 
   def self.find_or_create_from_auth_hash(hash)
     user = find_by_facebook_uid(hash.uid)
