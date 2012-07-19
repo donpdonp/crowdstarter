@@ -28,10 +28,11 @@
           <div class="pull-right hangboard contributor-count">
             <div class="title">Funders: </div>
             <div class="count">
-                <% if project.funded? %>
+                <% if project.fundable? %>
                   <%= project.contributions.authorizeds.count +
                       project.contributions.reserveds.count  %>
-                <% else %>
+                <% end %>
+                <% if project.funded? %>
                   <%= project.contributions.captureds.count %>
                 <% end %>
             </div>
