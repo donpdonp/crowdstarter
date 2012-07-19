@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_image_url
+    image_url || "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
+  end
+
   def wepay_token_hash
     JSON.parse(wepay_token)
   end
