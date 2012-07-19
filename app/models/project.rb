@@ -79,18 +79,9 @@ class Project < ActiveRecord::Base
 
   def fund
     contributions.reserveds.each do |contrib|
+      # Kick off the capture and wait for the IPN
+      # contrib.wepay_refresh
       response = contrib.wepay_capture
-      logger.info response.inspect
-      if contrib.captured?
-        activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",
-                          :code => "capture",
-                          :contribution => contrib)
-        Notifications.delay(:queue => 'mailer').contribution_collected(contrib)
-      else
-        activities.create(:detail => "Collection failed for #{contrib.user.email} $#{contrib.amount}",
-                          :code => "capture-fail",
-                          :contribution => contrib)
-      end
     end
   end
 
