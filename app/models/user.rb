@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
 
   def profile_image_url
-    image_url || "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
+    image_url || "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=50"
   end
 
   def wepay_token_hash
