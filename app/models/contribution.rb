@@ -44,10 +44,10 @@ class Contribution < ActiveRecord::Base
 
   def wepay_capture
     wp_params = {:checkout_id => wepay_checkout_id}
-    logger.tagged("wepay params") { logger.info "/v2/checkout/capture #{wp_params.inspect}" }
+    logger.info "/v2/checkout/capture #{wp_params.inspect}"
     payment = user.wepay.get("/v2/checkout/capture",
                              :params => wp_params).parsed
-    logger.tagged("wepay response") { logger.info payment.inspect }
+    logger.info payment.inspect
   end
 
   def amazon_capture
