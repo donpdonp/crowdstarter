@@ -54,7 +54,7 @@ class Gateways::WepayController < ApplicationController
       logger.tagged("wepay response") { logger.info checkout.inspect }
       case checkout["state"]
       when "authorized"
-        contribution.authorize!
+        contribution.authorize! if contribution.new?
         flash[:success] = "Thank you! Your contribution has been recorded!"
         Activity.create({:detail => "Contributed $#{contribution.amount}",
                          :code => "contributed",
