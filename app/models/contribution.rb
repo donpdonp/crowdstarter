@@ -45,7 +45,7 @@ class Contribution < ActiveRecord::Base
   def wepay_capture
     wp_params = {:checkout_id => wepay_checkout_id}
     logger.info "/v2/checkout/capture #{wp_params.inspect}"
-    payment = user.wepay.get("/v2/checkout/capture",
+    payment = project.user.wepay.get("/v2/checkout/capture",
                              :params => wp_params).parsed
     logger.info payment.inspect
   end
@@ -79,7 +79,7 @@ class Contribution < ActiveRecord::Base
 
   def wepay_cancel
     begin
-      payment = user.wepay.get("/v2/checkout/cancel",
+      payment = project.user.wepay.get("/v2/checkout/cancel",
                                :params => {:checkout_id => wepay_checkout_id,
                                            :cancel_reason => "Cancelled by customer request"}).parsed
       logger.info payment.inspect
