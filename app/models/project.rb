@@ -63,7 +63,7 @@ class Project < ActiveRecord::Base
 
   def end_of_project_processing
     if fundable?
-      if contributed_amount >= amount
+      if contributed_amount + collected_amount >= amount
         activities.create(:detail => "Final processing - Funded! Collecting contributions",
                           :code => "funded")
         fund!
