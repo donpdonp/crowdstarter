@@ -86,10 +86,11 @@ class Gateways::WepayController < ApplicationController
         status = "OK"
       when "captured"
         contribution.capture!
-        contribution.project.activities.create(:detail => "Collected #{contrib.user.email} $#{contrib.amount}",
+        contribution.project.activities.create(
+                  :detail => "Collected #{contribution.user.email} $#{contribution.amount}",
                   :code => "capture",
-                  :contribution => contrib)
-        Notifications.delay(:queue => 'mailer').contribution_collected(contrib)
+                  :contribution => contribution)
+        Notifications.delay(:queue => 'mailer').contribution_collected(contribution)
 
         status = "OK"
       end
