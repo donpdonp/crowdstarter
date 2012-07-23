@@ -59,30 +59,45 @@ class Gateways::WepayController < ApplicationController
   end
 
   def ipn
+    log = GatewayLog.create(:called_at => Time.now,
+                           :verb => "IPN",
+                           :url => request.url,
+                           :params => params.to_json)
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
-    checkout = contribution.wepay_status
-    begin
-      case checkout["state"]
-      when "authorized"
-        contribution.authorize!
-        status = "OK"
-      when "reserved"
-        contribution.reserve!
-        status = "OK"
-      when "captured"
-        contribution.capture!
-        contribution.project.activities.create(
-                  :detail => "Collected #{contribution.user.email} $#{contribution.amount}",
-                  :code => "capture",
-                  :contribution => contribution)
-        Notifications.delay(:queue => 'mailer').contribution_collected(contribution)
+    if contribution
+      log.project = contribution.project
+      log.contribution = contribution
 
-        status = "OK"
+      checkout = contribution.wepay_status
+
+      begin
+        case checkout["state"]
+        when "authorized"
+          contribution.authorize!
+          status = "OK"
+        when "reserved"
+          contribution.reserve!
+          status = "OK"
+        when "captured"
+          contribution.capture!
+          contribution.project.activities.create(
+                    :detail => "Collected #{contribution.user.email} $#{contribution.amount}",
+                    :code => "capture",
+                    :contribution => contribution)
+          Notifications.delay(:queue => 'mailer').contribution_collected(contribution)
+
+          status = "OK"
+        end
+      rescue Workflow::TransitionHalted => e
+        status = "ERR"
+        logger.error e.halted_because
       end
-    rescue Workflow::TransitionHalted => e
-      status = "ERR"
-      logger.error e.halted_because
+    else
+      status = "NOTFOUND"
     end
-    render :json => {:status => status}
+    response = {:status => status}
+    log.response = response.to_json
+    log.save
+    render :json => response
   end
 end
