@@ -31,10 +31,6 @@ class User < ActiveRecord::Base
     JSON.parse(wepay_token)
   end
 
-  def wepay
-    OAuth2::AccessToken.from_hash(WEPAY, wepay_token_hash)
-  end
-
   def payment_gateway
     attributes['payment_gateway'] || SETTINGS.default_payment_gateway
   end

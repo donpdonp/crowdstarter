@@ -106,7 +106,8 @@ class ProjectsController < ApplicationController
     @contribution = project.contributions.create(
                            :user_id => current_user.id,
                            :amount => params[:amount],
-                           :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}")
+                           :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
+                           :gateway => Gateway.find_by_provider(project.payment_gateway))
     if @contribution.valid?
       reward = project.closest_reward(@contribution.amount)
       if reward

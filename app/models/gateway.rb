@@ -1,4 +1,5 @@
 class Gateway < ActiveRecord::Base
+  validates :provider, :uniqueness => true
 
   after_find :gateway_setup
 
