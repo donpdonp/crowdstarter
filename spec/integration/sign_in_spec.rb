@@ -17,9 +17,9 @@ describe "Sign in", :type => :request do
     visit '/'
     within("#user-nav") do
       fill_in 'email', :with => PUser.info.email
+      # this is ajaxy now. how to test?
       #click_button "Sign in"
     end
-    # this is ajaxy now
     #page.should have_content('user@test.site')
   end
 end

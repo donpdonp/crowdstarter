@@ -8,7 +8,9 @@ class Contribution < ActiveRecord::Base
   belongs_to :gateway
 
   has_many :gateway_logs
+
   validates :amount, :numericality => true
+  validates :project_id, :gateway_id, :presence => true
 
   scope :authorizeds, where(:workflow_state => :authorized)
   scope :reserveds, where(:workflow_state => :reserved)
@@ -36,6 +38,7 @@ class Contribution < ActiveRecord::Base
     state :cancelled
   end
 
+  # override ?
   def capture
   end
 
