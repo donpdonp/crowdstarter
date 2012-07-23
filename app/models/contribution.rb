@@ -7,6 +7,7 @@ class Contribution < ActiveRecord::Base
   belongs_to :reward
   belongs_to :gateway
 
+  has_many :gateway_logs
   validates :amount, :numericality => true
 
   scope :authorizeds, where(:workflow_state => :authorized)

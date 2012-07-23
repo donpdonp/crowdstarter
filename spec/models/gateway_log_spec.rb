@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Gateway::Wepay do
+describe GatewayLog do
   pending "add some examples to (or delete) #{__FILE__}"
 end
