@@ -4,6 +4,7 @@ class Contribution < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
   belongs_to :reward
+  belongs_to :gateway
 
   validates :amount, :numericality => true
 
