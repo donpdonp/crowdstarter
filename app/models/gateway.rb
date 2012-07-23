@@ -20,7 +20,8 @@ class Gateway < ActiveRecord::Base
                                   :token_url => "/v2/oauth2/token",
                                   :connection_opts => {
                                     :ssl => {:verify=> !Rails.env.development?}
-                                    }})
+                                    },
+                                  :raise_errors => false})
   end
 
 end
