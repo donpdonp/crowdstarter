@@ -2,7 +2,8 @@ module Wepay
   def wepay_api
     Oauth2Logger.new(OAuth2::AccessToken.from_hash(
                                        gateway.client,
-                                       project.user.wepay_token_hash))
+                                       project.user.wepay_token_hash),
+                     self)
   end
 
   def wepay_status

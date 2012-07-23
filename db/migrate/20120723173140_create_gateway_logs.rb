@@ -5,10 +5,10 @@ class CreateGatewayLogs < ActiveRecord::Migration
       t.integer :project_id
       t.datetime :called_at
       t.string :verb
-      t.string :url
-      t.string :params
+      t.text :url
+      t.text :params
       t.datetime :responded_at
-      t.string :response
+      t.text :response
     end
   end
 end
