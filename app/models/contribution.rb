@@ -1,5 +1,6 @@
 class Contribution < ActiveRecord::Base
   include Workflow
+  include Wepay
 
   belongs_to :project
   belongs_to :user
@@ -67,15 +68,6 @@ class Contribution < ActiveRecord::Base
 
   def cancel
     wepay_cancel
-  end
-
-  def wepay_status
-    wp_params = {:checkout_id => wepay_checkout_id}
-    logger.info "/v2/checkout/ #{wp_params.inspect}"
-    response = project.user.wepay.get("/v2/checkout",
-                   :params => wp_params).parsed
-    logger.info response.inspect
-    response
   end
 
   def wepay_cancel
