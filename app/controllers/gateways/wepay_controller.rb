@@ -31,12 +31,9 @@ class Gateways::WepayController < ApplicationController
   def finish
     contribution = current_user.contributions.find_by_wepay_checkout_id(params[:checkout_id])
     if contribution
-      project_owner = contribution.project.user
-      checkout = project_owner.wepay.get('/v2/checkout/',
-                                        :params => {
-                                          :checkout_id =>
-                                            contribution.wepay_checkout_id}).parsed
-      logger.tagged("wepay response") { logger.info checkout.inspect }
+
+      checkout = contribution.wepay_status
+
       case checkout["state"]
       when "authorized"
         contribution.authorize! if contribution.new?
@@ -73,8 +70,12 @@ class Gateways::WepayController < ApplicationController
       begin
         case checkout["state"]
         when "authorized"
-          contribution.authorize!
-          status = "OK"
+          if contribution.new?
+            contribution.authorize!
+            status = "OK"
+          else
+            status = "NOACTION"
+          end
         when "reserved"
           contribution.reserve!
           status = "OK"
