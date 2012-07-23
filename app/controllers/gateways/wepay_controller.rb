@@ -18,8 +18,7 @@ class Gateways::WepayController < ApplicationController
       else
         wp_params = {:checkout_id => contribution.wepay_checkout_id }
         logger.tagged("wepay params") { logger.info wp_params.inspect }
-        checkout = project_owner.wepay.get('/v2/checkout',
-                                           :params => wp_params).parsed
+        checkout = contribution.wepay_status
         logger.tagged("wepay response") { logger.info checkout.inspect }
         if checkout["state"] == "new"
           redirect_to checkout["checkout_uri"]
