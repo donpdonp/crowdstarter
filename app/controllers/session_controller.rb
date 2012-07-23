@@ -33,6 +33,10 @@ class SessionController < ApplicationController
       uson.merge!({:status => "EXISTS"})
       if user.facebook_uid
         uson.merge!({:service => "facebook"})
+        if !request.xhr?
+          redirect_to "/auth/facebook"
+          return
+        end
       end
     else
       uson.merge!({:status => "MISSING"})

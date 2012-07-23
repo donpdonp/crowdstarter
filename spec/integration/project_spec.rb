@@ -30,11 +30,12 @@ describe "Project management", :type => :request do
     # Manager creates project
     OmniAuth.config.mock_auth[:facebook] = PManager
     visit '/'
-    click_on "facebook-login"
-    page.should have_content("manager@test.site")
+    fill_in 'email', :with => PManager.info.email
+    click_button "Sign in"
 
-    # Setup Amazon multiuse token
-    visit "/payment/tokenize?tokenID=abc123"
+    # Check that we're logged in
+    page.should have_content(PManager.info.email)
+
     # Setup Wepay token
     wpauth = mock("Wepay auth", {:get_token => mock("Wepay token",
                                                     {:params => {},

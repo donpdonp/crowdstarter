@@ -20,6 +20,6 @@ div class="navbar"
           span class="user-detail"
             = link_to "logout", session_path, :method => :delete
         - else
-          form id="login" onsubmit="email_login(this.elements); return false"
+          form id="login" onsubmit="email_login(this.elements); return false" action="/session/lookup"
             input placeholder="e-mail address" name="email"
             button class="btn" Sign in
