@@ -15,7 +15,11 @@ class Oauth2Logger
                             :verb => name,
                             :url => args.first,
                             :params => args.last[:params].to_json)
-    response = @access_token.send(name, *args)
+    begin
+      response = @access_token.send(name, *args)
+    rescue OAuth2::Error => e
+      response = e.response
+    end
     response_params = response.parsed
     log.response = response_params.to_json
     log.responded_at = Time.now

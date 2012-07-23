@@ -28,8 +28,7 @@ module Wepay
 
   def wepay_capture
     wp_params = {:checkout_id => wepay_checkout_id}
-    wepay_api.get("/v2/checkout/capture",
-                             :params => wp_params).parsed
+    wepay_api.get("/v2/checkout/capture", :params => wp_params)
   end
 
   def wepay_cancel
