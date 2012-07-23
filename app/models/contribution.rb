@@ -45,14 +45,6 @@ class Contribution < ActiveRecord::Base
   def capture
   end
 
-  def wepay_capture
-    wp_params = {:checkout_id => wepay_checkout_id}
-    logger.info "/v2/checkout/capture #{wp_params.inspect}"
-    payment = project.user.wepay.get("/v2/checkout/capture",
-                             :params => wp_params).parsed
-    logger.info payment.inspect
-  end
-
   def amazon_capture
     payment = FPS.pay( caller_reference:      "proj:#{project.id}-ctrb:#{id}-#{rand(100)}",
                      marketplace_variable_fee: SETTINGS.payment_gateways.amazon.fee_percentage.to_s,
@@ -69,21 +61,6 @@ class Contribution < ActiveRecord::Base
 
   def cancel
     wepay_cancel
-  end
-
-  def wepay_cancel
-    begin
-      payment = project.user.wepay.get("/v2/checkout/cancel",
-                               :params => {:checkout_id => wepay_checkout_id,
-                                           :cancel_reason => "Cancelled by customer request"}).parsed
-      logger.info payment.inspect
-      if payment["state"] != "cancelled"
-        logger.error "Payment cancellation failed!"
-        halt
-      end
-    rescue OAuth2::Error => e
-      logger.error e
-    end
   end
 
   def amazon_cancel
