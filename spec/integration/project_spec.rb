@@ -30,8 +30,9 @@ def project_manager_setup
   OmniAuth.config.mock_auth[:facebook] = PManager
   User.create(:email=>PManager.info.email,
               :facebook_uid => PManager.uid,
-              :wepay_token => '{"user_id":1166,"token_type":"BEARER","access_token":"token123","refresh_token":null,"expires_at":null}")'
+              :wepay_token => '{"user_id":1166,"token_type":"BEARER","access_token":"token123","refresh_token":null,"expires_at":null}'
              )
+  Gateway.create(:provider => 'wepay')
 end
 
 describe "Project manager", :type => :request do
@@ -84,7 +85,7 @@ describe "Project manager", :type => :request do
     #reference = find(:xpath, "//input[@name='contribution_id']")["value"]
     user_wepay = mock("user wepay")
     OAuth2::AccessToken.should_receive(:from_hash).and_return(user_wepay)
-    resp = mock("wepay checkout", :parsed => {"checkout_id" => 1,
+    resp = mock("wepay checkout", :parsed => {"checkout_id" => 123456,
                                               "checkout_uri" => "uri"})
     user_wepay.should_receive(:get).and_return(resp)
     click_on "Continue to WePay Checkout"

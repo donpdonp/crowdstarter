@@ -18,17 +18,17 @@ div.project-contribute
 
   div
     | EverythingFunded uses
-    - if @contribution.project.payment_gateway == 'wepay'
+    - if @contribution.project.gateway.provider == 'wepay'
       |  WePay
-    - if @contribution.project.payment_gateway == 'amazon'
+    - if @contribution.project.gateway.provider == 'amazon'
       |  Amazon Payments
     |  to process contributions.
 
   div.payments-logo
-    - if @contribution.project.payment_gateway == 'wepay'
+    - if @contribution.project.gateway.provider == 'wepay'
       = image_tag "wepay_small.png"
-    - if @contribution.project.payment_gateway == 'amazon'
+    - if @contribution.project.gateway.provider == 'amazon'
       = image_tag "amazon-payments.gif"
 
-  = render :partial => "checkout_#{@contribution.project.payment_gateway}"
+  = render :partial => "checkout_#{@contribution.project.gateway.provider}"
 

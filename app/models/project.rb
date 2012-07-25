@@ -3,15 +3,17 @@ class Project < ActiveRecord::Base
   include Workflow
 
   belongs_to :user
+  belongs_to :gateway
   has_many :contributions
   has_many :tags, :through => :taggings
   has_many :taggings
   has_many :activities
   has_many :rewards
   has_many :gateway_logs
+
   friendly_id :name, :use => :slugged
 
-  validates_presence_of :name, :funding_due, :amount, :user_id, :payment_gateway
+  validates :name, :funding_due, :amount, :user_id, :gateway_id, :presence => true
 
   has_attached_file :image, :styles => {:thumb => "133x75>",
                                         :medium => "533x300>"},

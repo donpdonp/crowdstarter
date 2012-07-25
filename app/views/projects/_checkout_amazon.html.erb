@@ -1,11 +1,9 @@
-<% if @contribution.project.payment_gateway == 'amazon' %>
-  <%= raw FPS.cbui_form( :multi_use,
-                return_url:         payment_receive_url,
-                caller_reference:   @contribution.reference,
-                global_amount_limit:   @contribution.amount,
-                recipient_token_list: [SETTINGS.payment_gateways.amazon.recipient_token,
-                                        @contribution.project.user.aws_token],
-                payment_method: "CC",
-                payment_reason: "Contribution to Project ##{@contribution.project.id}",
-                submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>
-<% end %>
+<%= raw FPS.cbui_form( :multi_use,
+              return_url:         payment_receive_url,
+              caller_reference:   @contribution.reference,
+              global_amount_limit:   @contribution.amount,
+              recipient_token_list: [SETTINGS.payment_gateways.amazon.recipient_token,
+                                      @contribution.project.user.aws_token],
+              payment_method: "CC",
+              payment_reason: "Contribution to Project ##{@contribution.project.id}",
+              submit_tag: "<button type='submit' class='btn'>Continue to Amazon Payments</button>" )%>

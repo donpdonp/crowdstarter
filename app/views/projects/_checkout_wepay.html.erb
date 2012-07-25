@@ -1,6 +1,4 @@
-<% if @contribution.project.payment_gateway == 'wepay' %>
-  <%= form_tag gateways_wepay_checkout_path do %>
-    <input type="hidden" name="contribution_id" value="<%=@contribution.id%>"/>
-    <button>Continue to WePay Checkout</button>
-  <% end %>
+<%= form_tag gateways_wepay_checkout_path do %>
+  <input type="hidden" name="contribution_id" value="<%=@contribution.id%>"/>
+  <button>Continue to WePay Checkout</button>
 <% end %>

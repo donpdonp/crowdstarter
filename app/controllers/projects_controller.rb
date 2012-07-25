@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   def create
     if logged_in?
       params[:project][:funding_due] += " #{params[:timezone]}"
-      params[:project][:payment_gateway] = SETTINGS.default_payment_gateway
+      params[:project][:gateway_id] = Gateway.find_by_provider(SETTINGS.default_payment_gateway).id
       project = current_user.projects.create(params[:project])
       if project.valid?
         project.activities.create({:detail => "Created project",
@@ -107,7 +107,7 @@ class ProjectsController < ApplicationController
                            :user_id => current_user.id,
                            :amount => params[:amount],
                            :reference => "proj:#{project.id}-fbid:#{current_user.facebook_uid}-time:#{Time.now.to_i}",
-                           :gateway => Gateway.find_by_provider(project.payment_gateway))
+                           :gateway_id => project.gateway_id)
     if @contribution.valid?
       reward = project.closest_reward(@contribution.amount)
       if reward
