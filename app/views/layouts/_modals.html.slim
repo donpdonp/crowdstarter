@@ -10,12 +10,12 @@ div class="modal hide efmodal" id="modal-signup"
         label for="username" username
         input name="username" id="username"
         fieldset.control-group#password-group
-          label for="username" password
+          label for="password" password
           input name="password" type="password" id="password"
           span.help-inline#password-help
         button.btn type="submit" Sign up
     div.pull-left style="margin-left: 2em"
-      h2 Sign in with Facebook.
+      h2 Sign up with Facebook.
       a class="login" href="/auth/facebook?state=#{URI.encode(request.url)}" id="facebook-login"
         = image_tag "signin_facebook.png"
 

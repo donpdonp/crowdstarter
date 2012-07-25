@@ -11,22 +11,21 @@ PUser = Hashie::Mash.new({
       :credentials => { :token => "abc123" }
     })
 
-def signin_setup
-  OmniAuth.config.mock_auth[:facebook] = PUser
-  User.create(:email=>PUser.info.email,
-            :facebook_uid => PUser.uid,
-           )
+def signup_setup
 end
 
-describe "Sign in", :type => :request do
-  it "signs in with facebook" do
-    signin_setup
-    visit '/'
-    within("#user-nav") do
-      fill_in 'email', :with => PUser.info.email
-      click_button "Sign in"
-    end
+describe "Sign up", :type => :request do
+  it "with facebook" do
+    signup_setup
 
+    visit '/'
+    within("#modal-signup") do
+      fill_in 'email', :with => PUser.info.email
+      fill_in 'username', :with => "testuser"
+      fill_in 'password', :with => "abc123"
+      click_button "Sign up"
+    end
+puts page.body
     within('.user-detail') do
       page.should have_content('user@test.site')
     end
