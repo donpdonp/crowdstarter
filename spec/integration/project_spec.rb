@@ -95,6 +95,11 @@ describe "Project manager", :type => :request do
 
 
     #WePay callback
+    wepay_status = mock("wepay status")
+    OAuth2::AccessToken.should_receive(:from_hash).and_return(wepay_status)
+    resp = mock("wepay status result", :parsed => {"checkout_id" => 123456,
+                                                   "state" => "authorized"})
+    wepay_status.should_receive(:get).and_return(resp)
     visit "/gateways/wepay/finish?checkout_id=123456"
 
     within(".contributors") do
