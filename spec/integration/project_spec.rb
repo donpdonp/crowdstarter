@@ -25,34 +25,27 @@ PCustomer = Hashie::Mash.new({
 PProject = Hashie::Mash.new({
 })
 
-describe "Project management", :type => :request do
-  it "Creates a new project using the big Add button" do
-    # Manager creates project
-    OmniAuth.config.mock_auth[:facebook] = PManager
+def project_manager_setup
+  # Mock the facebook response
+  OmniAuth.config.mock_auth[:facebook] = PManager
+  User.create(:email=>PManager.info.email,
+              :facebook_uid => PManager.uid,
+              :wepay_token => '{"user_id":1166,"token_type":"BEARER","access_token":"token123","refresh_token":null,"expires_at":null}")'
+             )
+end
+
+describe "Project manager", :type => :request do
+  it "creates a new project using the big Add button" do
+    project_manager_setup
+
+    # Sign in
     visit '/'
     fill_in 'email', :with => PManager.info.email
-    click_button "Sign in"
+    click_on "Sign in"
 
     # Check that we're logged in
     page.should have_content(PManager.info.email)
 
-    # Setup Wepay token
-    wpauth = mock("Wepay auth", {:get_token => mock("Wepay token",
-                                                    {:params => {},
-                                                     :token => '1234',
-                                                     :refresh_token => 'abc',
-                                                     :expires_at => 'ab'})})
-    WEPAY.should_receive(:auth_code).and_return(wpauth)
-    manager_wepay = mock("manager wepay")
-    manager_wepay.should_receive(:get).with('/v2/account/find',
-                                         {:params=>{
-                                            :reference_id=>"everythingfunded"}}).
-                                    and_return(mock("wepay response",
-                                                    {:parsed => ['fake account']}))
-    OAuth2::AccessToken.should_receive(:from_hash).and_return(manager_wepay)
-    visit "/payment/wepay_request?code=abc123"
-
-    visit '/'
     click_on "Add a project"
     page.has_css?("form#new_project")
     fill_in('Project Name', :with => "A new pony")
