@@ -43,6 +43,8 @@ module Wepay
       reserve!
     when "captured"
       capture!
+    when "cancelled"
+      cancel!
     when "failed"
       cancel!
     else
@@ -74,9 +76,9 @@ module Wepay
   end
 
   def wepay_cancel(reason = "Cancelled by customer request")
-    payment = wepay_api.get("/v2/checkout/cancel",
-                             :params => {:checkout_id => wepay_checkout_id,
-                                         :cancel_reason => reason})
+    wp_params = {:checkout_id => wepay_checkout_id, :cancel_reason => reason}
+    response = wepay_api.get("/v2/checkout/cancel",
+                             :params => wp_params)
     wepay_migrate_to(response["state"]) unless response["error"]
   end
 

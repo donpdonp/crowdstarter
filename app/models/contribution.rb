@@ -48,7 +48,6 @@ class Contribution < ActiveRecord::Base
   end
 
   def cancel
-    wepay_cancel
   end
 
 end

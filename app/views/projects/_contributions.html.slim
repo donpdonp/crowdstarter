@@ -6,7 +6,7 @@ div.contributors
     div.body
       - if contribs.size > 0
         table
-          - contribs.each do |c|
+          - contribs.order(:created_at).each do |c|
             - unless c.new?
               = render :partial => "projects/contribution_row", :locals => {:contribution => c}
       - else
