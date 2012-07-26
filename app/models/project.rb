@@ -80,11 +80,15 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def gateway_sync
+    contributions.each{|c| c.wepay_sync}
+  end
+
   def fund
     contributions.reserveds.each do |contrib|
       # Kick off the capture and wait for the IPN
       # contrib.wepay_refresh
-      response = contrib.wepay_capture
+      contrib.wepay_capture
     end
   end
 
