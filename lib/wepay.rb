@@ -16,9 +16,10 @@ module Wepay
       state_wepay = wepay_status["state"]
 
       if wepay_state_match?(state_wepay)
-        logger.info "Contribution #{id} in sync local:#{workflow_state} == wepay:#{state_wepay} to"
+        logger.info "Contribution #{id} in sync local:#{workflow_state} == wepay:#{state_wepay}"
       else
         wepay_migrate_to(state_wepay)
+        state_wepay
       end
     end
   end

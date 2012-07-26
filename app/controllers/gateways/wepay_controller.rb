@@ -62,33 +62,20 @@ class Gateways::WepayController < ApplicationController
                            :params => params.to_json)
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
     if contribution
-      log.project = contribution.project
-      log.contribution = contribution
-
-      checkout = contribution.wepay_status
+      migrated_to = contribution.wepay_sync
 
       begin
-        case checkout["state"]
+        case migrated_to
         when "authorized"
-          if contribution.new?
-            contribution.authorize!
-            status = "OK"
-          else
-            status = "NOACTION"
-          end
         when "reserved"
-          contribution.reserve!
-          status = "OK"
         when "captured"
-          contribution.capture!
           contribution.project.activities.create(
                     :detail => "Collected #{contribution.user.email} $#{contribution.amount}",
                     :code => "capture",
                     :contribution => contribution)
           Notifications.delay(:queue => 'mailer').contribution_collected(contribution)
-
-          status = "OK"
         end
+        status = "OK"
       rescue Workflow::TransitionHalted => e
         status = "ERR"
         logger.error e.halted_because
