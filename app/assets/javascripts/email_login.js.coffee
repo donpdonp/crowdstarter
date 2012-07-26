@@ -39,7 +39,10 @@ do_login = (data)->
     $('#modal-signin fieldset#password-group span').html("Incorrect password")
 
 (exports ? this).user_create = (form_elements)->
-  data = {email: form_elements['email'].value, password: form_elements['password'].value}
+  data = {
+           email: form_elements['email'].value,
+           username: form_elements['username'].value,
+           password: form_elements['password'].value }
   $.ajax('/users', {
          data: data,
          type: 'post',
