@@ -12,6 +12,7 @@ PUser = Hashie::Mash.new({
     })
 
 def signup_setup
+  OmniAuth.config.mock_auth[:facebook] = PUser
 end
 
 describe "Sign up", :type => :request do
@@ -20,14 +21,29 @@ describe "Sign up", :type => :request do
 
     visit '/'
     within("#modal-signup") do
+      click_on "facebook-login"
+    end
+
+    within('.user-detail') do
+      page.should have_content(PUser.info.email)
+    end
+  end
+
+  it "with email" do
+    signup_setup
+
+    visit '/'
+    within("#modal-signup") do
       fill_in 'email', :with => PUser.info.email
       fill_in 'username', :with => "testuser"
-      fill_in 'password', :with => "abc123"
+      #fill_in 'password', :with => "abc123" #capybara bug?
+puts page.body
       click_button "Sign up"
     end
+
 puts page.body
     within('.user-detail') do
-      page.should have_content('user@test.site')
+      page.should have_content(PUser.info.email)
     end
   end
 end
