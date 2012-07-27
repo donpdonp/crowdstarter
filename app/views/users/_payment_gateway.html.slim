@@ -5,7 +5,7 @@ H3 Payment Gateway
       | Connect to WePay
       = image_tag "wepay_small.png"
       - gateway = Gateway.find_by_provider(current_user.payment_gateway)
-      - url = gateway.client.auth_code.authorize_url({:client_id => SETTINGS.payment_gateways.wepay.client.id,
+      - url = gateway.client.auth_code.authorize_url({:client_id => gateway.access_key,
                        :redirect_uri => payment_wepay_request_url,
                        :scope => "manage_accounts,view_balance,collect_payments,refund_payments,view_user",
                        :user_email => user.email})
