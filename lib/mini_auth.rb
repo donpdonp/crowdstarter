@@ -28,7 +28,7 @@ module MiniAuth
     if id
       begin
         log_in(id)
-        logger.info("session login: ##{current_user.id} #{current_user.email.inspect}")
+        logger.info("Login: #{current_user.email.inspect} User##{current_user.id}")
       rescue ActiveRecord::RecordNotFound
         logger.info("session user id of #{id} is bogus. removing")
         session[:logged_in_user_id] = nil

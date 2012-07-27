@@ -46,7 +46,7 @@
       <%= f.label("amount", "Collection amount") %>
       $<%= f.text_field("amount", :required => true, :class => "money") %>
       - $<input class="money" disabled="" id="feepercent" style="width:2em">(6.5%) =
-      $<input class="money" disabled="" id="feetotal"> collected
+      $<input class="money" disabled="" id="feetotal"> collected (approx.)
       <script>
         var projectdate = new Date(Date.parse(<%=raw project.funding_due.to_json%>));
         document.getElementById('project_funding_due').value = projectdate.getFullYear() + "-" + (projectdate.getMonth()+1) + "-" + projectdate.getDate() + " " + projectdate.getHours() + ":" + projectdate.getMinutes();

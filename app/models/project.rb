@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   validates :name, :funding_due, :amount, :user_id, :gateway_id, :presence => true
 
   has_attached_file :image, :styles => {:thumb => "133x75>",
-                                        :medium => "533x300>"},
+                                        :medium => "530x300>"},
               :default_url => "/assets/:style/missing.png"
 
 
