@@ -16,7 +16,7 @@ class RewardsController < ApplicationController
                                   :code => "reward",
                                   :user => current_user})
     else
-      flash[:error] = "Reward creation failed."
+      flash[:error] = "Reward creation failed. #{reward.errors.full_messages.join(' ')}"
     end
     redirect_to @project
   end
