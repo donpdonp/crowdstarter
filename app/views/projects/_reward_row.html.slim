@@ -10,6 +10,6 @@ li.bob
         |  #{ number_to_currency(reward.amount)}
     |  or more
     - if logged_in? && @project.editable? && current_user == @project.user
-      |  (#{link_to "delete", reward, :method => :delete})
+      |  [#{link_to "x", reward, :method => :delete, :title => "delete this reward"}]
   div
     | "#{reward.description.html_safe}"
