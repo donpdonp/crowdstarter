@@ -97,7 +97,12 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    current_user.projects.find(params[:id]).destroy
+    project = current_user.projects.find(params[:id])
+    if project.editable?
+      project.destroy
+    else
+      flash[:error] = "Project must be editable to remove."
+    end
     redirect_to :root
   end
 
