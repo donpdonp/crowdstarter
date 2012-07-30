@@ -76,6 +76,7 @@
 
       <% if defined?(description) %>
         <% unless project.description.blank? %>
+          <hr/>
           <div class="project-box-description" style="clear:both">
             <%= project.description.html_safe %>
           </div>
