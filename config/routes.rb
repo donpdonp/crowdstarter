@@ -3,6 +3,7 @@ Crowdstarter::Application.routes.draw do
   get "dashboard/contact_us"
   get "dashboard/jobs"
   get "dashboard/terms_of_service"
+  get "dashboard/pricing"
 
   get "payment/tokenize"
   get "payment/clear"
