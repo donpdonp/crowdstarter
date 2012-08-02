@@ -7,6 +7,6 @@ div class="pull-left box"
       span class="btn"
         | Publish
   - if project.fundable?
-    - if project.contributions.authorizeds.count == 0
+    - if project.contributions.authorizeds.count + project.contributions.reserveds.count == 0
       a href="#{unpublish_project_path(project)}" data-method="post"
         span.btn Unpublish

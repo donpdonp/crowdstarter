@@ -161,11 +161,16 @@ class ProjectsController < ApplicationController
 
   def unpublish
     @project = current_user.projects.find(params[:id])
-    @project.unpublish!
-    flash[:success] = "Project has been unpublished!"
-    @project.activities.create({:detail => "Project unpublished",
-                               :code => "unpublish",
-                               :user => current_user})
+    contributions = @project.contributions
+    if contributions.authorizeds.count + contributions.reserveds.count == 0
+      @project.unpublish!
+      flash[:success] = "Project has been unpublished!"
+      @project.activities.create({:detail => "Project unpublished",
+                                 :code => "unpublish",
+                                 :user => current_user})
+    else
+      flash[:success] = "Project has contributions and cannot be unpublished."
+    end
 
     redirect_to @project
   end
