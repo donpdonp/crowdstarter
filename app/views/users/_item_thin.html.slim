@@ -3,7 +3,11 @@ div class="pull-left box"
 div class="pull-left box"
   = link_to(project.name, project)
 div class="pull-left box"
-  | #{project.contributions.authorizeds.count} contributors
+  - if project.fundable?
+    | #{project.contributions.authorizeds.count+project.contributions.reserveds.count}
+  - else
+    | #{project.contributions.captureds.count}
+    |  contributors
 div.pull-left.box
   - if project.funded?
     | #{number_to_currency(project.collected_amount)}
