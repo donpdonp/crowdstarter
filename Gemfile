@@ -5,7 +5,7 @@ if File.file?(local_gemfile)
   self.instance_eval(Bundler.read_file(local_gemfile))
 end
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,7 +26,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', "~> 2.1.4"
 gem 'rspec-rails'
 gem 'slim'
 gem 'friendly_id'
