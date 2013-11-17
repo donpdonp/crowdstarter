@@ -10,7 +10,8 @@ div class="navbar"
 
       span.pull-right#user-nav
         span.nav-info
-          | #{Project.where(:workflow_state => ['fundable','funded']).count} projects
+          a
+            | #{Project.where(:workflow_state => ['fundable','funded']).count} projects
         span.nav-info
           | #{number_to_currency(Contribution.where(:workflow_state => ['reserved','captured']).sum(:amount))} in contributions
 
@@ -22,6 +23,6 @@ div class="navbar"
         - else
           form id="login" onsubmit="email_login(this.elements); return false" action="/session/lookup"
             input placeholder="e-mail address" name="email"
-            button class="btn" 
+            button class="btn"
               = image_tag "facebook.jpg"
               | Sign in
