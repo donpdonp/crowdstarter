@@ -10,7 +10,7 @@ div class="navbar"
 
       span.pull-right#user-nav
         span.nav-info
-          a
+          a href="#{projects_path}"
             | #{Project.where(:workflow_state => ['fundable','funded']).count} projects
         span.nav-info
           | #{number_to_currency(Contribution.where(:workflow_state => ['reserved','captured']).sum(:amount))} in contributions
