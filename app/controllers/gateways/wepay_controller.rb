@@ -63,7 +63,9 @@ class Gateways::WepayController < ApplicationController
     contribution = Contribution.find_by_wepay_checkout_id(params[:checkout_id])
     if contribution
       migrated_to = contribution.wepay_sync
-
+      log.contribution = contribution
+      log.user = contribution.user
+      log.project = contribution.project
       begin
         case migrated_to
         when "authorized"
