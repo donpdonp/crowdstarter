@@ -10,7 +10,7 @@ gem 'rails', '3.2.16'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 1.4.1'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'boomerang', :git => "git://github.com/donpdonp/boomerang.git"
 
