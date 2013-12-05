@@ -13,6 +13,7 @@ div.projects-show
 
     = render :partial => "contributions"
 
-    - if logged_in? && current_user == @project.user
-      = render :partial => "activity_log"
-      = render :partial => "menu_buttons"
+    - if logged_in?
+      - if current_user == @project.user || current_user.role == "admin"
+        = render :partial => "activity_log"
+        = render :partial => "menu_buttons"
