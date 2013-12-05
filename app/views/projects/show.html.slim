@@ -16,4 +16,7 @@ div.projects-show
     - if logged_in?
       - if current_user == @project.user || current_user.role == "admin"
         = render :partial => "activity_log"
+      - if current_user == @project.user
         = render :partial => "menu_buttons"
+      - if current_user.role == "admin"
+        = render :partial => "gateway_log"

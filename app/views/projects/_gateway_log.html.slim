@@ -1,0 +1,9 @@
+div.activity-log
+  div.threetone-box
+    div.header
+      | Gateway Log
+    div.body
+      ul
+      - @project.gateway_logs.each do |a|
+        li
+          | #{a.called_at} #{a.verb} #{a.url} #{a.params} #{a.response}
