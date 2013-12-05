@@ -6,4 +6,8 @@ div.activity-log
       ul
       - @project.gateway_logs.each do |a|
         li
-          | #{a.called_at} #{a.verb} #{a.url} #{a.params} #{a.response}
+          | #{a.called_at} #{a.verb} #{a.url}
+          pre
+            | #{a.params}
+          pre
+            | #{a.response}
