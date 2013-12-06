@@ -6,3 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Tag.create({name: "frontpage"})
+Gateway.create({"provider"=>"wepay",
+                "access_key"=>"12345",
+                "access_secret"=>"123abc",
+                "sandbox"=>true})
