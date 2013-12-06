@@ -14,15 +14,3 @@ google:
   analytics: 'UA-XXXXXX-X'
 default_payment_gateway: 'wepay'
 fee_percentage: 3
-payment_gateways:
-  amazon:
-    sandbox: true
-    access_key: "123"
-    access_secret: "abc"
-    recipient_token: "abc123"
-  wepay:
-    sandbox: true
-    access_token: "abc123"
-    client:
-      id: "123"
-      secret: "abc"
