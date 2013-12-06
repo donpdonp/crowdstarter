@@ -1,25 +1,30 @@
 class Gateways::WepayController < ApplicationController
-  def checkout
+  def preapproval
     contribution = current_user.contributions.find(params[:contribution_id].to_i)
     if contribution.new? #rename state
       project_owner = contribution.project.user
-      if contribution.wepay_checkout_id.nil?
+      if contribution.wepay_preapproval_id.nil?
 
-        checkout = contribution.wepay_checkout(gateways_wepay_finish_url,
-                                               gateways_wepay_ipn_url)
-
-        if checkout["checkout_id"] > 0
-          contribution.update_attribute :wepay_checkout_id, checkout["checkout_id"]
-          redirect_to checkout["checkout_uri"]
-        else
+        preapproval = contribution.wepay_preapproval(gateways_wepay_finish_url,
+                                                     gateways_wepay_ipn_url)
+        #{"error":"access_denied","error_description":"access token does not have the necessary permissions for this action. Permission required: preapprove_payments","error_code":1010}
+        if preapproval["error"]
           flash[:error] = "Payment processing failed. Please try again."
           redirect_to contribution.project
+        else
+          if preapproval["preapproval_id"] > 0
+            contribution.update_attribute :wepay_preapproval_id, preapproval["preapproval_id"]
+            redirect_to preapproval["preapproval_uri"]
+          else
+            flash[:error] = "Payment processing failed. Please try again."
+            redirect_to contribution.project
+          end
         end
       else
-        wp_params = {:checkout_id => contribution.wepay_checkout_id }
-        checkout = contribution.wepay_status
-        if checkout["state"] == "new"
-          redirect_to checkout["checkout_uri"]
+        wp_params = {:preapproval_id => contribution.wepay_preapproval_id }
+        preapproval = contribution.wepay_preapproval_status
+        if preapproval["state"] == "new"
+          redirect_to preapproval["preapproval_uri"]
         else
           flash[:error] = "This contribution has expired. Please try again."
           redirect_to contribution.project
@@ -29,13 +34,13 @@ class Gateways::WepayController < ApplicationController
   end
 
   def finish
-    contribution = current_user.contributions.find_by_wepay_checkout_id(params[:checkout_id])
+    contribution = current_user.contributions.find_by_wepay_preapproval_id(params[:preapproval_id])
     if contribution
 
-      checkout = contribution.wepay_status
+      preapproval = contribution.wepay_preapproval_status
 
-      case checkout["state"]
-      when "authorized"
+      case preapproval["state"]
+      when "approved"
         contribution.authorize! if contribution.new?
         flash[:success] = "Thank you! Your contribution has been recorded!"
         Activity.create({:detail => "Contributed $#{contribution.amount}",

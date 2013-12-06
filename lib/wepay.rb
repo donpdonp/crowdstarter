@@ -3,9 +3,15 @@ module Wepay
     Oauth2Logger.new(gateway.client, project.user, self)
   end
 
-  def wepay_status
+  def wepay_checkout_status
     wp_params = {:checkout_id => wepay_checkout_id}
     wepay_api.get("/v2/checkout",
+                   :params => wp_params)
+  end
+
+  def wepay_preapproval_status
+    wp_params = {:preapproval_id => wepay_preapproval_id}
+    wepay_api.get("/v2/preapproval",
                    :params => wp_params)
   end
 
@@ -50,6 +56,22 @@ module Wepay
     else
       logger.info "Contribution #{id} unknown migration path from local:#{workflow_state} to wepay:#{state_wepay}"
     end
+  end
+
+  def wepay_preapproval(finish_url, ipn_url)
+    wp_params = {
+           :account_id => project.user.wepay_account_id,
+           :amount => self.amount,
+           :short_description => "Contribution to Project ##{project.id} - #{project.name}",
+           :period => "once",
+           :reference_id => "contribution-#{id}",
+           :app_fee => amount * (SETTINGS.fee_percentage/100.0),
+           :fee_payer => "Payee",
+           :redirect_uri => finish_url,
+           :end_time => project.funding_due+3.days
+      }
+    wp_params.merge!(:callback_uri => ipn_url) unless Rails.env.development?
+    wepay_api.get('/v2/preapproval/create', :params => wp_params)
   end
 
   def wepay_checkout(finish_url, ipn_url)

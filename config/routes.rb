@@ -34,7 +34,7 @@ Crowdstarter::Application.routes.draw do
 
   namespace :gateways do
     post "wepay/ipn"
-    post "wepay/checkout"
+    post "wepay/preapproval"
     get "wepay/finish"
   end
 

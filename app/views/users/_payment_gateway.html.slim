@@ -7,7 +7,7 @@ H3 Payment Gateway
       - gateway = Gateway.find_by_provider(current_user.payment_gateway)
       - url = gateway.client.auth_code.authorize_url({:client_id => gateway.access_key,
                        :redirect_uri => payment_wepay_request_url,
-                       :scope => "manage_accounts,view_balance,collect_payments,refund_payments,view_user",
+                       :scope => "manage_accounts,view_balance,collect_payments,refund_payments,view_user,preapprove_payments,manage_subscriptions",
                        :user_email => user.email})
       br
       a href="#{url}"
