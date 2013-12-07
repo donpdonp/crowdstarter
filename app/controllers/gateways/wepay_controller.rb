@@ -49,7 +49,6 @@ class Gateways::WepayController < ApplicationController
                          :user => contribution.user,
                          :project => contribution.project})
         Notifications.delay(:queue => 'mailer').contribution_thanks(contribution)
-        flash[:success] = "Contribution received!"
       else
         flash[:error] = "An error occured processing the contribution."
       end
@@ -69,7 +68,6 @@ class Gateways::WepayController < ApplicationController
     if contribution
       migrated_to = contribution.wepay_sync
       log.contribution = contribution
-      log.user = contribution.user
       log.project = contribution.project
       begin
         case migrated_to

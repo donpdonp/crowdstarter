@@ -16,16 +16,20 @@ module Wepay
   end
 
   def wepay_sync
-    # a checkout can be in the new state and not have a checkout id yet
     if wepay_checkout_id
       # get a fresh state from WePay
-      state_wepay = wepay_status["state"]
+      state_wepay = wepay_checkout_status["state"]
 
       if wepay_state_match?(state_wepay)
         logger.info "Contribution #{id} in sync local:#{workflow_state} == wepay:#{state_wepay}"
       else
         wepay_migrate_to(state_wepay)
         state_wepay
+      end
+    else
+      if wepay_preapproval_id
+        state_wepay = wepay_preapproval_status["state"]
+        wepay_preapproval_migrate_to(state_wepay)
       end
     end
   end
@@ -36,7 +40,23 @@ module Wepay
     when "cancelled"
       ["cancelled", "failed"].include?(state_wepay)
     else
-      workflow_state == state_wepay
+      false
+    end
+  end
+
+  def wepay_preapproval_migrate_to(state_wepay)
+    logger.info "Contribution #{id} preapproval migrating from local:#{workflow_state} to wepay:#{state_wepay}"
+    case state_wepay
+    when "approved"
+      authorize!
+    when "revoked"
+      cancel!
+    when "expired"
+      cancel!
+    when "cancelled"
+      cancel!
+    else
+      logger.info "Contribution #{id} preapproval unknown migration path from local:#{workflow_state} to wepay:#{state_wepay}"
     end
   end
 
