@@ -27,7 +27,6 @@ group :assets do
 end
 
 gem 'jquery-rails', "~> 2.1.4"
-gem 'rspec-rails'
 gem 'slim'
 gem 'friendly_id'
 gem 'workflow'
@@ -55,6 +54,8 @@ end
 # gem 'capistrano'
 
 group :development do
+  gem 'rspec-rails'
+
   # output tools
   gem 'awesome_print'
 
