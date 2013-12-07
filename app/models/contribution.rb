@@ -38,16 +38,26 @@ class Contribution < ActiveRecord::Base
     state :cancelled
   end
 
-  # override ?
+  # workflow transition handlers
   def capture
   end
 
-  def reward_available?
-    cheapest_reward = project.rewards.order("amount asc").first
-    cheapest_reward && cheapest_reward.amount >= amount
+  def authorize
+    Activity.create({:detail => "Contributed $#{self.amount}",
+                     :code => "contributed",
+                     :contribution => self,
+                     :user => self.user,
+                     :project => self.project})
+    Notifications.delay(:queue => 'mailer').contribution_thanks(self)
   end
 
   def cancel
+  end
+
+  # helpers
+  def reward_available?
+    cheapest_reward = project.rewards.order("amount asc").first
+    cheapest_reward && cheapest_reward.amount >= amount
   end
 
 end

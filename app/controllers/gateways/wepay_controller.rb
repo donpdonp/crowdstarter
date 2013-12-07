@@ -37,18 +37,11 @@ class Gateways::WepayController < ApplicationController
     contribution = current_user.contributions.find_by_wepay_preapproval_id(params[:preapproval_id])
     if contribution
 
-      preapproval = contribution.wepay_preapproval_status
+      contribution.wepay_sync
 
-      case preapproval["state"]
-      when "approved"
-        contribution.authorize! if contribution.new?
+      case contribution.current_state.name
+      when :authorized
         flash[:success] = "Thank you! Your contribution has been recorded!"
-        Activity.create({:detail => "Contributed $#{contribution.amount}",
-                         :code => "contributed",
-                         :contribution => contribution,
-                         :user => contribution.user,
-                         :project => contribution.project})
-        Notifications.delay(:queue => 'mailer').contribution_thanks(contribution)
       else
         flash[:error] = "An error occured processing the contribution."
       end
