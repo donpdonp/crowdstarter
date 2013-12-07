@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Reward do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # simple model
 end

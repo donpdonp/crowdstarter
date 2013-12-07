@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe GatewayLog do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # pure-assocation model
 end
