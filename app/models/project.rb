@@ -40,6 +40,10 @@ class Project < ActiveRecord::Base
     state :disbursed
   end
 
+  def authorized_amount
+    contributions.authorizeds.sum(&:amount)
+  end
+
   def contributed_amount
     contributions.reserveds.sum(&:amount)
   end
@@ -66,7 +70,7 @@ class Project < ActiveRecord::Base
 
   def end_of_project_processing
     if fundable?
-      if contributed_amount + collected_amount >= amount
+      if authorized_amount + contributed_amount + collected_amount >= amount
         activities.create(:detail => "Final processing - Funded! Collecting contributions",
                           :code => "funded")
         fund!
@@ -85,6 +89,25 @@ class Project < ActiveRecord::Base
   end
 
   def fund
+    reserve
+    capture
+  end
+
+  def reserve
+    contributions.authorizeds.each do |contrib|
+      if contrib.wepay_checkout_id
+        logger.error "reserve: contribution #{contrib.id} has an existing checkout id"
+      else
+        result = contrib.wepay_checkout
+        if result["checkout_id"]
+          contrib.update_attribute :wepay_checkout_id, result["checkout_id"]
+        end
+        # use result["state"] == "authorized" to reserve! or wait for inspect
+      end
+    end
+  end
+
+  def capture
     contributions.reserveds.each do |contrib|
       # Kick off the capture and wait for the IPN
       # contrib.wepay_refresh

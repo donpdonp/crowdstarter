@@ -5,8 +5,7 @@ class Gateways::WepayController < ApplicationController
       project_owner = contribution.project.user
       if contribution.wepay_preapproval_id.nil?
 
-        preapproval = contribution.wepay_preapproval(gateways_wepay_finish_url,
-                                                     gateways_wepay_ipn_url)
+        preapproval = contribution.wepay_preapproval
         #{"error":"access_denied","error_description":"access token does not have the necessary permissions for this action. Permission required: preapprove_payments","error_code":1010}
         if preapproval["error"]
           flash[:error] = "Payment processing failed. Please try again."
