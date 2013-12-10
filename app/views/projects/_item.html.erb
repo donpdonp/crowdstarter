@@ -20,7 +20,7 @@
           <div class="hangboards">
           <% if defined?(owner) %>
             <div class="pull-right hangboard project-box-inner-owner">
-              <div class="photo"> <%= link_to(image_tag(project.user.image_url), project.user) %></div>
+              <div class="photo"> <%= link_to(image_tag(project.user.profile_image_url), project.user) %></div>
               <div class="name"> <%= link_to project.user.name, project.user %></div>
             </div>
           <% end %>
