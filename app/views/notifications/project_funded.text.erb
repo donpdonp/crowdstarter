@@ -1,8 +1,8 @@
 Hello <%= @project.user.name %>,
 
-  The project "<%= @project.name %>" is now closed. Congratulations! The contributions of <%= number_to_currency(@project.contributed_amount) %> were sufficient to fund the project for <%= number_to_currency(@project.amount) %>!
+  The project "<%= @project.name %>" is now closed. Congratulations! The contributions of <%= number_to_currency(@project.authorized_amount) %> were sufficient to fund the project for <%= number_to_currency(@project.amount) %>!
 
-  The payment processor has been instructed to collect each contribution. Please check the project page to montior collections as they happen. This generally takes 15 minutes to complete.
+  The payment processor has been instructed to collect each contribution. Please check the project page to montior collections as they happen. This generally takes 10 minutes to complete.
 
 Project link: <%= project_url(@project,
                               :host => SETTINGS["mailer"]["host"]) %>
