@@ -47,7 +47,7 @@
                 var daystr =
                 var now = new Date()
                 if(ptime < now) {
-                  daystr = ptime.getDate()+"-"+months[ptime.getMonth()]+"-"+(1900+now.getYear()
+                  daystr = ptime.getDate()+"-"+months[ptime.getMonth()]+"-"+(1900+ptime.getYear())
                 }
                 $("#project-<%=project.id%> #ptime_day").html(daystr)
                 var minutes = ptime.getMinutes();
