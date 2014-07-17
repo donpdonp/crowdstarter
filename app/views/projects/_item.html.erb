@@ -44,7 +44,7 @@
               $(function() {
                 var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
                 var ptime = new Date(Date.parse(<%=raw project.funding_due.to_json%>))
-                var daystr =
+                var daystr = months[ptime.getMonth()]+" "+ptime.getDate()
                 var now = new Date()
                 if(ptime < now) {
                   daystr = ptime.getDate()+"-"+months[ptime.getMonth()]+"-"+(1900+ptime.getYear())
