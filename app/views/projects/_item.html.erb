@@ -44,7 +44,12 @@
               $(function() {
                 var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
                 var ptime = new Date(Date.parse(<%=raw project.funding_due.to_json%>))
-                $("#project-<%=project.id%> #ptime_day").html(months[ptime.getMonth()]+" "+ptime.getDate())
+                var daystr = months[ptime.getMonth()]+" "+ptime.getDate()
+                var now = new Date()
+                if(ptime.getYear() != now.getYear()) {
+                  daystr = now.getYear()+" "+daystr
+                }
+                $("#project-<%=project.id%> #ptime_day").html(daystr)
                 var minutes = ptime.getMinutes();
                 if(minutes < 10) { minutes = "0"+minutes }
                 $("#project-<%=project.id%> #ptime_hour").html(ptime.getHours()+":"+minutes)
