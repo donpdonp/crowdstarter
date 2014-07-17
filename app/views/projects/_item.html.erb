@@ -44,10 +44,10 @@
               $(function() {
                 var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
                 var ptime = new Date(Date.parse(<%=raw project.funding_due.to_json%>))
-                var daystr = months[ptime.getMonth()]+" "+ptime.getDate()
+                var daystr = ptime.getDate()+"-"+months[ptime.getMonth()]
                 var now = new Date()
                 if(ptime.getYear() != now.getYear()) {
-                  daystr = now.getYear()+" "+daystr
+                  daystr = daystr+"-"+(2000+now.getYear())
                 }
                 $("#project-<%=project.id%> #ptime_day").html(daystr)
                 var minutes = ptime.getMinutes();
