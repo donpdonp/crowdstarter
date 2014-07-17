@@ -162,4 +162,8 @@ class Project < ActiveRecord::Base
   def smallest_reward
     rewards.order("amount asc").first
   end
+
+  def late?
+    funding_due < Time.now
+  end
 end

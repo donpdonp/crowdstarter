@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
       if @project.editable?
         if logged_in? && current_user == @project.user
         else
-          flash[:info] = "Project #{params[:id]} is not finished"
+          flash[:info] = "Project #{params[:id]} is being worked on."
           redirect_to root_path
           return
         end
