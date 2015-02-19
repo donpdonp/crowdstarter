@@ -128,8 +128,8 @@ class Project < ActiveRecord::Base
         activities.create(:detail => "Failed to cancel from #{contrib.user.email} $#{contrib.amount}",
                           :code => "collect-cancel-fail",
                           :contribution => contrib)
-        logger.error e.message
-        logger.error e.http_response.body
+        #logger.error e.message
+        #logger.error e.http_response.body
       end
     end
   end
