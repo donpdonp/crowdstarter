@@ -117,7 +117,7 @@ class Project < ActiveRecord::Base
 
   def fail
     contributions.authorizeds.each do |contrib|
-      response = contrib.wepay_cancel
+      response = contrib.wepay_preapproval_cancel
       logger.info response.inspect
       if contrib.cancelled?
         activities.create(:detail => "Cancelled #{contrib.user.email} $#{contrib.amount}",

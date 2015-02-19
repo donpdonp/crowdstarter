@@ -144,4 +144,11 @@ module Wepay
     wepay_migrate_to(response["state"]) unless response["error"]
   end
 
+  def wepay_preapproval_cancel(reason = "Cancelled by customer request")
+    wp_params = {:preapproval_id => wepay_preapproval_id, :cancel_reason => reason}
+    response = wepay_api.get("/v2/preapproval/cancel",
+                             :params => wp_params)
+    wepay_preapproval_migrate_to(response["state"]) unless response["error"]
+  end
+
 end
