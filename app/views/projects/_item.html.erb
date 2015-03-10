@@ -40,11 +40,11 @@
             <div class="title">Funders: </div>
             <div class="count">
                 <% if project.fundable? %>
-                  <%= project.contributions.authorizeds.count +
-                      project.contributions.reserveds.count  %>
+                  <%= project.contributions.authorizeds.count %>
                 <% end %>
                 <% if project.funded? %>
-                  <%= project.contributions.captureds.count %>
+                  <%= project.contributions.reserveds.count +
+                      project.contributions.captureds.count %>
                 <% end %>
             </div>
           </div>
@@ -74,9 +74,9 @@
             <div class="title">Collected: </div>
             <div class="money">
               <% if project.funded? %>
-                <%= number_to_currency(project.collected_amount) %>
+                <%= number_to_currency(project.contributed_amount+project.collected_amount) %>
               <% else %>
-                <%= number_to_currency(project.authorized_amount+project.contributed_amount) %>
+                <%= number_to_currency(project.authorized_amount) %>
               <% end %>
             </div>
           </div>
