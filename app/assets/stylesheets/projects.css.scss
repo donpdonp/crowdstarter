@@ -53,6 +53,9 @@
   .project-box {
     margin: 0 auto;
     width: 580px;
+    .body {
+      background-color: white;
+    }
   }
 
   .project-box-inner-photo {
@@ -76,8 +79,6 @@
   padding: 0.7em;
 
   .body {
-    $boxcolor_lighter: #999999;
-    background: $boxcolor_lighter;
     text-align: center;
     color: white
   }
@@ -122,6 +123,13 @@
       list-style: none;
       margin-bottom: 0.5em;
     }
+  }
+}
+
+.admin-box {
+  .btn-group {
+    display: flex;
+    justify-content: center;
   }
 }
 
