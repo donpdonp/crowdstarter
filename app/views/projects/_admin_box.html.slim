@@ -5,10 +5,11 @@ div.admin-box
     div.outline
       div.body
         div.btn-group
-          = link_to 'Edit', edit_project_path(@project), :class => "btn"
-          = link_to 'Delete', project_path(@project), :method => :delete, :class => "btn", :confirm => "Delete this project?"
+          - if @project.editable?
+            = link_to 'Edit', edit_project_path(@project), :class => "btn"
+            = link_to 'Delete', project_path(@project), :method => :delete, :class => "btn", :confirm => "Delete this project?"
+            = link_to 'Publish', publish_review_project_path(@project), :class => "btn"
           - if @project.fundable?
             - if @project.contributions.authorizeds.count + @project.contributions.reserveds.count == 0
               = link_to 'Unpublish', unpublish_project_path(@project), :class => "btn", :method => :post
           - else
-            = link_to 'Publish', publish_review_project_path(@project), :class => "btn"
