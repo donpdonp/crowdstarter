@@ -18,7 +18,8 @@ class Project < ActiveRecord::Base
   has_attached_file :image, :styles => {:thumb => "133x75>",
                                         :medium => "530x300>"},
               :default_url => "/assets/:style/missing.png"
-
+  validates_attachment_content_type :image,
+                  :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   scope :fundables, where(:workflow_state => :fundable)
 

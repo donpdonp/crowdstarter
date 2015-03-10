@@ -31,7 +31,7 @@ gem 'friendly_id'
 gem 'workflow'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'paperclip'
+gem 'paperclip', "~> 4.2.1"
 gem 'loofah-activerecord'
 gem 'exception_notification'
 gem 'oauth2'
