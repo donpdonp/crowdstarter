@@ -25,8 +25,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails', "~> 2.1.4"
-gem 'slim'
+gem 'jquery-rails', '~> 2.1.4'
+gem 'slim', '~> 3.0.3'
 gem 'friendly_id'
 gem 'workflow'
 gem 'delayed_job_active_record'
