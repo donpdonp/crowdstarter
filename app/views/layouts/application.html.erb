@@ -15,6 +15,7 @@
 
     <script>
       $(navbar_highlight(<%=raw controller_name.to_json%>, <%=raw action_name.to_json%>))
+      $(time_fixups)
     </script>
 
     <%= yield %>
