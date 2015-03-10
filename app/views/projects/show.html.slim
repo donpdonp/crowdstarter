@@ -1,6 +1,6 @@
 div.projects-show
   div class="util-box pull-right" style="width: 28%"
-    - if current_user
+    - if logged_in?
       - if current_user == @project.user || current_user.role == "admin"
         = render :partial => "admin_box"
     = render :partial => "contribute_box"

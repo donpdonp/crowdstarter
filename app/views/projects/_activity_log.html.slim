@@ -6,4 +6,8 @@ div.activity-log
       ul
       - @project.activities.each do |a|
         li
-          | #{a.created_at} #{a.user ? "#{a.user.name}/#{a.user.email}" : "System"} #{a.detail}
+          span.time
+            time datetime="#{a.created_at.iso8601}" data-format="yyyy-MMM-dd h:mmtt"
+              |  #{a.created_at.iso8601}
+          span.user #{a.user ? "#{a.user.name}/#{a.user.email}" : "System"}
+          span.detail #{a.detail}

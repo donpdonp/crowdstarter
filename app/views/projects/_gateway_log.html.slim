@@ -6,7 +6,9 @@ div.activity-log
       ul
       - @project.gateway_logs.order(:called_at).each do |a|
         li
-          | #{a.called_at} #{a.verb} #{a.url}
+          time datetime="#{a.called_at.iso8601}" data-format="yyyy-MMM-dd h:mmtt"
+            |  #{a.called_at.iso8601}
+          | #{a.verb} #{a.url}
           pre
             | #{a.params}
           pre
