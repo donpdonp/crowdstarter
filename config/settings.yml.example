@@ -14,3 +14,13 @@ google:
   analytics: 'UA-XXXXXX-X'
 default_payment_gateway: 'wepay'
 fee_percentage: 3
+default_url:
+  protocol: https
+  host: example.com
+payment_gateways:
+  wepay:
+    access_token: "6key-sample"
+    client:
+      id: "2-sample"
+      secret: "8-sample"
+

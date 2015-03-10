@@ -6,7 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Tag.create({name: "frontpage"})
+client = SETTINGS[:payment_gateways][:wepay][:client]
 Gateway.create({"provider"=>"wepay",
-                "access_key"=>"12345",
-                "access_secret"=>"123abc",
+                "access_key"=>client[:id],
+                "access_secret"=>client[:secret],
                 "sandbox"=>true})
