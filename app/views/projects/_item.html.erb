@@ -4,7 +4,7 @@
 </div>
 <% end %>
 
-<% if project.editable? %>
+<% if project.funded? %>
 <div class="alert alert-success">
   This project was funded on
   <time datetime="<%= project.funding_due.iso8601 %>"
