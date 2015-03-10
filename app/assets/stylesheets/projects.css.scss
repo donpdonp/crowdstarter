@@ -109,9 +109,6 @@
 
 .rewards-box{
   .body {
-    padding-top: 0.5em;
-    $boxcolor_lighter: #999;
-    background: $boxcolor_lighter;
     .money {
       color: white
     }
@@ -130,6 +127,9 @@
   .btn-group {
     display: flex;
     justify-content: center;
+  }
+  .btn {
+    margin: 0.3em;
   }
 }
 
