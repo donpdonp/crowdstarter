@@ -1,4 +1,4 @@
-li.bob
+li.rewards-row
   div
     - if logged_in?
       = link_to contribute_project_path(:amount => reward.amount), :method => :post do
@@ -11,5 +11,5 @@ li.bob
     |  or more
     - if logged_in? && @project.editable? && current_user == @project.user
       |  [#{link_to "x", reward, :method => :delete, :title => "delete this reward"}]
-  div
-    | "#{reward.description.html_safe}"
+  div.description
+    | #{reward.description.html_safe}

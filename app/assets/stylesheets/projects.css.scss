@@ -76,7 +76,6 @@
 }
 
 .contribute-box {
-  padding: 0.7em;
 
   .body {
     text-align: center;
@@ -91,6 +90,8 @@
     margin-bottom: 0px;
     margin-right: 3px;
   }
+
+  .give-minimum { color: #ddd; }
 }
 
 .contributors {
@@ -119,6 +120,11 @@
     li {
       list-style: none;
       margin-bottom: 0.5em;
+      .description {
+        background-color: #bbb;
+        font-size: 110%;
+        padding: 0.1em;
+      }
     }
   }
 }
