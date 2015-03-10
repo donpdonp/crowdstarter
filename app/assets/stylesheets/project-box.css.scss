@@ -5,7 +5,6 @@ $boxcolor_lightest: #ffffff;
 
 .project-box {
   font-size: 13px;
-  .body { background-color: white; }
 }
 
 .threetone-box {
@@ -44,6 +43,7 @@ $boxcolor_lightest: #ffffff;
 
 .project-box-inner-top-row {
   padding-bottom: 0.2em
+  background-color: white;
  }
 
 .project-box-inner-top-row-inside {
