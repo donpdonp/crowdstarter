@@ -149,3 +149,11 @@
     list-style: none;
   }
 }
+
+.gateway-log {
+  .body {
+    background: #BBB;
+    .time { margin-right: 0.5em; }
+    .verb { margin-right: 0.5em; }
+  }
+}

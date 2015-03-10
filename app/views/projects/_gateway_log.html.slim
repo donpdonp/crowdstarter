@@ -1,4 +1,4 @@
-div.activity-log
+div.gateway-log
   div.threetone-box
     div.header
       | Gateway Log
@@ -6,9 +6,11 @@ div.activity-log
       ul
       - @project.gateway_logs.order(:called_at).each do |a|
         li
-          time datetime="#{a.called_at.iso8601}" data-format="yyyy-MMM-dd h:mmtt"
-            |  #{a.called_at.iso8601}
-          | #{a.verb} #{a.url}
+         span.time
+            time datetime="#{a.called_at.iso8601}" data-format="yyyy-MMM-dd h:mmtt"
+              |  #{a.called_at.iso8601}
+          span.verb #{a.verb}
+          span.url #{a.url}
           pre
             | #{a.params}
           pre

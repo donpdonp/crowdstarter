@@ -6,7 +6,8 @@ tr.contribution-row
     = number_to_currency(contribution.amount)
 
   td
-    = contribution.created_at.strftime("%Y-%m-%d")
+    time datetime="#{contribution.created_at.iso8601}" data-format="yyyy-MMM-dd"
+      |  #{contribution.created_at.iso8601}
 
   td
     - [["authorized","label-warning"],
