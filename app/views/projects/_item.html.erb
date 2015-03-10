@@ -7,7 +7,9 @@
 <% if project.editable? %>
 <div class="alert alert-success">
   This project was funded on
-  <time datetime="<%= project.funding_due.iso8601 %>" data-format="yyyy-MMM-dd h:mm:sstt">
+  <time datetime="<%= project.funding_due.iso8601 %>"
+        title="<%= project.funding_due.iso8601 %>"
+        data-format="yyyy-MMM-dd h:mmtt">
     <%= project.funding_due %>
   </time>.
 </div>
@@ -47,28 +49,22 @@
             </div>
           </div>
           <% end %>
-          <div class="pull-right hangboard project-due">
+          <div class="pull-right hangboard project-due"
+               title="<%= project.funding_due.iso8601 %>">
             <div class="title" style="margin-bottom: 0.1em">Due by: </div>
-            <script>
-              $(function() {
-                var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-                var ptime = new Date(Date.parse(<%=raw project.funding_due.to_json%>))
-                var daystr = months[ptime.getMonth()]+" "+ptime.getDate()
-                var now = new Date()
-                if(ptime < now) {
-                  daystr = ptime.getDate()+"-"+months[ptime.getMonth()]+"-"+(1900+ptime.getYear())
-                }
-                $("#project-<%=project.id%> #ptime_day").html(daystr)
-                var minutes = ptime.getMinutes();
-                if(minutes < 10) { minutes = "0"+minutes }
-                $("#project-<%=project.id%> #ptime_hour").html(ptime.getHours()+":"+minutes)
-                $("#project-<%=project.id%> #ptime_zone").html(ptime.toString().substr(35,3))
-              })
-            </script>
-            <span id="ptime_day"></span>
+            <span id="ptime_day">
+              <time datetime="<%= project.funding_due.iso8601 %>"
+                    data-format="MMM-dd">
+                <%= project.funding_due %>
+              </time>
+            </span>
             <br/>
-            <span id="ptime_hour"></span>
-            <span id="ptime_zone" style="font-size:80%"></span>
+            <span id="ptime_hour">
+              <time datetime="<%= project.funding_due.iso8601 %>"
+                    data-format="h:mmtt">
+                <%= project.funding_due %>
+              </time>
+            </span>
           </div>
           <div class="pull-right hangboard project-goal">
             <div class="title">Goal: </div>
