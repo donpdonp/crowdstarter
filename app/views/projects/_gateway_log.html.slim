@@ -6,7 +6,7 @@ div.gateway-log
       ul
       - @project.gateway_logs.order(:called_at).each do |a|
         li
-         span.time
+          span.time
             time datetime="#{a.called_at.iso8601}" data-format="yyyy-MMM-dd h:mmtt"
               |  #{a.called_at.iso8601}
           span.verb #{a.verb}
