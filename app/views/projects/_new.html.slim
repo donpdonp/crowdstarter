@@ -1,87 +1,31 @@
-h1
-  Add a project
+h1 Add a project
 p
-  Describe your project to potential contributors using the fields below.
+  | Describe your project to potential contributors using the fields below.
 
-<%= form_for(project) do |f| %>
-  <div class="row-fluid">
-    <div class="span6">
-      <%= f.label("name", "Project Name", :class => "text") %>
-      <%= f.text_field("name", :required => true) %>
-      <%= f.label("image", "Descriptive Image") %>
-      <%= f.file_field :image %>
-      <%= f.label("funding_due") %>
-      <%= text_field_tag("project[funding_due]", nil, :required => true) %>
-      <%= text_field_tag("timezone","", :id=> "timezone", :style=>"width:2em", :readonly=>"", :title => "Timezone") %>
-    </div>
-    <div class="span6">
 
-    </div>
-  </div>
+= form_for(project) do |f|
+  div class="row-fluid"
+    div class="span6"
+      = f.label("name", "Project Name", :class => "text")
+      = f.text_field("name", :required => true)
 
-  <div class="row-fluid">
-    <div class="span6">
-      <%= f.label("amount", "Collection amount") %>
-      $<%= f.text_field("amount", :required => true, :class => "money") %>
-      - $<input class="money" disabled="" id="feepercent" style="width:2em">(5.9%) =
-      $<input class="money" disabled="" id="feetotal"> collected (approx.)
-      <script>
-        var projectdate = new Date(Date.parse(<%=raw project.funding_due.to_json%>));
-        document.getElementById('project_funding_due').value = projectdate.getFullYear() + "-" + (projectdate.getMonth()+1) + "-" + projectdate.getDate() + " " + projectdate.getHours() + ":" + projectdate.getMinutes();
-        var datematch = (new Date()).toString().match(/\(([A-Z]{3})\)/);
-        if(datematch) {
-          document.forms[0].timezone.value=datematch[1]
-        }
+  div class="row-fluid"
+    div class="span12"
+      p style="text-align:center"
+        | Choose a style of funding that
 
-        $(function() {
-          var recalc = function(){
-            var total = $('#project_amount').val()
-            var fee = (total*0.059).toFixed(2)
-            $('#feepercent').val(fee)
-            $('#feetotal').val((total-fee).toFixed(2))
-          };
+  div class="row-fluid"
+    div class="span12"
+      div style="display:flex;justify-content:space-around;text-align:center"
+        div
+          h1 Minimum Price
+          button Minimum Price
+        div
+          h1 One Price
+          button One Price
 
-          $('#project_amount').change(recalc).blur(recalc).focus(recalc).keyup(recalc)
-          recalc()
-        })
-      </script>
-      <%= f.label("descripton") do %>
-        Description
-        <span style="font-size:75%">Allowed html tags: &lt;h1&gt; &lt;p&gt; </span>
-        <%= f.text_area("description", :rows => 4) %>
-      <% end %>
-      <script>
-      $(document).ready(function(){
-        $("#project_description").autoGrow();
-       });
-      </script>
-    </div>
-    <div class="span6">
-      If the funding is successful, EverythingFunded charges a <%=SETTINGS.fee_percentage%>% fee. In addition,
-
-      <% gateway = project.gateway ? project.gateway.provider : current_user.payment_gateway %>
-      <% if gateway == 'wepay' %>
-        WePay
-        <a href="https://www.wepay.com/about/fees"
-           style="text-decoration:underline">
-          charges 2.9%+$0.30</a>
-      <% end %>
-      <% if gateway == 'amazon' %>
-        Amazon Payments charges
-        <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=6022"
-           style="text-decoration:underline">
-          approximately 3%</a>
-      <% end %>
-       to each contributor for credit card processing.
-    </div>
-  </div>
-
-  <div class="row-fluid">
-    <div class="span6">
-      <%= submit_tag "Save Details", :class => "btn" %>
-    </div>
-    <div class="span6">
-       Save as often as you like. The details are for your eyes only until published.
-    </div>
-  </div>
-<% end %>
+  div class="row-fluid"
+    div class="span6"
+      = submit_tag "Next Step", :class => "btn"
+    div class="span6"
+      | Project details are hidden until published.
