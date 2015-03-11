@@ -1,6 +1,6 @@
 h1 Add a project
 p
-  | Describe your project to potential contributors using the fields below.
+  | Describe your project to potential contributors.
 
 
 = form_for(project) do |f|
@@ -12,20 +12,25 @@ p
   div class="row-fluid"
     div class="span12"
       p style="text-align:center"
-        | Choose a style of funding that
+        | Choose a style of funding
 
   div class="row-fluid"
     div class="span12"
       div style="display:flex;justify-content:space-around;text-align:center"
         div
-          h1 Minimum Price
-          button Minimum Price
+          h1 Open Ended
+          p
+            | The amount collected grows with each new contributor.
+          p
+            | A minimum amount must be reached
+            |  for the project to be successful.
+          button Open Ended
         div
-          h1 One Price
-          button One Price
+          h1 Group Buy / Fixed Price
+          p
+            | The price is fixed and divided amongst the contributors.
+          p
+            | A minimum contributor count is needed
+            |  for the project to be successful.
+          button Group Buy
 
-  div class="row-fluid"
-    div class="span6"
-      = submit_tag "Next Step", :class => "btn"
-    div class="span6"
-      | Project details are hidden until published.
