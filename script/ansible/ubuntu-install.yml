@@ -1,0 +1,36 @@
+---
+- hosts: server
+  sudo: yes
+
+  tasks:
+## REPOS
+    - action: apt_repository repo=ppa:chris-lea/node.js
+    - action: apt_repository repo="ppa:brightbox/ruby-ng"
+# CACHE UPDATE
+    - action: apt update_cache=yes
+
+# PREREQs
+    - action: apt pkg=software-properties-common state=present
+    - action: apt pkg=build-essential state=present
+
+## PACKAGES
+# RUBY
+    - action: apt pkg=ruby2.1 state=present
+    - action: apt pkg=ruby2.1-dev state=present
+    - command: gem install bundler
+# NGINX
+    - action: apt pkg=nginx state=present
+    - copy: src=../conf/everythingfunded.com dest=/etc/nginx/sites-enabled/
+
+# GIT
+    - action: apt pkg=git state=present
+# POSTFIX
+    - action: apt pkg=postfix state=present
+
+# CODE
+    - git: repo=https://github.com/donpdonp/crowdstarter.git dest=/home/devops/everythingfunded.com
+      sudo: no
+    - command: npm install chdir=/home/devops/everythingfunded.com creates=/home/devops/everythingfunded.com/node_modules
+      sudo: no
+    - copy: owner=devops src=../conf/settings.yaml dest=/home/devops/everythingfunded.com/config/settings.yaml
+
