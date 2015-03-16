@@ -34,4 +34,6 @@
       sudo: no
     - copy: owner=devops src=../conf/settings.yaml dest=/home/devops/everythingfunded.com/config/settings.yaml
     - copy: owner=devops src=../conf/database.yml dest=/home/devops/everythingfunded.com/config/database.yml
+    - command: bundle install --path gems chdir=/home/devops/everythingfunded.com 
+
 
