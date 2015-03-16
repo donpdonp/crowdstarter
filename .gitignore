@@ -22,5 +22,6 @@ db/schema.rb
 /gems
 
 /app/assets/images/samples/
+/script/conf
 /public/system/
 /public/assets/
