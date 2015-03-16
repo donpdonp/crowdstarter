@@ -15,8 +15,8 @@
 
 ## PACKAGES
 # RUBY
-    - action: apt pkg=ruby2.1 state=present
-    - action: apt pkg=ruby2.1-dev state=present
+    - action: apt pkg=ruby2.2 state=present
+    - action: apt pkg=ruby2.2-dev state=present
     - command: gem install bundler
 # NGINX
     - action: apt pkg=nginx state=present
