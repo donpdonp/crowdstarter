@@ -22,7 +22,7 @@
     - command: gem install bundler
 # NGINX
     - action: apt pkg=nginx state=present
-    - copy: src=../conf/everythingfunded.com dest=/etc/nginx/sites-enabled/
+    - copy: src=../conf/everythingfunded.com dest=/etc/nginx/conf.d/
 
 # GIT
     - action: apt pkg=git state=present
