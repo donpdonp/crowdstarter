@@ -14,6 +14,8 @@
     - action: apt pkg=build-essential state=present
 
 ## PACKAGES
+# NODE
+    - action: apt pkg=nodejs state=present
 # RUBY
     - action: apt pkg=ruby2.2 state=present
     - action: apt pkg=ruby2.2-dev state=present
