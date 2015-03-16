@@ -32,7 +32,6 @@
 # CODE
     - git: repo=https://github.com/donpdonp/crowdstarter.git dest=/home/devops/everythingfunded.com
       sudo: no
-    - command: npm install chdir=/home/devops/everythingfunded.com creates=/home/devops/everythingfunded.com/node_modules
-      sudo: no
     - copy: owner=devops src=../conf/settings.yaml dest=/home/devops/everythingfunded.com/config/settings.yaml
+    - copy: owner=devops src=../conf/database.yml dest=/home/devops/everythingfunded.com/config/database.yml
 
