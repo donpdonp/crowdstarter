@@ -13,6 +13,7 @@
     - action: apt pkg=software-properties-common state=present
     - action: apt pkg=build-essential state=present
     - action: apt pkg=zlib1g-dev state=present
+    - action: apt pkg=libpq-dev state=present
 
 ## PACKAGES
 # NODE
