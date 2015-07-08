@@ -1,0 +1,7 @@
+- hosts: commons
+  sudo: yes
+  tasks:
+# CODE
+    - git: repo=git@github.com:donpdonp/crowdstarter.git dest=/home/donp/everythingfunded.com
+      sudo: no
+
