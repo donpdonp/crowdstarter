@@ -1,4 +1,5 @@
 ---
+hostname: "mysite.com"
 notices:
   from: "robot@localhost"
   bcc: ""
